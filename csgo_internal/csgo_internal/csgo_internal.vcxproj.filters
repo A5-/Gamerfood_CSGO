@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DLLMain.cpp">
+      <Filter>Source Files\Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Offsets.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="NetVarManager.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="ConVar.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="IPhysicsSurfaceProps.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="ISurface.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IVPanel.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Interfaces.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="IBaseClientDLL.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Draw.cpp">
+      <Filter>Source Files\Cheat\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="IVModelRender.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IMaterialSystem.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateMove.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawModelExecute.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameStageNotify.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="OverrideView.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintTraverse.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="LegitBot.cpp">
+      <Filter>Source Files\Cheat\Enhancements</Filter>
+    </ClCompile>
+    <ClCompile Include="RageBot.cpp">
+      <Filter>Source Files\Cheat\Enhancements</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source Files\Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Visuals.cpp">
+      <Filter>Source Files\Cheat\Enhancements</Filter>
+    </ClCompile>
+    <ClCompile Include="Miscellaneous.cpp">
+      <Filter>Source Files\Cheat\Enhancements</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Source Files\Cheat\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Cheat\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="NetVars.cpp">
+      <Filter>Source Files\Cheat\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files\Cheat</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files\Cheat\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySound.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="WndProc.cpp">
+      <Filter>Source Files\Cheat\Hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\dx9\imgui_dx9.cpp">
+      <Filter>Source Files\ImGui\dx9</Filter>
+    </ClCompile>
+    <ClCompile Include="IInputSystem.cpp">
+      <Filter>Source Files\SDK\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Autowall.cpp">
+      <Filter>Source Files\Cheat\RageHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="AntiAim.cpp">
+      <Filter>Source Files\Cheat\RageHelpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Misc.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="NetVarManager.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="ConVar.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="IBaseClientDLL.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IClientEntityList.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IClientModeShared.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ICvar.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IEngineClient.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IEngineTrace.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IGlobalVarsBase.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputSystem.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ISurface.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IVPanel.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Trace.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheat.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Draw.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="VTHook.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="IVModelRender.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IVModelInfo.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterialSystem.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterial.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderView.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="LegitBot.h">
+      <Filter>Header Files\Cheat\Enhancements</Filter>
+    </ClInclude>
+    <ClInclude Include="RageBot.h">
+      <Filter>Header Files\Cheat\Enhancements</Filter>
+    </ClInclude>
+    <ClInclude Include="Enhancements.h">
+      <Filter>Header Files\Cheat\Enhancements</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Visuals.h">
+      <Filter>Header Files\Cheat\Enhancements</Filter>
+    </ClInclude>
+    <ClInclude Include="Miscellaneous.h">
+      <Filter>Header Files\Cheat\Enhancements</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Cheat\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="cx_fnv1.h">
+      <Filter>Header Files\Cheat\Util\CompileTime String Enc</Filter>
+    </ClInclude>
+    <ClInclude Include="cx_pcg32.h">
+      <Filter>Header Files\Cheat\Util\CompileTime String Enc</Filter>
+    </ClInclude>
+    <ClInclude Include="cx_strenc.h">
+      <Filter>Header Files\Cheat\Util\CompileTime String Enc</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="VPhysics.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IPrediction.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Vars.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\dx9\imgui_dx9.h">
+      <Filter>Header Files\ImGui\dx9</Filter>
+    </ClInclude>
+    <ClInclude Include="IVDebugOverlay.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IStudioRender.h">
+      <Filter>Header Files\SDK\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="GlowManager.h">
+      <Filter>Header Files\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="Autowall.h">
+      <Filter>Header Files\Cheat\RageHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiAim.h">
+      <Filter>Header Files\Cheat\RageHelpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5a20e6af-3d9d-49f2-aef3-e1d511072d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{34693407-bcdc-47bf-ae28-60945b681dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat">
+      <UniqueIdentifier>{e8126654-f359-4654-b7d7-462570af5fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK">
+      <UniqueIdentifier>{15dc3ad2-dfe3-40c5-815c-7b5111f77b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDK">
+      <UniqueIdentifier>{9c62249c-e761-47bb-903e-ed2fbe5a3aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheat">
+      <UniqueIdentifier>{3e7a22c0-7879-4b20-ae57-720ccf28d7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat\Util">
+      <UniqueIdentifier>{0cc4b421-a674-4db1-83c4-8040a7681395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK\Interfaces">
+      <UniqueIdentifier>{b5b37e91-57ed-477e-9862-d3043be2eb5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDK\Interfaces">
+      <UniqueIdentifier>{31d23d58-a113-4e2d-b57f-67e181453a27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheat\Util">
+      <UniqueIdentifier>{b89a2d04-469e-4722-a228-4abac0e78094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat\Enhancements">
+      <UniqueIdentifier>{0866e256-039f-4a3c-b0e1-b855165b200a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheat\Hooks">
+      <UniqueIdentifier>{2716070c-8eae-4a07-93b6-10ca6e4a8f26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheat\Enhancements">
+      <UniqueIdentifier>{9be8df7b-ea41-4aa8-a2ee-25147fb78878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat\Menu">
+      <UniqueIdentifier>{1b35d57a-e856-474e-93ae-93623aae7f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat\Util\CompileTime String Enc">
+      <UniqueIdentifier>{91a9bda1-5eb7-4cb8-abd2-0e9d902e50fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ImGui">
+      <UniqueIdentifier>{d98370d8-80e7-4ca4-a7be-71037f6c092b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ImGui\dx9">
+      <UniqueIdentifier>{826fd1f2-450b-4947-89d1-e94d7c2a81f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImGui">
+      <UniqueIdentifier>{4f7e6295-5367-455e-813f-a81da828e8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImGui\dx9">
+      <UniqueIdentifier>{bdabb2cd-94dc-46d5-acc5-a57b65c13a00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cheat\RageHelpers">
+      <UniqueIdentifier>{2820f829-8669-4890-a54a-164b281c142a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Cheat\RageHelpers">
+      <UniqueIdentifier>{f12bc937-a8dd-4b44-965a-b5425a437620}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
