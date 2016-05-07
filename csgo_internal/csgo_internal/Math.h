@@ -16,21 +16,16 @@ namespace M
 	extern Vector ExtrapolateTick( Vector p0, Vector v0 );
 
 	extern inline float RandFloat( float M, float N );
+	
+	// sperg cried about the previous method, 
+	//here's not only a faster one but inaccurate as well to trigger more people
+	inline float FASTSQRT( float x )
+ 	{
+   		unsigned int i = *(unsigned int*) &x;
 
-	double inline __declspec ( naked ) __fastcall FASTSQRT( double n )
-	{
-		_asm fld qword ptr[esp + 4]
-		_asm fsqrt
-		_asm ret 8
-	}
-
-	inline float sseSqrt( float x )
-	{
-		float root = 0.0f;
-
-		__asm sqrtss xmm0, x
-		__asm movss root, xmm0
-
-		return root;
+   		i  += 127 << 23;
+   		// approximation of square root
+   		i >>= 1; 
+   		return *(float*) &i;
 	}
 }
