@@ -73,7 +73,7 @@ public:
 	void GrabOffsets( );
 	int GetOffset( const char *tableName, const char *propName );
 	bool HookProp( const char *tableName, const char *propName, RecvVarProxyFn fun );
-	void DumpNetvars( std::string path );
+	void DumpNetvars();
 private:
 	int Get_Prop( const char *tableName, const char *propName, RecvProp **prop = 0 );
 	int Get_Prop( RecvTable *recvTable, const char *propName, RecvProp **prop = 0 );
