@@ -126,11 +126,8 @@ void CNetVarManager::DumpTable( RecvTable *table, int depth )
 
 void CNetVarManager::DumpNetvars( std::string path )
 {
-	time_t t = time( 0 );   // get time now
-	struct tm * now = localtime( &t );
 
-	m_file.open( path );
-	m_file << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec << " " << ( now->tm_mday ) << '/' << ( now->tm_mon + 1 ) << '/' << now->tm_year + 1900 << "\n";
+	m_file.open( "C:/Users/Admin/Desktop/netdump.txt" );
 	m_file << strenc( "NetVar Dump by A5 / teamgamerfood\n\nhaha look proper formatting \n\n" );
 
 	for ( ClientClass *pClass = I::Client->GetAllClasses( ); pClass != NULL; pClass = pClass->m_pNext )
