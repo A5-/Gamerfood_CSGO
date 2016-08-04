@@ -13,7 +13,7 @@ void U::SetupInterfaces()
 	I::ClientMode		= **( IClientModeShared*** ) ( ( *( DWORD** ) I::Client )[10] + 0x5 );
 	I::ClientEntList	= U::CaptureInterface<IClientEntityList>( strenc( "client.dll" ), strenc( "VClientEntityList003" ) );
 	I::Cvar				= U::CaptureInterface<ICVar>( strenc( "vstdlib.dll" ), strenc( "VEngineCvar007" ) );
-	I::Engine			= U::CaptureInterface<IEngineClient>( strenc( "engine.dll" ), strenc( "VEngineClient013" ) );
+	I::Engine			= U::CaptureInterface<IEngineClient>( strenc( "engine.dll" ), strenc( "VEngineClient014" ) );
 	I::EngineTrace		= U::CaptureInterface<IEngineTrace>( strenc( "engine.dll" ), strenc( "EngineTraceClient004" ) );
 	I::InputSystem		= U::CaptureInterface<IInputSystem>( strenc( "inputsystem.dll" ), strenc( "InputSystemVersion001" ) );
 	I::Globals			= **( IGlobalVarsBase*** ) ( ( *( DWORD** ) I::Client )[0] + 0x53 );
