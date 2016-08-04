@@ -137,7 +137,7 @@ public:
 	virtual int                   GetAppID() = 0;
 	virtual Vector                GetLightForPointFast( const Vector &pos, bool bClamp ) = 0;
 	virtual void                  ClientCmd_Unrestricted1( char  const*, int, bool );
-	virtual void                  ClientCmd_Unrestricted( const char *szCmdString ) = 0; // 114
+	virtual void                  ClientCmd_Unrestricted( const char *szCmdString, const char *newFlag) = 0; // 114, new flag, quick testing shows setting 0 seems to work, haven't looked into it.
 	virtual void                  SetRestrictServerCommands( bool bRestrict ) = 0;
 	virtual void                  SetRestrictClientCommands( bool bRestrict ) = 0;
 	virtual void                  SetOverlayBindProxy( int iOverlayID, void *pBindProxy ) = 0;
