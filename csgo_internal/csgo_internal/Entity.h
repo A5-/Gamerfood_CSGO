@@ -87,7 +87,7 @@ class WeaponInfo_t
 public:
 	char pad_0x0000[ 99 ];	//0x0000
 	char m_name[ 80 ];			//0x00
-	char pad_0x07B0[ 0x6FD ];	//0x0000
+	char pad_0x0800[0x74D];	//0x0000 Updated (Structure)
 	float m_flArmorRatio;		//0x07B0 
 	float unkwn1;				//0x07B4 
 	float unkwn2;				//0x07B8 

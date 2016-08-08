@@ -380,6 +380,7 @@ bool CBaseCombatWeapon::IsGun()
 		return false;
 
 	int id = this->GetWeaponID();
+//If your aimbot is broken, this is the reason. Just an FYI.
 
 	switch( id )
 	{

@@ -247,11 +247,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::Separator();
 				ImGui::Text( charenc( "Netvar Dump" ) );
 				ImGui::Separator();
-				ImGui::PushItemWidth( 180 );
-				static char buf3[ 128 ] = ""; ImGui::InputText( charenc( "##NetVar" ), buf2, 128 );
-				ImGui::SameLine();
-				ImGui::PushItemWidth( 50 );
-				if( ImGui::Button( charenc( "Save File" ) ) ) NetVarManager->DumpNetvars( buf3 );
+				if( ImGui::Button( charenc( "Save Dump" ) ) ) NetVarManager->DumpNetvars();
 			}
 			ImGui::End(); //End Misc window
 		}
