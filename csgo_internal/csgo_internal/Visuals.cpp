@@ -65,6 +65,12 @@ void CVisuals::PlayerESP( int index )
 	float height = ( pos.y - top.y );
 	float width = height / 4.f;
 
+	if (strstr(Entity->GetClientClass()->m_pNetworkName, charenc("CHostage")))
+	{
+		D::DrawString(F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage"));
+		return;
+	}
+
 	if( Vars.Visuals.Skeleton )
 		Skeleton( Entity, Color::White() );
 
