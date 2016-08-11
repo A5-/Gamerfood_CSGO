@@ -34,7 +34,7 @@ void Offsets::GrabOffsets( )
 	offsets.m_Collision = U::NetVars->GetOffset( charenc( "DT_BasePlayer" ), charenc( "m_Collision" ) );
 	offsets.m_CollisionGroup = U::NetVars->GetOffset( charenc( "DT_BasePlayer" ), charenc( "m_CollisionGroup" ) );
 	offsets.m_iShotsFired = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_iShotsFired" ) );
-	offsets.m_iWeaponID = U::NetVars->GetOffset( charenc( "DT_WeaponCSBase" ), charenc( "m_fAccuracyPenalty" ) ) + 0x2C;
+	offsets.m_iWeaponID = U::NetVars->GetOffset( charenc( "DT_WeaponCSBase" ), charenc( "m_fAccuracyPenalty" ) ) + 0x30;
 	offsets.m_hOwnerEntity = U::NetVars->GetOffset( charenc( "DT_BaseEntity" ), charenc( "m_hOwnerEntity" ) );
 	offsets.m_nMoveType = 0x258;
 	offsets.m_nHitboxSet = U::NetVars->GetOffset( charenc( "DT_BasePlayer" ), charenc( "m_nHitboxSet" ) );
