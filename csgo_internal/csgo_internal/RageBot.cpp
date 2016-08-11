@@ -217,7 +217,7 @@ void CRageBot::GoToTarget()
 
 void CRageBot::DropTarget()
 {
-	if( !EntityIsValid( G::BestTarget ) || ( Vars.Ragebot.TargetMethod == 2 && !Vars.Ragebot.HitScanAll ) )
+	if( !EntityIsValid( G::BestTarget ) ||  Vars.Ragebot.HitScanAll || Vars.Ragebot.HitScanHitbox ) 
 		G::BestTarget = -1;
 }
 
@@ -390,19 +390,26 @@ bool CRageBot::BestAimPointHitbox( CBaseEntity* target, Vector& hitbox )
 	{
 	case 0:
 		hitboxnum = 3;
+		break;
 	case 1:
 		hitboxnum = 6;
+		break;
 	case 2:
 	case 3:
 		hitboxnum = 4;
+		break;
 	case 4:
 		hitboxnum = 7;
+		break;
 	case 5:
 		hitboxnum = 1;
+		break;
 	case 6:
 		hitboxnum = 0;
+		break;
 	default:
 		hitboxnum = 0;
+		break;
 	}
 
 	Hitbox hitboxx( hitboxnum );
