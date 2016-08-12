@@ -67,7 +67,9 @@ void CVisuals::PlayerESP( int index )
 
 	if( Entity->GetClientClass()->m_ClassID == 83 ) // CHostage ClassID - Thx
 	{
-		D::DrawString(F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage"));
+		if( Vars.Visuals.Info.Name )
+			D::DrawString(F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage"));
+			
 		return;
 	}
 
