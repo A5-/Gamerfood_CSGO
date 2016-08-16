@@ -8,23 +8,22 @@ void inline M::SinCos( float radians, float *sine, float *cosine )
 
 void M::VectorAngles( const Vector& forward, QAngle &angles )
 {
-	if( forward[ 1 ] == 0.0f && forward[ 0 ] == 0.0f )
+	if (forward[1] == 0.0f && forward[0] == 0.0f)
 	{
-		angles[ 0 ] = ( forward[ 2 ] > 0.0f ) ? 270.0f : 90.0f;
-		angles[ 1 ] = 0.0f;
+		angles[0] = (forward[2] > 0.0f) ? 270.0f : 90.0f; // Pitch (up/down)
+		angles[1] = 0.0f;  //yaw left/right
 	}
 	else
 	{
-		float len2d = sseSqrt( square( forward[ 0 ] ) + square( forward[ 1 ] ) );
+		angles[0] = atan2(-forward[2], forward.Length2D()) * -180 / M_PI;
+		angles[1] = atan2(forward[1], forward[0]) * 180 / M_PI;
 
-		angles[ 0 ] = RAD2DEG( atan2f( -forward[ 2 ], len2d ) );
-		angles[ 1 ] = RAD2DEG( atan2f( forward[ 1 ], forward[ 0 ] ) );
-
-		if( angles[ 0 ] < 0.0f ) angles[ 0 ] += 360.0f;
-		if( angles[ 1 ] < 0.0f ) angles[ 1 ] += 360.0f;
+		if (angles[1] > 90) angles[1] -= 180;
+		else if (angles[1] < 90) angles[1] += 180;
+		else if (angles[1] == 90) angles[1] = 0;
 	}
 
-	angles[ 2 ] = 0.0f;
+	angles[2] = 0.0f;
 }
 
 void M::AngleVectors( const QAngle &angles, Vector *forward )
@@ -78,16 +77,12 @@ float M::GetFov( const QAngle& viewAngle, const QAngle& aimAngle )
 
 	return RAD2DEG( acos( aim.Dot( ang ) / aim.LengthSqr() ) );
 }
-// fix aimbot issues using wrong math funcs in calcangle
 QAngle M::CalcAngle( Vector src, Vector dst )
 {
 	QAngle angles;
 	Vector delta = src - dst;
-	angles.x = ( asinf( delta.z / delta.Length() ) * M_RADPI );
-	angles.y = ( atanf( delta.y / delta.x ) * M_RADPI );
-	angles.z = 0.0f;
-	if( delta.x >= 0.0 ) { angles.y += 180.0f; }
-
+	VectorAngles(delta, angles);
+	delta.Normalize();
 	return angles;
 }
 
