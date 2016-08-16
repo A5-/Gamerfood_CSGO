@@ -19,7 +19,7 @@ public:
 
 	bool SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData &data );
 	bool HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData &data );
-	bool TraceToExit( Vector &end, trace_t *enter_trace, Vector start, Vector dir, trace_t *exit_trace );
+	bool TraceToExit(Vector& end, trace_t& tr, float x, float y, float z, float x2, float y2, float z2, trace_t* trace);
 	bool DidHitNonWorldEntity( CBaseEntity* m_pEnt );
 	void ScaleDamage( int hitgroup, CBaseEntity *enemy, float weapon_armor_ratio, float &current_damage );
 	float GetHitgroupDamageMultiplier( int iHitGroup );
