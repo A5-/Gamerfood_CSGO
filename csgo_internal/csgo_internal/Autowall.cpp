@@ -55,62 +55,30 @@ bool CAutowall::DidHitNonWorldEntity( CBaseEntity* m_pEnt )
 	return m_pEnt != NULL && m_pEnt == I::ClientEntList->GetClientEntity( 0 );
 }
 
-bool CAutowall::TraceToExit( Vector &end, trace_t *enter_trace, Vector start, Vector dir, trace_t *exit_trace )
+bool CAutowall::TraceToExit(Vector& end, trace_t& tr, float x, float y, float z, float x2, float y2, float z2, trace_t* trace)
 {
-	float distance = 0.0f;
+	typedef bool(__fastcall* TraceToExitFn)(Vector&, trace_t&, float, float, float, float, float, float, trace_t*);
+	static TraceToExitFn TraceToExit = (TraceToExitFn)U::FindPattern("client.dll", "55 8B EC 83 EC 2C F3 0F 10 75 ? 33 C0");
 
-	while( distance <= 90.0f )
+	if (!TraceToExit)
 	{
-		distance += 4.0f;
-		end = start + dir * distance;
-
-		auto point_contents = I::EngineTrace->GetPointContents( end, MASK_SHOT_HULL | CONTENTS_HITBOX, NULL );
-
-		if( point_contents & MASK_SHOT_HULL && ( !( point_contents & CONTENTS_HITBOX ) ) )
-			continue;
-
-		auto new_end = end - ( dir * 4.0f );
-
-		Ray_t ray;
-		ray.Init( end, new_end );
-		I::EngineTrace->TraceRay( ray, MASK_SHOT, 0, exit_trace );
-
-		if( exit_trace->startsolid && exit_trace->surface.flags & SURF_HITBOX )
-		{
-			ray.Init( end, start );
-			CTraceFilter filter;
-			filter.pSkip = exit_trace->m_pEnt;
-			I::EngineTrace->TraceRay( ray, 0x600400B, &filter, exit_trace );
-
-			if( ( exit_trace->fraction < 1.0f || exit_trace->allsolid ) && !exit_trace->startsolid )
-			{
-				end = exit_trace->endpos;
-				return true;
-			}
-			continue;
-		}
-
-		if( !( exit_trace->fraction < 1.0 || exit_trace->allsolid || exit_trace->startsolid ) || exit_trace->startsolid )
-		{
-			if( exit_trace->m_pEnt )
-			{
-				if( DidHitNonWorldEntity( enter_trace->m_pEnt ) )
-					return true;
-			}
-			continue;
-		}
-
-		if( ( ( exit_trace->surface.flags >> 7 ) & 1 ) && !( ( enter_trace->surface.flags >> 7 ) & 1 ) )
-			continue;
-
-		if( exit_trace->plane.normal.Dot( dir ) <= 1.0f )
-		{
-			auto fraction = exit_trace->fraction * 4.0f;
-			end = end - ( dir * fraction );
-			return true;
-		}
+		return false;
+		U::PrintMessage("TraceToExit not found\n");
 	}
-	return false;
+	_asm
+	{
+		push trace
+		push z2
+		push y2
+		push x2
+		push z
+		push y
+		push x
+		mov edx, tr
+		mov ecx, end
+		call TraceToExit
+		add esp, 0x1C
+	}
 }
 
 bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData &data )
@@ -130,7 +98,7 @@ bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData 
 
 	Vector dummy;
 	trace_t trace_exit;
-	if( !TraceToExit( dummy, &data.enter_trace, data.enter_trace.endpos, data.direction, &trace_exit ) )
+	if (!TraceToExit(dummy, data.enter_trace, data.enter_trace.endpos.x, data.enter_trace.endpos.y, data.enter_trace.endpos.z, data.direction.x, data.direction.y, data.direction.z, &trace_exit))
 		return false;
 
 
