@@ -404,10 +404,8 @@ bool CRageBot::EntityIsValid(int i)
 		
 		return false;
 	}
-
-	if (Entity->IsEnemy())
-	{
-		
+	if (!Vars.Ragebot.FriendlyFire && !Entity->IsEnemy())
+	{	
 		return false;
 	}
 	if (Entity == G::LocalPlayer)
