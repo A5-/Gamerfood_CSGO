@@ -178,6 +178,7 @@ public:
 	float			GetWeaponSpread();
 	float			GetWeaponCone();
 	WeaponInfo_t*	GetCSWpnData();
+	bool GetWeaponTypewitham();
 	bool			IsGun();
 	std::string		GetWeaponName();
 };
