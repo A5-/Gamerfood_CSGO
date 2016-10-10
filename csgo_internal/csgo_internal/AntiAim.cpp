@@ -25,6 +25,16 @@ void CAntiAim::Run()
 	if( G::LocalPlayer->GetMoveType() == MOVETYPE_LADDER || G::LocalPlayer->GetMoveType() == MOVETYPE_NOCLIP )
 		return;
 
+	auto pWeapon = G::LocalPlayer->GetWeapon();
+	if (!pWeapon->GetWeaponTypewitham()) //如果返回FALSE
+	{
+		return;
+	}
+	if (G::UserCmd->buttons & IN_USE)
+	{
+		return;
+	}
+
 	static bool flip = false;
 	flip = !flip;
 
