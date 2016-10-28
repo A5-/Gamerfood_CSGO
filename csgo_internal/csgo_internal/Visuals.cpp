@@ -45,7 +45,7 @@ void CVisuals::PlayerESP( int index )
 {
 	CBaseEntity* Entity = I::ClientEntList->GetClientEntity( index );
 
-	if( EntityIsInvaild( Entity ) )
+	if( EntityIsInvalid( Entity ) )
 		return;
 
 	if( !Vars.Visuals.Filter.Friendlies && !Entity->IsEnemy() )
@@ -234,7 +234,7 @@ bool CVisuals::InGame()
 	return true;
 }
 
-bool CVisuals::EntityIsInvaild( CBaseEntity* Entity )
+bool CVisuals::EntityIsInvalid( CBaseEntity* Entity )
 {
 	if( !Entity )
 		return true;
