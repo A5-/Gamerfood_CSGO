@@ -9,7 +9,7 @@ IsReadyFn U::IsReady;
 
 void U::SetupInterfaces()
 {
-	I::Client			= U::CaptureInterface<IBaseClientDll>( strenc( "client.dll" ), strenc( "VClient017" ) );
+	I::Client			= U::CaptureInterface<IBaseClientDll>( strenc( "client.dll" ), strenc( "VClient018" ) );
 	I::ClientMode		= **( IClientModeShared*** ) ( ( *( DWORD** ) I::Client )[10] + 0x5 );
 	I::ClientEntList	= U::CaptureInterface<IClientEntityList>( strenc( "client.dll" ), strenc( "VClientEntityList003" ) );
 	I::Cvar				= U::CaptureInterface<ICVar>( strenc( "vstdlib.dll" ), strenc( "VEngineCvar007" ) );
