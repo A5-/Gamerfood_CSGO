@@ -17,7 +17,7 @@ public:
 	void Run( );
 	void Watermark();
 	void BulletTraceOverlay( CBaseEntity* entity, Color color );
-	bool EntityIsInvaild( CBaseEntity* Entity );
+	bool EntityIsInvalid( CBaseEntity* Entity );
 	void DrawGlow();
 private:
 	bool InGame();
