@@ -141,14 +141,14 @@ bool CBaseEntity::IsVisible( int bone )
 	Ray_t ray;
 	trace_t tr;
 	m_visible = false;
-	ray.Init( G::LocalPlayer->GetEyePosition(), this->GetBonePosition( bone ) ); // replace with config->aimbone
+	ray.Init(G::LocalPlayer->GetEyePosition(), this->GetBonePosition(bone));
 
 	CTraceFilter filter;
 	filter.pSkip = G::LocalPlayer;
 
-	I::EngineTrace->TraceRay( ray, MASK_SHOT, &filter, &tr );
+	I::EngineTrace->TraceRay(ray, MASK_NPCWORLDSTATIC | CONTENTS_SOLID | CONTENTS_MOVEABLE | CONTENTS_MONSTER | CONTENTS_WINDOW | CONTENTS_DEBRIS | CONTENTS_HITBOX, &filter, &tr);
 
-	if( tr.m_pEnt == this )
+	if (tr.m_pEnt == this || tr.fraction>0.99f)
 	{
 		m_visible = true;
 		return true;
