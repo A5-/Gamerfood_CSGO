@@ -22,6 +22,7 @@ void U::SetupInterfaces()
 	I::RenderView		= U::CaptureInterface<IVRenderView>( strenc( "engine.dll" ), strenc( "VEngineRenderView014" ) );
 	I::ModelRender		= U::CaptureInterface<IVModelRender>( strenc( "engine.dll" ), strenc( "VEngineModel016" ) );
 	I::MaterialSystem	= U::CaptureInterface<IMaterialSystem>( strenc( "materialsystem.dll" ), strenc( "VMaterialSystem080" ) );
+	I::vrtEffects = U::CaptureInterface<IVEffects>(strenc("engine.dll"), strenc("VEngineEffects001"));
 	I::ModelInfo		= U::CaptureInterface<IVModelInfo>( strenc( "engine.dll" ), strenc( "VModelInfoClient004" ) );
 	I::Prediction		= U::CaptureInterface<IPrediction>( strenc( "client.dll" ), strenc( "VClientPrediction001" ) );
 	I::Physprops		= U::CaptureInterface<IPhysicsSurfaceProps>( strenc( "vphysics.dll" ), strenc( "VPhysicsSurfaceProps001" ) );
