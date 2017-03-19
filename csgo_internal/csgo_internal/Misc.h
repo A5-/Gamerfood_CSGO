@@ -2517,3 +2517,9 @@ public:
 	static int CallGetSymbolForString( const char *name, bool bCreate = true ) { return s_pfGetSymbolForString( name, bCreate ); }
 	static const char *CallGetStringForSymbol( int symbol ) { return s_pfGetStringForSymbol( symbol ); }
 };
+
+struct ColorRGBExp32
+{
+	byte r, g, b;
+	signed char exponent;
+};
