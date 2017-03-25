@@ -149,6 +149,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::NextColumn();
 				ImGui::Checkbox( charenc( "Glow" ), &Vars.Visuals.Glow );
 				ImGui::Checkbox( charenc( "Bullet Trace" ), &Vars.Visuals.BulletTrace );
+				ImGui::Checkbox(charenc("Dlights"), &Vars.Visuals.Dlights);
 				ImGui::Columns( 1 );
 				ImGui::SliderFloat( charenc( "Trace Length" ), &Vars.Visuals.BulletTraceLength, 1.f, 3000.f, "%.0f" );
 
