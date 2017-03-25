@@ -1,19 +1,5 @@
 #include "Cheat.h"
 
-void testDlights(CBaseEntity* Entity)
-{
-	dlight_t*dLight = I::vrtEffects->CL_AllocDlight(Entity->index);
-	dLight->die = I::Globals->curtime + 0.05f;
-	dLight->radius = 200.f;
-	dLight->color.r = 2;
-	dLight->color.g = 48;
-	dLight->color.b = 22;
-	dLight->color.exponent = 5;
-	dLight->key = Entity->index;
-	dLight->decay = dLight->radius / 5.0f;
-	dLight->origin = Entity->GetOrigin() + Vector(0, 0, 2); //Size up so it wouldn't be shitting in my ground
-}
-
 void CVisuals::Run()
 {
 	if( Vars.Misc.Watermark )
@@ -67,6 +53,25 @@ void CVisuals::PlayerESP( int index )
 
 	if( !Vars.Visuals.Filter.Enemies && Entity->IsEnemy() )
 		return;
+	
+	if (Vars.Visuals.Dlights)
+	{
+		dlight_t* dLight = I::vrtEffects->CL_AllocDlight(Entity->index);
+		dLight->die = I::Globals->curtime + 0.05f;
+		dLight->radius = 200.f;
+		if (Entity->IsEnemy()) {
+			dLight->color.r = 200;
+			dLight->color.g = 200;
+			dLight->color.b = 60; }
+		else {
+			dLight->color.r = 2;
+			dLight->color.g = 48;
+			dLight->color.b = 22; }
+		dLight->color.exponent = 5;
+		dLight->key = Entity->index;
+		dLight->decay = dLight->radius / 5.0f;
+		dLight->origin = Entity->GetOrigin() + Vector(0, 0, 2);
+	}
 
 	Vector max = Entity->GetCollideable()->OBBMaxs();
 	Vector pos, pos3D;
