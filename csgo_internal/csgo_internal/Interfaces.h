@@ -17,6 +17,7 @@
 #include "IMaterial.h"
 #include "IRenderView.h"
 #include "IPrediction.h"
+#include "fukyou.h"
 #include "VPhysics.h"
 #include "IVDebugOverlay.h"
 #include "IStudioRender.h"
@@ -31,6 +32,7 @@ namespace I // Interfaces
 	extern IEngineClient*			Engine;
 	extern IEngineTrace*			EngineTrace;
 	extern IGlobalVarsBase*			Globals;
+	extern IVEffects*				vrtEffects;
 	extern ISurface*				Surface;
 	extern IVPanel*					VPanel;
 	extern IVModelRender*			ModelRender;

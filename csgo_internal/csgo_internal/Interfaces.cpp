@@ -9,6 +9,7 @@ IEngineClient*			I::Engine;
 IEngineTrace*			I::EngineTrace;
 IGlobalVarsBase*		I::Globals;
 ISurface*				I::Surface;
+IVEffects*				I::vrtEffects;
 IVPanel*				I::VPanel;
 IVModelRender*			I::ModelRender;
 IVModelInfo*			I::ModelInfo;
@@ -19,7 +20,6 @@ IPrediction*			I::Prediction;
 IPhysicsSurfaceProps*	I::Physprops;
 IVDebugOverlay*			I::DebugOverlay;
 IStudioRender*			I::StudioRender;
-
 IMaterial* visible_tex;
 IMaterial* hidden_tex;
 IMaterial* visible_flat;

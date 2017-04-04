@@ -89,6 +89,7 @@ struct Variables
 		bool 	Box;
 		int 	BoxType;
 		bool	Skeleton;
+		bool	Dlights;
 		bool	Glow;
 		bool	BulletTrace;
 		float   BulletTraceLength;

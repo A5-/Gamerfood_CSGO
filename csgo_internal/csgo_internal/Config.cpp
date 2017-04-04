@@ -77,6 +77,7 @@ void CConfig::Setup()
 	SetupValue( Vars.Visuals.Removals.Weapon, false, strenc( "Visuals" ), strenc( "RemoveWeapon" ) );
 	SetupValue( Vars.Visuals.Removals.VisualRecoil, true, strenc( "Visuals" ), strenc( "RemoveRecoil" ) );
 	SetupValue( Vars.Visuals.Removals.Flash, true, strenc( "Visuals" ), strenc( "RemoveFlash" ) );
+	SetupValue(Vars.Visuals.Dlights, true, strenc("Visuals"), strenc("DLightEnabled"));
 
 	SetupValue( Vars.Misc.Bhop, true, strenc( "Misc" ), strenc( "Bhop" ) );
 	SetupValue( Vars.Misc.AutoStrafe, false, strenc( "Misc" ), strenc( "AutoStrafe" ) );
