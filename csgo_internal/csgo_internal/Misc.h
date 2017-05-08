@@ -5,17 +5,17 @@
 #define CHECK_VALID( _v ) 0
 #define Assert( _exp ) ((void)0)
 
-typedef __int16					int16;
-typedef unsigned __int16		uint16;
-typedef __int32					int32;
-typedef unsigned __int32		uint32;
-typedef __int64					int64;
-typedef unsigned __int64		uint64;
+typedef __int16 int16;
+typedef unsigned __int16 uint16;
+typedef __int32 int32;
+typedef unsigned __int32 uint32;
+typedef __int64 int64;
+typedef unsigned __int64 uint64;
 
 // intp is an integer that can accomodate a pointer
 // (ie, sizeof(intp) >= sizeof(int) && sizeof(intp) >= sizeof(void *)
-typedef intptr_t				intp;
-typedef uintptr_t				uintp;
+typedef intptr_t intp;
+typedef uintptr_t uintp;
 
 inline float BitsToFloat( uint32 i )
 {
@@ -23,7 +23,7 @@ inline float BitsToFloat( uint32 i )
 	{
 		float f;
 		unsigned long ul;
-	}tmp;
+	} tmp;
 	tmp.ul = i;
 	return tmp.f;
 }
@@ -45,12 +45,11 @@ inline float BitsToFloat( uint32 i )
 
 //#define FastSqrt(x)			(*pfSqrt)(x)
 
-
 #define M_PI		3.14159265358979323846f
 #define M_RADPI		57.295779513082f
 #define M_PI_F		((float)(M_PI))	// Shouldn't collide with anything.
-#define RAD2DEG( x  )  ( (float)(x) * (float)(180.f / M_PI_F) )
-#define DEG2RAD( x  )  ( (float)(x) * (float)(M_PI_F / 180.f) )
+#define RAD2DEG( x )  ( (float)(x) * (float)(180.f / M_PI_F) )
+#define DEG2RAD( x )  ( (float)(x) * (float)(M_PI_F / 180.f) )
 
 #define IN_ATTACK				(1 << 0)
 #define IN_JUMP					(1 << 1)
@@ -76,15 +75,15 @@ inline float BitsToFloat( uint32 i )
 #define IN_WEAPON2				(1 << 21)
 #define IN_BULLRUSH				(1 << 22)
 
-#define	FL_ONGROUND				(1 << 0)	
-#define FL_DUCKING				(1 << 1)	
-#define	FL_WATERJUMP			(1 << 3)	
-#define FL_ONTRAIN				(1 << 4) 
-#define FL_INRAIN				(1 << 5)	
-#define FL_FROZEN				(1 << 6) 
-#define FL_ATCONTROLS			(1 << 7) 
-#define	FL_CLIENT				(1 << 8)	
-#define FL_FAKECLIENT			(1 << 9)	
+#define	FL_ONGROUND				(1 << 0)
+#define FL_DUCKING				(1 << 1)
+#define	FL_WATERJUMP			(1 << 3)
+#define FL_ONTRAIN				(1 << 4)
+#define FL_INRAIN				(1 << 5)
+#define FL_FROZEN				(1 << 6)
+#define FL_ATCONTROLS			(1 << 7)
+#define	FL_CLIENT				(1 << 8)
+#define FL_FAKECLIENT			(1 << 9)
 #define	FL_INWATER				(1 << 10)
 
 #define HIDEHUD_SCOPE			(1 << 11)
@@ -147,7 +146,7 @@ inline float BitsToFloat( uint32 i )
 #define ALL_VISIBLE_CONTENTS (LAST_VISIBLE_CONTENTS | (LAST_VISIBLE_CONTENTS-1))
 
 #define CONTENTS_TESTFOGVOLUME	0x100
-#define CONTENTS_UNUSED			0x200	
+#define CONTENTS_UNUSED			0x200
 
 // unused 
 // NOTE: If it's visible, grab from the top + update LAST_VISIBLE_CONTENTS
@@ -268,9 +267,9 @@ struct colorVec
 
 enum
 {
-	PITCH = 0,	// up / down
-	YAW,		// left / right
-	ROLL		// fall over
+	PITCH = 0, // up / down
+	YAW, // left / right
+	ROLL // fall over
 };
 
 enum FontRenderFlag_t
@@ -280,7 +279,8 @@ enum FontRenderFlag_t
 	FONT_CENTER = 2
 };
 
-enum ItemDefinitionIndex : int {
+enum ItemDefinitionIndex : int
+{
 	WEAPON_DEAGLE = 1,
 	WEAPON_ELITE = 2,
 	WEAPON_FIVESEVEN = 3,
@@ -379,41 +379,44 @@ public:
 	inline void Zero();
 	bool operator==( const Vector& v ) const;
 	bool operator!=( const Vector& v ) const;
-	__forceinline Vector&	operator+=( const Vector &v );
-	__forceinline Vector&	operator-=( const Vector &v );
-	__forceinline Vector&	operator*=( const Vector &v );
-	__forceinline Vector&	operator*=( float s );
-	__forceinline Vector&	operator/=( const Vector &v );
-	__forceinline Vector&	operator/=( float s );
-	__forceinline Vector&	operator+=( float fl );
-	__forceinline Vector&	operator-=( float fl );
-	inline float	Length() const;
+	__forceinline Vector& operator+=( const Vector& v );
+	__forceinline Vector& operator-=( const Vector& v );
+	__forceinline Vector& operator*=( const Vector& v );
+	__forceinline Vector& operator*=( float s );
+	__forceinline Vector& operator/=( const Vector& v );
+	__forceinline Vector& operator/=( float s );
+	__forceinline Vector& operator+=( float fl );
+	__forceinline Vector& operator-=( float fl );
+	inline float Length() const;
+
 	__forceinline float LengthSqr( void ) const
 	{
 		CHECK_VALID( *this );
-		return ( this->x*this->x + this->y*this->y + this->z*this->z );
+		return ( this->x * this->x + this->y * this->y + this->z * this->z );
 	}
+
 	bool IsZero( float tolerance = 0.01f ) const
 	{
 		return ( x > -tolerance && x < tolerance &&
 			y > -tolerance && y < tolerance &&
 			z > -tolerance && z < tolerance );
 	}
-	float	NormalizeInPlace();
-	Vector	Normalize();
-	__forceinline float	DistToSqr( const Vector &vOther ) const;
-	__forceinline float	Dist( const Vector &vOther ) const;
-	float	Dot( const Vector& vOther ) const;
-	float	Dot( const float* fOther ) const;
-	float	Length2D( void ) const;
-	float	Length2DSqr( void ) const;
-	Vector& operator=( const Vector &vOther );
-	Vector	operator-( const Vector& v ) const;
-	Vector	operator+( const Vector& v ) const;
-	Vector	operator*( const Vector& v ) const;
-	Vector	operator/( const Vector& v ) const;
-	Vector	operator*( float fl ) const;
-	Vector	operator/( float fl ) const;
+
+	float NormalizeInPlace();
+	Vector Normalize();
+	__forceinline float DistToSqr( const Vector& vOther ) const;
+	__forceinline float Dist( const Vector& vOther ) const;
+	float Dot( const Vector& vOther ) const;
+	float Dot( const float* fOther ) const;
+	float Length2D( void ) const;
+	float Length2DSqr( void ) const;
+	Vector& operator=( const Vector& vOther );
+	Vector operator-( const Vector& v ) const;
+	Vector operator+( const Vector& v ) const;
+	Vector operator*( const Vector& v ) const;
+	Vector operator/( const Vector& v ) const;
+	Vector operator*( float fl ) const;
+	Vector operator/( float fl ) const;
 	// Base address...
 	float* Base();
 	float const* Base() const;
@@ -422,46 +425,61 @@ public:
 //===============================================
 inline void Vector::Init( float ix, float iy, float iz )
 {
-	x = ix; y = iy; z = iz;
+	x = ix;
+	y = iy;
+	z = iz;
 	CHECK_VALID( *this );
 }
+
 //===============================================
 inline Vector::Vector( float X, float Y, float Z )
 {
-	x = X; y = Y; z = Z;
+	x = X;
+	y = Y;
+	z = Z;
 	CHECK_VALID( *this );
 }
+
 //===============================================
-inline Vector::Vector( void ){ }
+inline Vector::Vector( void )
+{ }
+
 //===============================================
 inline void Vector::Zero()
 {
 	x = y = z = 0.0f;
 }
+
 //===============================================
 inline void VectorClear( Vector& a )
 {
 	a.x = a.y = a.z = 0.0f;
 }
+
 //===============================================
-inline Vector& Vector::operator=( const Vector &vOther )
+inline Vector& Vector::operator=( const Vector& vOther )
 {
 	CHECK_VALID( vOther );
-	x = vOther.x; y = vOther.y; z = vOther.z;
+	x = vOther.x;
+	y = vOther.y;
+	z = vOther.z;
 	return *this;
 }
+
 //===============================================
 inline float& Vector::operator[]( int i )
 {
 	Assert( ( i >= 0 ) && ( i < 3 ) );
 	return ( ( float* )this )[ i ];
 }
+
 //===============================================
 inline float Vector::operator[]( int i ) const
 {
 	Assert( ( i >= 0 ) && ( i < 3 ) );
 	return ( ( float* )this )[ i ];
 }
+
 //===============================================
 inline bool Vector::operator==( const Vector& src ) const
 {
@@ -469,6 +487,7 @@ inline bool Vector::operator==( const Vector& src ) const
 	CHECK_VALID( *this );
 	return ( src.x == x ) && ( src.y == y ) && ( src.z == z );
 }
+
 //===============================================
 inline bool Vector::operator!=( const Vector& src ) const
 {
@@ -476,6 +495,7 @@ inline bool Vector::operator!=( const Vector& src ) const
 	CHECK_VALID( *this );
 	return ( src.x != x ) || ( src.y != y ) || ( src.z != z );
 }
+
 //===============================================
 __forceinline void VectorCopy( const Vector& src, Vector& dst )
 {
@@ -484,24 +504,31 @@ __forceinline void VectorCopy( const Vector& src, Vector& dst )
 	dst.y = src.y;
 	dst.z = src.z;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator+=( const Vector& v )
+__forceinline Vector& Vector::operator+=( const Vector& v )
 {
 	CHECK_VALID( *this );
 	CHECK_VALID( v );
-	x += v.x; y += v.y; z += v.z;
+	x += v.x;
+	y += v.y;
+	z += v.z;
 	return *this;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator-=( const Vector& v )
+__forceinline Vector& Vector::operator-=( const Vector& v )
 {
 	CHECK_VALID( *this );
 	CHECK_VALID( v );
-	x -= v.x; y -= v.y; z -= v.z;
+	x -= v.x;
+	y -= v.y;
+	z -= v.z;
 	return *this;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator*=( float fl )
+__forceinline Vector& Vector::operator*=( float fl )
 {
 	x *= fl;
 	y *= fl;
@@ -509,8 +536,9 @@ __forceinline  Vector& Vector::operator*=( float fl )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator*=( const Vector& v )
+__forceinline Vector& Vector::operator*=( const Vector& v )
 {
 	CHECK_VALID( v );
 	x *= v.x;
@@ -519,8 +547,9 @@ __forceinline  Vector& Vector::operator*=( const Vector& v )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
-__forceinline Vector&	Vector::operator+=( float fl )
+__forceinline Vector& Vector::operator+=( float fl )
 {
 	x += fl;
 	y += fl;
@@ -528,8 +557,9 @@ __forceinline Vector&	Vector::operator+=( float fl )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
-__forceinline Vector&	Vector::operator-=( float fl )
+__forceinline Vector& Vector::operator-=( float fl )
 {
 	x -= fl;
 	y -= fl;
@@ -537,8 +567,9 @@ __forceinline Vector&	Vector::operator-=( float fl )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator/=( float fl )
+__forceinline Vector& Vector::operator/=( float fl )
 {
 	Assert( fl != 0.0f );
 	float oofl = 1.0f / fl;
@@ -548,8 +579,9 @@ __forceinline  Vector& Vector::operator/=( float fl )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
-__forceinline  Vector& Vector::operator/=( const Vector& v )
+__forceinline Vector& Vector::operator/=( const Vector& v )
 {
 	CHECK_VALID( v );
 	Assert( v.x != 0.0f && v.y != 0.0f && v.z != 0.0f );
@@ -559,6 +591,7 @@ __forceinline  Vector& Vector::operator/=( const Vector& v )
 	CHECK_VALID( *this );
 	return *this;
 }
+
 //===============================================
 inline float Vector::Length( void ) const
 {
@@ -566,13 +599,14 @@ inline float Vector::Length( void ) const
 
 	float root = 0.0f;
 
-	float sqsr = x*x + y*y + z*z;
+	float sqsr = x * x + y * y + z * z;
 
 	__asm sqrtss xmm0, sqsr
 	__asm movss root, xmm0
 
 	return root;
 }
+
 //===============================================
 inline float Vector::Length2D( void ) const
 {
@@ -580,7 +614,7 @@ inline float Vector::Length2D( void ) const
 
 	float root = 0.0f;
 
-	float sqst = x*x + y*y;
+	float sqst = x * x + y * y;
 
 	__asm
 	{
@@ -590,18 +624,21 @@ inline float Vector::Length2D( void ) const
 
 	return root;
 }
+
 //===============================================
 inline float Vector::Length2DSqr( void ) const
 {
-	return ( x*x + y*y );
+	return ( x * x + y * y );
 }
+
 //===============================================
 inline Vector CrossProduct( const Vector& a, const Vector& b )
 {
-	return Vector( a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x );
+	return Vector( a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x );
 }
+
 //===============================================
-float Vector::DistToSqr( const Vector &vOther ) const
+float Vector::DistToSqr( const Vector& vOther ) const
 {
 	Vector delta;
 
@@ -612,7 +649,7 @@ float Vector::DistToSqr( const Vector &vOther ) const
 	return delta.LengthSqr();
 }
 
-float Vector::Dist( const Vector &vOther ) const
+float Vector::Dist( const Vector& vOther ) const
 {
 	Vector delta;
 
@@ -628,13 +665,15 @@ inline Vector Vector::Normalize()
 	Vector vector;
 	float length = this->Length();
 
-	if( length != 0 ){
+	if( length != 0 )
+	{
 		vector.x = x / length;
 		vector.y = y / length;
 		vector.z = z / length;
 	}
 	else
-		vector.x = vector.y = 0.0f; vector.z = 1.0f;
+		vector.x = vector.y = 0.0f;
+	vector.z = 1.0f;
 
 	return vector;
 }
@@ -650,6 +689,7 @@ inline float Vector::NormalizeInPlace()
 	v.y *= iradius;
 	v.z *= iradius;
 }
+
 //===============================================
 inline float VectorNormalize( Vector& v )
 {
@@ -661,15 +701,18 @@ inline float VectorNormalize( Vector& v )
 	}
 	else
 	{
-		v.x = v.y = 0.0f; v.z = 1.0f;
+		v.x = v.y = 0.0f;
+		v.z = 1.0f;
 	}
 	return l;
 }
+
 //===============================================
-FORCEINLINE float VectorNormalize( float * v )
+FORCEINLINE float VectorNormalize( float* v )
 {
-	return VectorNormalize( *( reinterpret_cast<Vector *>( v ) ) );
+	return VectorNormalize( *( reinterpret_cast< Vector * >( v ) ) );
 }
+
 //===============================================
 inline Vector Vector::operator+( const Vector& v ) const
 {
@@ -689,6 +732,7 @@ inline Vector Vector::operator-( const Vector& v ) const
 	res.z = z - v.z;
 	return res;
 }
+
 //===============================================
 inline Vector Vector::operator*( float fl ) const
 {
@@ -698,6 +742,7 @@ inline Vector Vector::operator*( float fl ) const
 	res.z = z * fl;
 	return res;
 }
+
 //===============================================
 inline Vector Vector::operator*( const Vector& v ) const
 {
@@ -707,6 +752,7 @@ inline Vector Vector::operator*( const Vector& v ) const
 	res.z = z * v.z;
 	return res;
 }
+
 //===============================================
 inline Vector Vector::operator/( float fl ) const
 {
@@ -716,6 +762,7 @@ inline Vector Vector::operator/( float fl ) const
 	res.z = z / fl;
 	return res;
 }
+
 //===============================================
 inline Vector Vector::operator/( const Vector& v ) const
 {
@@ -725,18 +772,19 @@ inline Vector Vector::operator/( const Vector& v ) const
 	res.z = z / v.z;
 	return res;
 }
+
 inline float Vector::Dot( const Vector& vOther ) const
 {
 	const Vector& a = *this;
 
-	return( a.x*vOther.x + a.y*vOther.y + a.z*vOther.z );
+	return ( a.x * vOther.x + a.y * vOther.y + a.z * vOther.z );
 }
 
 inline float Vector::Dot( const float* fOther ) const
 {
 	const Vector& a = *this;
 
-	return( a.x*fOther[ 0 ] + a.y*fOther[ 1 ] + a.z*fOther[ 2 ] );
+	return ( a.x * fOther[ 0 ] + a.y * fOther[ 1 ] + a.z * fOther[ 2 ] );
 }
 
 inline float* Vector::Base()
@@ -750,6 +798,7 @@ inline float const* Vector::Base() const
 }
 
 class QAngleByValue;
+
 class QAngle
 {
 public:
@@ -758,8 +807,15 @@ public:
 	QAngle( void );
 	QAngle( float X, float Y, float Z );
 
-	operator QAngleByValue &( )              { return *( ( QAngleByValue * )( this ) ); }
-	operator const QAngleByValue &( ) const  { return *( ( const QAngleByValue * )( this ) ); }
+	operator QAngleByValue &()
+	{
+		return *( ( QAngleByValue * )( this ) );
+	}
+
+	operator const QAngleByValue &() const
+	{
+		return *( ( const QAngleByValue * )( this ) );
+	}
 
 	void Init( float ix = 0.0f, float iy = 0.0f, float iz = 0.0f );
 	void Random( float minVal, float maxVal );
@@ -785,22 +841,22 @@ public:
 	bool operator==( const QAngle& v ) const;
 	bool operator!=( const QAngle& v ) const;
 
-	QAngle& operator+=( const QAngle &v );
-	QAngle& operator-=( const QAngle &v );
+	QAngle& operator+=( const QAngle& v );
+	QAngle& operator-=( const QAngle& v );
 	QAngle& operator*=( float s );
 	QAngle& operator/=( float s );
 
-	float   Length() const;
-	float   LengthSqr() const;
+	float Length() const;
+	float LengthSqr() const;
 
 	QAngle& operator=( const QAngle& src );
 
-	QAngle  operator-( void ) const;
+	QAngle operator-( void ) const;
 
-	QAngle  operator+( const QAngle& v ) const;
-	QAngle  operator-( const QAngle& v ) const;
-	QAngle  operator*( float fl ) const;
-	QAngle  operator/( float fl ) const;
+	QAngle operator+( const QAngle& v ) const;
+	QAngle operator-( const QAngle& v ) const;
+	QAngle operator*( float fl ) const;
+	QAngle operator/( float fl ) const;
 
 	QAngle Clamp();
 	QAngle Mod( float N );
@@ -810,13 +866,15 @@ public:
 		QAngle vector;
 		float length = this->Length();
 
-		if( length != 0 ){
+		if( length != 0 )
+		{
 			vector.x = x / length;
 			vector.y = y / length;
 			vector.z = z / length;
 		}
 		else
-			vector.x = vector.y = 0.0f; vector.z = 1.0f;
+			vector.x = vector.y = 0.0f;
+		vector.z = 1.0f;
 
 		return vector;
 	}
@@ -866,7 +924,9 @@ inline QAngle::QAngle( void )
 
 inline QAngle::QAngle( float X, float Y, float Z )
 {
-	x = X; y = Y; z = Z;
+	x = X;
+	y = Y;
+	z = Z;
 	CHECK_VALID( *this );
 }
 
@@ -875,7 +935,9 @@ inline QAngle::QAngle( float X, float Y, float Z )
 //-----------------------------------------------------------------------------
 inline void QAngle::Init( float ix, float iy, float iz )
 {
-	x = ix; y = iy; z = iz;
+	x = ix;
+	y = iy;
+	z = iz;
 	CHECK_VALID( *this );
 }
 
@@ -890,10 +952,12 @@ inline void QAngle::Random( float minVal, float maxVal )
 //-----------------------------------------------------------------------------
 // assignment
 //-----------------------------------------------------------------------------
-inline QAngle& QAngle::operator=( const QAngle &vOther )
+inline QAngle& QAngle::operator=( const QAngle& vOther )
 {
 	CHECK_VALID( vOther );
-	x = vOther.x; y = vOther.y; z = vOther.z;
+	x = vOther.x;
+	y = vOther.y;
+	z = vOther.z;
 	return *this;
 }
 
@@ -921,7 +985,9 @@ inline QAngle& QAngle::operator+=( const QAngle& v )
 {
 	CHECK_VALID( *this );
 	CHECK_VALID( v );
-	x += v.x; y += v.y; z += v.z;
+	x += v.x;
+	y += v.y;
+	z += v.z;
 	return *this;
 }
 
@@ -929,7 +995,9 @@ inline QAngle& QAngle::operator-=( const QAngle& v )
 {
 	CHECK_VALID( *this );
 	CHECK_VALID( v );
-	x -= v.x; y -= v.y; z -= v.z;
+	x -= v.x;
+	y -= v.y;
+	z -= v.z;
 	return *this;
 }
 
@@ -990,7 +1058,6 @@ inline float QAngle::Length() const
 	return ( float )sqrt( LengthSqr() ); //todo replace with fastsqrt
 }
 
-
 inline float QAngle::LengthSqr() const
 {
 	CHECK_VALID( *this );
@@ -1045,13 +1112,13 @@ inline QAngle QAngle::Clamp()
 	if( this->x < -89.0f )
 		this->x = -89.0f;
 
-	if( this->x >  89.0f )
+	if( this->x > 89.0f )
 		this->x = 89.0f;
 
 	while( this->y < -180.0f )
 		this->y += 360.0f;
 
-	while( this->y >  180.0f )
+	while( this->y > 180.0f )
 		this->y -= 360.0f;
 
 	this->z = 0.0f;
@@ -1072,23 +1139,24 @@ inline QAngle QAngle::Mod( float N )
 class CUserCmd
 {
 public:
-	virtual ~CUserCmd( ) { };
-	int		command_number;
-	int		tick_count;
-	QAngle	viewangles;
-	Vector	aimdirection;
-	float	forwardmove;
-	float	sidemove;
-	float	upmove;
-	int		buttons;
-	byte    impulse;
-	int		weaponselect;
-	int		weaponsubtype;
-	int		random_seed;
-	short	mousedx;
-	short	mousedy;
-	bool	hasbeenpredicted;
-	char	pad_0x4C[0x18];
+	virtual ~CUserCmd()
+	{ };
+	int command_number;
+	int tick_count;
+	QAngle viewangles;
+	Vector aimdirection;
+	float forwardmove;
+	float sidemove;
+	float upmove;
+	int buttons;
+	byte impulse;
+	int weaponselect;
+	int weaponsubtype;
+	int random_seed;
+	short mousedx;
+	short mousedy;
+	bool hasbeenpredicted;
+	char pad_0x4C[0x18];
 };
 
 struct VMatrix
@@ -1113,38 +1181,58 @@ struct matrix3x3_t
 
 struct matrix3x4_t
 {
-	matrix3x4_t() {}
+	matrix3x4_t()
+	{}
+
 	matrix3x4_t(
 		float m00, float m01, float m02, float m03,
 		float m10, float m11, float m12, float m13,
 		float m20, float m21, float m22, float m23 )
 	{
-		m_flMatVal[ 0 ][ 0 ] = m00;	m_flMatVal[ 0 ][ 1 ] = m01; m_flMatVal[ 0 ][ 2 ] = m02; m_flMatVal[ 0 ][ 3 ] = m03;
-		m_flMatVal[ 1 ][ 0 ] = m10;	m_flMatVal[ 1 ][ 1 ] = m11; m_flMatVal[ 1 ][ 2 ] = m12; m_flMatVal[ 1 ][ 3 ] = m13;
-		m_flMatVal[ 2 ][ 0 ] = m20;	m_flMatVal[ 2 ][ 1 ] = m21; m_flMatVal[ 2 ][ 2 ] = m22; m_flMatVal[ 2 ][ 3 ] = m23;
+		m_flMatVal[ 0 ][ 0 ] = m00;
+		m_flMatVal[ 0 ][ 1 ] = m01;
+		m_flMatVal[ 0 ][ 2 ] = m02;
+		m_flMatVal[ 0 ][ 3 ] = m03;
+		m_flMatVal[ 1 ][ 0 ] = m10;
+		m_flMatVal[ 1 ][ 1 ] = m11;
+		m_flMatVal[ 1 ][ 2 ] = m12;
+		m_flMatVal[ 1 ][ 3 ] = m13;
+		m_flMatVal[ 2 ][ 0 ] = m20;
+		m_flMatVal[ 2 ][ 1 ] = m21;
+		m_flMatVal[ 2 ][ 2 ] = m22;
+		m_flMatVal[ 2 ][ 3 ] = m23;
 	}
 
 	//-----------------------------------------------------------------------------
 	// Creates a matrix where the X axis = forward
 	// the Y axis = left, and the Z axis = up
 	//-----------------------------------------------------------------------------
-	void Init( const Vector& xAxis, const Vector& yAxis, const Vector& zAxis, const Vector &vecOrigin )
+	void Init( const Vector& xAxis, const Vector& yAxis, const Vector& zAxis, const Vector& vecOrigin )
 	{
-		m_flMatVal[ 0 ][ 0 ] = xAxis.x; m_flMatVal[ 0 ][ 1 ] = yAxis.x; m_flMatVal[ 0 ][ 2 ] = zAxis.x; m_flMatVal[ 0 ][ 3 ] = vecOrigin.x;
-		m_flMatVal[ 1 ][ 0 ] = xAxis.y; m_flMatVal[ 1 ][ 1 ] = yAxis.y; m_flMatVal[ 1 ][ 2 ] = zAxis.y; m_flMatVal[ 1 ][ 3 ] = vecOrigin.y;
-		m_flMatVal[ 2 ][ 0 ] = xAxis.z; m_flMatVal[ 2 ][ 1 ] = yAxis.z; m_flMatVal[ 2 ][ 2 ] = zAxis.z; m_flMatVal[ 2 ][ 3 ] = vecOrigin.z;
+		m_flMatVal[ 0 ][ 0 ] = xAxis.x;
+		m_flMatVal[ 0 ][ 1 ] = yAxis.x;
+		m_flMatVal[ 0 ][ 2 ] = zAxis.x;
+		m_flMatVal[ 0 ][ 3 ] = vecOrigin.x;
+		m_flMatVal[ 1 ][ 0 ] = xAxis.y;
+		m_flMatVal[ 1 ][ 1 ] = yAxis.y;
+		m_flMatVal[ 1 ][ 2 ] = zAxis.y;
+		m_flMatVal[ 1 ][ 3 ] = vecOrigin.y;
+		m_flMatVal[ 2 ][ 0 ] = xAxis.z;
+		m_flMatVal[ 2 ][ 1 ] = yAxis.z;
+		m_flMatVal[ 2 ][ 2 ] = zAxis.z;
+		m_flMatVal[ 2 ][ 3 ] = vecOrigin.z;
 	}
 
 	//-----------------------------------------------------------------------------
 	// Creates a matrix where the X axis = forward
 	// the Y axis = left, and the Z axis = up
 	//-----------------------------------------------------------------------------
-	matrix3x4_t( const Vector& xAxis, const Vector& yAxis, const Vector& zAxis, const Vector &vecOrigin )
+	matrix3x4_t( const Vector& xAxis, const Vector& yAxis, const Vector& zAxis, const Vector& vecOrigin )
 	{
 		Init( xAxis, yAxis, zAxis, vecOrigin );
 	}
 
-	inline void SetOrigin( Vector const & p )
+	inline void SetOrigin( Vector const& p )
 	{
 		m_flMatVal[ 0 ][ 3 ] = p.x;
 		m_flMatVal[ 1 ][ 3 ] = p.y;
@@ -1162,10 +1250,27 @@ struct matrix3x4_t
 		}
 	}
 
-	float *operator[]( int i )				{ Assert( ( i >= 0 ) && ( i < 3 ) ); return m_flMatVal[ i ]; }
-	const float *operator[]( int i ) const	{ Assert( ( i >= 0 ) && ( i < 3 ) ); return m_flMatVal[ i ]; }
-	float *Base()							{ return &m_flMatVal[ 0 ][ 0 ]; }
-	const float *Base() const				{ return &m_flMatVal[ 0 ][ 0 ]; }
+	float* operator[]( int i )
+	{
+		Assert( ( i >= 0 ) && ( i < 3 ) );
+		return m_flMatVal[ i ];
+	}
+
+	const float* operator[]( int i ) const
+	{
+		Assert( ( i >= 0 ) && ( i < 3 ) );
+		return m_flMatVal[ i ];
+	}
+
+	float* Base()
+	{
+		return &m_flMatVal[ 0 ][ 0 ];
+	}
+
+	const float* Base() const
+	{
+		return &m_flMatVal[ 0 ][ 0 ];
+	}
 
 	float m_flMatVal[ 3 ][ 4 ];
 };
@@ -1176,27 +1281,31 @@ public:
 	/*
 	matrix3x4a_t() { if (((size_t)Base()) % 16 != 0) { Error( "matrix3x4a_t missaligned" ); } }
 	*/
-	matrix3x4a_t& operator=( const matrix3x4_t& src ) { memcpy( Base(), src.Base(), sizeof( float ) * 3 * 4 ); return *this; };
+	matrix3x4a_t& operator=( const matrix3x4_t& src )
+	{
+		memcpy( Base(), src.Base(), sizeof( float) * 3 * 4 );
+		return *this;
+	};
 };
 
 class ICollideable
 {
 public:
-	virtual void pad0( );
-	virtual const Vector& OBBMins( ) const;
-	virtual const Vector& OBBMaxs( ) const;
+	virtual void pad0();
+	virtual const Vector& OBBMins() const;
+	virtual const Vector& OBBMaxs() const;
 };
 
 struct mstudiobbox_t
 {
-	int		bone;
-	int		group; // intersection group
-	Vector	bbmin; // bounding box 
-	Vector	bbmax;
-	int		hitboxnameindex; // offset to the name of the hitbox.
-	int		pad[ 3 ];
-	float	radius;
-	int		pad2[ 4 ];
+	int bone;
+	int group; // intersection group
+	Vector bbmin; // bounding box 
+	Vector bbmax;
+	int hitboxnameindex; // offset to the name of the hitbox.
+	int pad[ 3 ];
+	float radius;
+	int pad2[ 4 ];
 
 	char* getHitboxName()
 	{
@@ -1210,18 +1319,21 @@ struct mstudiobbox_t
 class Color
 {
 public:
-	Color( )
+	Color()
 	{
 		*( ( int * )this ) = 0;
 	}
+
 	Color( int color32 )
 	{
 		*( ( int * )this ) = color32;
 	}
+
 	Color( int _r, int _g, int _b )
 	{
 		SetColor( _r, _g, _b, 255 );
 	}
+
 	Color( int _r, int _g, int _b, int _a )
 	{
 		SetColor( _r, _g, _b, _a );
@@ -1229,18 +1341,18 @@ public:
 
 	void SetColor( int _r, int _g, int _b, int _a = 255 )
 	{
-		_color[0] = ( unsigned char ) _r;
-		_color[1] = ( unsigned char ) _g;
-		_color[2] = ( unsigned char ) _b;
-		_color[3] = ( unsigned char ) _a;
+		_color[ 0 ] = ( unsigned char ) _r;
+		_color[ 1 ] = ( unsigned char ) _g;
+		_color[ 2 ] = ( unsigned char ) _b;
+		_color[ 3 ] = ( unsigned char ) _a;
 	}
 
-	void GetColor( int &_r, int &_g, int &_b, int &_a ) const
+	void GetColor( int& _r, int& _g, int& _b, int& _a ) const
 	{
-		_r = _color[0];
-		_g = _color[1];
-		_b = _color[2];
-		_a = _color[3];
+		_r = _color[ 0 ];
+		_g = _color[ 1 ];
+		_b = _color[ 2 ];
+		_a = _color[ 3 ];
 	}
 
 	void SetRawColor( int color32 )
@@ -1248,126 +1360,156 @@ public:
 		*( ( int* )this ) = color32;
 	}
 
-	int GetRawColor( ) const
+	int GetRawColor() const
 	{
 		return *( ( int* )this );
 	}
 
-	int GetD3DColor( ) const
+	int GetD3DColor() const
 	{
-		return ( ( int ) ( ( ( ( _color[3] ) & 0xff ) << 24 ) | ( ( ( _color[0] ) & 0xff ) << 16 ) | ( ( ( _color[1] ) & 0xff ) << 8 ) | ( ( _color[2] ) & 0xff ) ) );
+		return ( ( int ) ( ( ( ( _color[ 3 ] ) & 0xff ) << 24 ) | ( ( ( _color[ 0 ] ) & 0xff ) << 16 ) | ( ( ( _color[ 1 ] ) & 0xff ) << 8 ) | ( ( _color[ 2 ] ) & 0xff ) ) );
 	}
 
-	inline int r( ) const { return _color[0]; }
-	inline int g( ) const { return _color[1]; }
-	inline int b( ) const { return _color[2]; }
-	inline int a( ) const { return _color[3]; }
-
-	inline float rBase() const { return _color[ 0 ] / 255.0f; }
-	inline float gBase() const { return _color[ 1 ] / 255.0f; }
-	inline float bBase() const { return _color[ 2 ] / 255.0f; }
-	inline float aBase() const { return _color[ 3 ] / 255.0f; }
-
-	unsigned char &operator[]( int index )
+	inline int r() const
 	{
-		return _color[index];
+		return _color[ 0 ];
 	}
 
-	const unsigned char &operator[]( int index ) const
+	inline int g() const
 	{
-		return _color[index];
+		return _color[ 1 ];
 	}
 
-	bool operator == ( const Color &rhs ) const
+	inline int b() const
+	{
+		return _color[ 2 ];
+	}
+
+	inline int a() const
+	{
+		return _color[ 3 ];
+	}
+
+	inline float rBase() const
+	{
+		return _color[ 0 ] / 255.0f;
+	}
+
+	inline float gBase() const
+	{
+		return _color[ 1 ] / 255.0f;
+	}
+
+	inline float bBase() const
+	{
+		return _color[ 2 ] / 255.0f;
+	}
+
+	inline float aBase() const
+	{
+		return _color[ 3 ] / 255.0f;
+	}
+
+	unsigned char& operator[]( int index )
+	{
+		return _color[ index ];
+	}
+
+	const unsigned char& operator[]( int index ) const
+	{
+		return _color[ index ];
+	}
+
+	bool operator ==( const Color& rhs ) const
 	{
 		return ( *( ( int * )this ) == *( ( int * ) &rhs ) );
 	}
 
-	bool operator != ( const Color &rhs ) const
+	bool operator !=( const Color& rhs ) const
 	{
 		return !( operator==( rhs ) );
 	}
 
-	Color &operator=( const Color &rhs )
+	Color& operator=( const Color& rhs )
 	{
-		SetRawColor( rhs.GetRawColor( ) );
+		SetRawColor( rhs.GetRawColor() );
 		return *this;
 	}
 
-	float* Base( )
+	float* Base()
 	{
 		float clr[3];
 
-		clr[0] = _color[0] / 255.0f;
-		clr[1] = _color[1] / 255.0f;
-		clr[2] = _color[2] / 255.0f;
+		clr[ 0 ] = _color[ 0 ] / 255.0f;
+		clr[ 1 ] = _color[ 1 ] / 255.0f;
+		clr[ 2 ] = _color[ 2 ] / 255.0f;
 
-		return &clr[0];
+		return &clr[ 0 ];
 	}
 
-	float* BaseAlpha( )
+	float* BaseAlpha()
 	{
 		float clr[4];
 
-		clr[0] = _color[0] / 255.0f;
-		clr[1] = _color[1] / 255.0f;
-		clr[2] = _color[2] / 255.0f;
-		clr[3] = _color[3] / 255.0f;
+		clr[ 0 ] = _color[ 0 ] / 255.0f;
+		clr[ 1 ] = _color[ 1 ] / 255.0f;
+		clr[ 2 ] = _color[ 2 ] / 255.0f;
+		clr[ 3 ] = _color[ 3 ] / 255.0f;
 
-		return &clr[0];
+		return &clr[ 0 ];
 	}
 
-	float Hue( ) const
+	float Hue() const
 	{
-		if ( _color[0] == _color[1] && _color[1] == _color[2] )
+		if( _color[ 0 ] == _color[ 1 ] && _color[ 1 ] == _color[ 2 ] )
 		{
 			return 0.0f;
 		}
 
-		float r = _color[0] / 255.0f;
-		float g = _color[1] / 255.0f;
-		float b = _color[2] / 255.0f;
+		float r = _color[ 0 ] / 255.0f;
+		float g = _color[ 1 ] / 255.0f;
+		float b = _color[ 2 ] / 255.0f;
 
 		float max = r > g ? r : g > b ? g : b,
-			min = r < g ? r : g < b ? g : b;
+				min = r < g ? r : g < b ? g : b;
 		float delta = max - min;
 		float hue = 0.0f;
 
-		if ( r == max )
+		if( r == max )
 		{
 			hue = ( g - b ) / delta;
 		}
-		else if ( g == max )
+		else if( g == max )
 		{
 			hue = 2 + ( b - r ) / delta;
 		}
-		else if ( b == max )
+		else if( b == max )
 		{
 			hue = 4 + ( r - g ) / delta;
 		}
 		hue *= 60;
 
-		if ( hue < 0.0f )
+		if( hue < 0.0f )
 		{
 			hue += 360.0f;
 		}
 		return hue;
 	}
 
-	float Saturation( ) const
+	float Saturation() const
 	{
-		float r = _color[0] / 255.0f;
-		float g = _color[1] / 255.0f;
-		float b = _color[2] / 255.0f;
+		float r = _color[ 0 ] / 255.0f;
+		float g = _color[ 1 ] / 255.0f;
+		float b = _color[ 2 ] / 255.0f;
 
 		float max = r > g ? r : g > b ? g : b,
-			min = r < g ? r : g < b ? g : b;
+				min = r < g ? r : g < b ? g : b;
 		float l, s = 0;
 
-		if ( max != min )
+		if( max != min )
 		{
 			l = ( max + min ) / 2;
-			if ( l <= 0.5f )
+			if( l <= 0.5f )
 				s = ( max - min ) / ( max + min );
 			else
 				s = ( max - min ) / ( 2 - max - min );
@@ -1375,14 +1517,14 @@ public:
 		return s;
 	}
 
-	float Brightness( ) const
+	float Brightness() const
 	{
-		float r = _color[0] / 255.0f;
-		float g = _color[1] / 255.0f;
-		float b = _color[2] / 255.0f;
+		float r = _color[ 0 ] / 255.0f;
+		float g = _color[ 1 ] / 255.0f;
+		float b = _color[ 2 ] / 255.0f;
 
 		float max = r > g ? r : g > b ? g : b,
-			min = r < g ? r : g < b ? g : b;
+				min = r < g ? r : g < b ? g : b;
 		return ( max + min ) / 2;
 	}
 
@@ -1394,77 +1536,146 @@ public:
 		float q = brightness * ( 1.0f - saturation * f );
 		float t = brightness * ( 1.0f - ( saturation * ( 1.0f - f ) ) );
 
-		if ( h < 1 )
+		if( h < 1 )
 		{
 			return Color(
-				( unsigned char ) ( brightness * 255 ),
-				( unsigned char ) ( t * 255 ),
-				( unsigned char ) ( p * 255 )
-				);
+			             ( unsigned char ) ( brightness * 255 ),
+			             ( unsigned char ) ( t * 255 ),
+			             ( unsigned char ) ( p * 255 )
+			            );
 		}
-		else if ( h < 2 )
+		else if( h < 2 )
 		{
 			return Color(
-				( unsigned char ) ( q * 255 ),
-				( unsigned char ) ( brightness * 255 ),
-				( unsigned char ) ( p * 255 )
-				);
+			             ( unsigned char ) ( q * 255 ),
+			             ( unsigned char ) ( brightness * 255 ),
+			             ( unsigned char ) ( p * 255 )
+			            );
 		}
-		else if ( h < 3 )
+		else if( h < 3 )
 		{
 			return Color(
-				( unsigned char ) ( p * 255 ),
-				( unsigned char ) ( brightness * 255 ),
-				( unsigned char ) ( t * 255 )
-				);
+			             ( unsigned char ) ( p * 255 ),
+			             ( unsigned char ) ( brightness * 255 ),
+			             ( unsigned char ) ( t * 255 )
+			            );
 		}
-		else if ( h < 4 )
+		else if( h < 4 )
 		{
 			return Color(
-				( unsigned char ) ( p * 255 ),
-				( unsigned char ) ( q * 255 ),
-				( unsigned char ) ( brightness * 255 )
-				);
+			             ( unsigned char ) ( p * 255 ),
+			             ( unsigned char ) ( q * 255 ),
+			             ( unsigned char ) ( brightness * 255 )
+			            );
 		}
-		else if ( h < 5 )
+		else if( h < 5 )
 		{
 			return Color(
-				( unsigned char ) ( t * 255 ),
-				( unsigned char ) ( p * 255 ),
-				( unsigned char ) ( brightness * 255 )
-				);
+			             ( unsigned char ) ( t * 255 ),
+			             ( unsigned char ) ( p * 255 ),
+			             ( unsigned char ) ( brightness * 255 )
+			            );
 		}
 		else
 		{
 			return Color(
-				( unsigned char ) ( brightness * 255 ),
-				( unsigned char ) ( p * 255 ),
-				( unsigned char ) ( q * 255 )
-				);
+			             ( unsigned char ) ( brightness * 255 ),
+			             ( unsigned char ) ( p * 255 ),
+			             ( unsigned char ) ( q * 255 )
+			            );
 		}
 	}
 
-	static Color Red( ) { return Color( 255, 0, 0 ); }
-	static Color Green( ) { return Color( 0, 255, 0 ); }
-	static Color Blue( ) { return Color( 0, 0, 255 ); }
-	static Color LightBlue( ) { return Color( 100, 100, 255 ); }
-	static Color Grey( ) { return Color( 128, 128, 128 ); }
-	static Color DarkGrey( ) { return Color( 45, 45, 45 ); }
-	static Color Black( ) { return Color( 0, 0, 0 ); }
-	static Color White( ) { return Color( 255, 255, 255 ); }
-	static Color Purple( ) { return Color( 220, 0, 220 ); }
+	static Color Red()
+	{
+		return Color( 255, 0, 0 );
+	}
+
+	static Color Green()
+	{
+		return Color( 0, 255, 0 );
+	}
+
+	static Color Blue()
+	{
+		return Color( 0, 0, 255 );
+	}
+
+	static Color LightBlue()
+	{
+		return Color( 100, 100, 255 );
+	}
+
+	static Color Grey()
+	{
+		return Color( 128, 128, 128 );
+	}
+
+	static Color DarkGrey()
+	{
+		return Color( 45, 45, 45 );
+	}
+
+	static Color Black()
+	{
+		return Color( 0, 0, 0 );
+	}
+
+	static Color White()
+	{
+		return Color( 255, 255, 255 );
+	}
+
+	static Color Purple()
+	{
+		return Color( 220, 0, 220 );
+	}
 
 	//Menu
-	static Color Background()	{ return Color(  55,  55,  55 ); }
-	static Color FrameBorder()	{ return Color(  80,  80,  80 ); }
-	static Color MainText()		{ return Color( 230, 230, 230 ); }
-	static Color HeaderText()	{ return Color(  49, 124, 230 ); }
-	static Color CurrentTab()	{ return Color( 55, 55, 55 ); }
-	static Color Tabs()			{ return Color( 23, 23, 23 ); }
-	static Color Highlight()	{ return Color( 49, 124, 230 );  }
-	static Color ElementBorder(){ return Color(  0, 0, 0 ); }
-	static Color SliderScroll() { return Color( 78, 143, 230 ); }
+	static Color Background()
+	{
+		return Color( 55, 55, 55 );
+	}
 
+	static Color FrameBorder()
+	{
+		return Color( 80, 80, 80 );
+	}
+
+	static Color MainText()
+	{
+		return Color( 230, 230, 230 );
+	}
+
+	static Color HeaderText()
+	{
+		return Color( 49, 124, 230 );
+	}
+
+	static Color CurrentTab()
+	{
+		return Color( 55, 55, 55 );
+	}
+
+	static Color Tabs()
+	{
+		return Color( 23, 23, 23 );
+	}
+
+	static Color Highlight()
+	{
+		return Color( 49, 124, 230 );
+	}
+
+	static Color ElementBorder()
+	{
+		return Color( 0, 0, 0 );
+	}
+
+	static Color SliderScroll()
+	{
+		return Color( 78, 143, 230 );
+	}
 
 private:
 	unsigned char _color[4];
@@ -1473,45 +1684,45 @@ private:
 class CViewSetup
 {
 public:
-	int			x, x_old;
-	int			y, y_old;
-	int			width, width_old;
-	int			height, height_old;
-	bool		m_bOrtho;
-	float		m_OrthoLeft;
-	float		m_OrthoTop;
-	float		m_OrthoRight;
-	float		m_OrthoBottom;
-	bool		m_bCustomViewMatrix;
-	matrix3x4_t	m_matCustomViewMatrix;
-	char		pad_0x68[0x48];
-	float		fov;
-	float		fovViewmodel;
-	Vector		origin;
-	QAngle		angles;
-	float		zNear;
-	float		zFar;
-	float		zNearViewmodel;
-	float		zFarViewmodel;
-	float		m_flAspectRatio;
-	float		m_flNearBlurDepth;
-	float		m_flNearFocusDepth;
-	float		m_flFarFocusDepth;
-	float		m_flFarBlurDepth;
-	float		m_flNearBlurRadius;
-	float		m_flFarBlurRadius;
-	int			m_nDoFQuality;
-	int			m_nMotionBlurMode;
-	float		m_flShutterTime;
-	Vector		m_vShutterOpenPosition;
-	QAngle		m_shutterOpenAngles;
-	Vector		m_vShutterClosePosition;
-	QAngle		m_shutterCloseAngles;
-	float		m_flOffCenterTop;
-	float		m_flOffCenterBottom;
-	float		m_flOffCenterLeft;
-	float		m_flOffCenterRight;
-	int			m_EdgeBlur;
+	int x, x_old;
+	int y, y_old;
+	int width, width_old;
+	int height, height_old;
+	bool m_bOrtho;
+	float m_OrthoLeft;
+	float m_OrthoTop;
+	float m_OrthoRight;
+	float m_OrthoBottom;
+	bool m_bCustomViewMatrix;
+	matrix3x4_t m_matCustomViewMatrix;
+	char pad_0x68[0x48];
+	float fov;
+	float fovViewmodel;
+	Vector origin;
+	QAngle angles;
+	float zNear;
+	float zFar;
+	float zNearViewmodel;
+	float zFarViewmodel;
+	float m_flAspectRatio;
+	float m_flNearBlurDepth;
+	float m_flNearFocusDepth;
+	float m_flFarFocusDepth;
+	float m_flFarBlurDepth;
+	float m_flNearBlurRadius;
+	float m_flFarBlurRadius;
+	int m_nDoFQuality;
+	int m_nMotionBlurMode;
+	float m_flShutterTime;
+	Vector m_vShutterOpenPosition;
+	QAngle m_shutterOpenAngles;
+	Vector m_vShutterClosePosition;
+	QAngle m_shutterCloseAngles;
+	float m_flOffCenterTop;
+	float m_flOffCenterBottom;
+	float m_flOffCenterLeft;
+	float m_flOffCenterRight;
+	int m_EdgeBlur;
 };
 
 enum FontDrawType_t
@@ -1529,8 +1740,14 @@ struct Vector2D
 public:
 	float x, y;
 
-	Vector2D( ) {}
-	Vector2D( float x_, float y_ ) { x = x_; y = y_; }
+	Vector2D()
+	{}
+
+	Vector2D( float x_, float y_ )
+	{
+		x = x_;
+		y = y_;
+	}
 };
 
 struct FontVertex_t
@@ -1538,13 +1755,16 @@ struct FontVertex_t
 	Vector2D m_Position;
 	Vector2D m_TexCoord;
 
-	FontVertex_t( ) {}
-	FontVertex_t( const Vector2D &pos, const Vector2D &coord = Vector2D( 0, 0 ) )
+	FontVertex_t()
+	{}
+
+	FontVertex_t( const Vector2D& pos, const Vector2D& coord = Vector2D( 0, 0 ) )
 	{
 		m_Position = pos;
 		m_TexCoord = coord;
 	}
-	void Init( const Vector2D &pos, const Vector2D &coord = Vector2D( 0, 0 ) )
+
+	void Init( const Vector2D& pos, const Vector2D& coord = Vector2D( 0, 0 ) )
 	{
 		m_Position = pos;
 		m_TexCoord = coord;
@@ -1555,74 +1775,74 @@ typedef FontVertex_t Vertex_t;
 
 struct surfacephysicsparams_t
 {
-	float			friction;
-	float			elasticity;
-	float			density;
-	float			thickness;
-	float			dampening;
+	float friction;
+	float elasticity;
+	float density;
+	float thickness;
+	float dampening;
 };
 
 struct surfaceaudioparams_t
 {
-	float			reflectivity;
-	float			hardnessFactor;
-	float			roughnessFactor;
-	float			roughThreshold;
-	float			hardThreshold;
-	float			hardVelocityThreshold;
+	float reflectivity;
+	float hardnessFactor;
+	float roughnessFactor;
+	float roughThreshold;
+	float hardThreshold;
+	float hardVelocityThreshold;
 };
 
 struct surfacesoundnames_t
 {
-	unsigned short	walkStepLeft;
-	unsigned short	walkStepRight;
-	unsigned short	runStepLeft;
-	unsigned short	runStepRight;
-	unsigned short	impactSoft;
-	unsigned short	impactHard;
-	unsigned short	scrapeSmooth;
-	unsigned short	scrapeRough;
-	unsigned short	bulletImpact;
-	unsigned short	rolling;
-	unsigned short	breakSound;
-	unsigned short	strainSound;
+	unsigned short walkStepLeft;
+	unsigned short walkStepRight;
+	unsigned short runStepLeft;
+	unsigned short runStepRight;
+	unsigned short impactSoft;
+	unsigned short impactHard;
+	unsigned short scrapeSmooth;
+	unsigned short scrapeRough;
+	unsigned short bulletImpact;
+	unsigned short rolling;
+	unsigned short breakSound;
+	unsigned short strainSound;
 };
 
 struct surfacesoundhandles_t
 {
-	short	walkStepLeft;
-	short	walkStepRight;
-	short	runStepLeft;
-	short	runStepRight;
-	short	impactSoft;
-	short	impactHard;
-	short	scrapeSmooth;
-	short	scrapeRough;
-	short	bulletImpact;
-	short	rolling;
-	short	breakSound;
-	short	strainSound;
+	short walkStepLeft;
+	short walkStepRight;
+	short runStepLeft;
+	short runStepRight;
+	short impactSoft;
+	short impactHard;
+	short scrapeSmooth;
+	short scrapeRough;
+	short bulletImpact;
+	short rolling;
+	short breakSound;
+	short strainSound;
 };
 
 struct surfacegameprops_t
 {
 public:
-	float				maxSpeedFactor; 
-	float				jumpFactor; 
-	char				pad00[ 0x4 ]; 
-	float				flPenetrationModifier; 
-	float				flDamageModifier; 
-	unsigned short		material; 
-	char				pad01[ 0x3 ];
+	float maxSpeedFactor;
+	float jumpFactor;
+	char pad00[ 0x4 ];
+	float flPenetrationModifier;
+	float flDamageModifier;
+	unsigned short material;
+	char pad01[ 0x3 ];
 };
 
 struct surfacedata_t
 {
-	surfacephysicsparams_t	physics;
-	surfaceaudioparams_t	audio;
-	surfacesoundnames_t		sounds;
-	surfacegameprops_t		game;
-	surfacesoundhandles_t	soundhandles;
+	surfacephysicsparams_t physics;
+	surfaceaudioparams_t audio;
+	surfacesoundnames_t sounds;
+	surfacegameprops_t game;
+	surfacesoundhandles_t soundhandles;
 };
 
 enum ClientFrameStage_t
@@ -1799,8 +2019,8 @@ enum ButtonCode_t
 	MOUSE_MIDDLE,
 	MOUSE_4,
 	MOUSE_5,
-	MOUSE_WHEEL_UP,		// A fake button which is 'pressed' and 'released' when the wheel is moved up 
-	MOUSE_WHEEL_DOWN,	// A fake button which is 'pressed' and 'released' when the wheel is moved down
+	MOUSE_WHEEL_UP, // A fake button which is 'pressed' and 'released' when the wheel is moved up 
+	MOUSE_WHEEL_DOWN, // A fake button which is 'pressed' and 'released' when the wheel is moved down
 
 	MOUSE_LAST = MOUSE_WHEEL_DOWN,
 	MOUSE_COUNT = MOUSE_LAST - MOUSE_FIRST + 1,
@@ -1821,12 +2041,12 @@ enum ButtonCode_t
 	BUTTON_CODE_COUNT = BUTTON_CODE_LAST - KEY_FIRST + 1,
 
 	// Helpers for XBox 360
-	KEY_XBUTTON_UP = JOYSTICK_FIRST_POV_BUTTON,	// POV buttons
+	KEY_XBUTTON_UP = JOYSTICK_FIRST_POV_BUTTON, // POV buttons
 	KEY_XBUTTON_RIGHT,
 	KEY_XBUTTON_DOWN,
 	KEY_XBUTTON_LEFT,
 
-	KEY_XBUTTON_A = JOYSTICK_FIRST_BUTTON,		// Buttons
+	KEY_XBUTTON_A = JOYSTICK_FIRST_BUTTON, // Buttons
 	KEY_XBUTTON_B,
 	KEY_XBUTTON_X,
 	KEY_XBUTTON_Y,
@@ -1838,16 +2058,16 @@ enum ButtonCode_t
 	KEY_XBUTTON_STICK2,
 	KEY_XBUTTON_INACTIVE_START,
 
-	KEY_XSTICK1_RIGHT = JOYSTICK_FIRST_AXIS_BUTTON,	// XAXIS POSITIVE
-	KEY_XSTICK1_LEFT,							// XAXIS NEGATIVE
-	KEY_XSTICK1_DOWN,							// YAXIS POSITIVE
-	KEY_XSTICK1_UP,								// YAXIS NEGATIVE
-	KEY_XBUTTON_LTRIGGER,						// ZAXIS POSITIVE
-	KEY_XBUTTON_RTRIGGER,						// ZAXIS NEGATIVE
-	KEY_XSTICK2_RIGHT,							// UAXIS POSITIVE
-	KEY_XSTICK2_LEFT,							// UAXIS NEGATIVE
-	KEY_XSTICK2_DOWN,							// VAXIS POSITIVE
-	KEY_XSTICK2_UP,								// VAXIS NEGATIVE
+	KEY_XSTICK1_RIGHT = JOYSTICK_FIRST_AXIS_BUTTON, // XAXIS POSITIVE
+	KEY_XSTICK1_LEFT, // XAXIS NEGATIVE
+	KEY_XSTICK1_DOWN, // YAXIS POSITIVE
+	KEY_XSTICK1_UP, // YAXIS NEGATIVE
+	KEY_XBUTTON_LTRIGGER, // ZAXIS POSITIVE
+	KEY_XBUTTON_RTRIGGER, // ZAXIS NEGATIVE
+	KEY_XSTICK2_RIGHT, // UAXIS POSITIVE
+	KEY_XSTICK2_LEFT, // UAXIS NEGATIVE
+	KEY_XSTICK2_DOWN, // VAXIS POSITIVE
+	KEY_XSTICK2_UP, // VAXIS NEGATIVE
 };
 
 #define MAXSTUDIOSKINS		32		// total textures
@@ -1871,8 +2091,8 @@ enum ButtonCode_t
 #define BONE_USED_BY_ATTACHMENT		0x00000200	// bone (or child) is used by an attachment point
 #define BONE_USED_BY_VERTEX_MASK	0x0003FC00
 #define BONE_USED_BY_VERTEX_LOD0	0x00000400	// bone (or child) is used by the toplevel model via skinned vertex
-#define BONE_USED_BY_VERTEX_LOD1	0x00000800	
-#define BONE_USED_BY_VERTEX_LOD2	0x00001000  
+#define BONE_USED_BY_VERTEX_LOD1	0x00000800
+#define BONE_USED_BY_VERTEX_LOD2	0x00001000
 #define BONE_USED_BY_VERTEX_LOD3	0x00002000
 #define BONE_USED_BY_VERTEX_LOD4	0x00004000
 #define BONE_USED_BY_VERTEX_LOD5	0x00008000
@@ -1896,7 +2116,7 @@ enum ButtonCode_t
 #define	HITGROUP_HEAD		1
 #define	HITGROUP_CHEST		2
 #define	HITGROUP_STOMACH	3
-#define HITGROUP_LEFTARM	4	
+#define HITGROUP_LEFTARM	4
 #define HITGROUP_RIGHTARM	5
 #define HITGROUP_LEFTLEG	6
 #define HITGROUP_RIGHTLEG	7
@@ -1904,25 +2124,27 @@ enum ButtonCode_t
 
 struct model_t
 {
-	char        name[ 255 ];
+	char name[ 255 ];
 };
+
 typedef unsigned short ModelInstanceHandle_t;
 
 struct ModelRenderInfo_t
 {
 	Vector origin;
 	QAngle angles;
-	void *pRenderable;
-	const model_t *pModel;
-	const matrix3x4_t *pModelToWorld;
-	const matrix3x4_t *pLightingOffset;
-	const Vector *pLightingOrigin;
+	void* pRenderable;
+	const model_t* pModel;
+	const matrix3x4_t* pModelToWorld;
+	const matrix3x4_t* pLightingOffset;
+	const Vector* pLightingOrigin;
 	int flags;
 	int entity_index;
 	int skin;
 	int body;
 	int hitboxset;
 	ModelInstanceHandle_t instance;
+
 	ModelRenderInfo_t()
 	{
 		pModelToWorld = NULL;
@@ -1940,10 +2162,10 @@ enum OverrideType_t
 
 enum MaterialPropertyTypes_t
 {
-	MATERIAL_PROPERTY_NEEDS_LIGHTMAP = 0,					// bool
-	MATERIAL_PROPERTY_OPACITY,								// int (enum MaterialPropertyOpacityTypes_t)
-	MATERIAL_PROPERTY_REFLECTIVITY,							// vec3_t
-	MATERIAL_PROPERTY_NEEDS_BUMPED_LIGHTMAPS				// bool
+	MATERIAL_PROPERTY_NEEDS_LIGHTMAP = 0, // bool
+	MATERIAL_PROPERTY_OPACITY, // int (enum MaterialPropertyOpacityTypes_t)
+	MATERIAL_PROPERTY_REFLECTIVITY, // vec3_t
+	MATERIAL_PROPERTY_NEEDS_BUMPED_LIGHTMAPS // bool
 };
 
 enum ImageFormat
@@ -1976,24 +2198,24 @@ enum ImageFormat
 	IMAGE_FORMAT_RGBA16161616F,
 	IMAGE_FORMAT_RGBA16161616,
 	IMAGE_FORMAT_UVLX8888,
-	IMAGE_FORMAT_R32F,			// Single-channel 32-bit floating point
-	IMAGE_FORMAT_RGB323232F,	// NOTE: D3D9 does not have this format
+	IMAGE_FORMAT_R32F, // Single-channel 32-bit floating point
+	IMAGE_FORMAT_RGB323232F, // NOTE: D3D9 does not have this format
 	IMAGE_FORMAT_RGBA32323232F,
 	IMAGE_FORMAT_RG1616F,
 	IMAGE_FORMAT_RG3232F,
 	IMAGE_FORMAT_RGBX8888,
 
-	IMAGE_FORMAT_NULL,			// Dummy format which takes no video memory
+	IMAGE_FORMAT_NULL, // Dummy format which takes no video memory
 
-								// Compressed normal map formats
-	IMAGE_FORMAT_ATI2N,			// One-surface ATI2N / DXN format
-	IMAGE_FORMAT_ATI1N,			// Two-surface ATI1N format
+	// Compressed normal map formats
+	IMAGE_FORMAT_ATI2N, // One-surface ATI2N / DXN format
+	IMAGE_FORMAT_ATI1N, // Two-surface ATI1N format
 
-	IMAGE_FORMAT_RGBA1010102,	// 10 bit-per component render targets
+	IMAGE_FORMAT_RGBA1010102, // 10 bit-per component render targets
 	IMAGE_FORMAT_BGRA1010102,
-	IMAGE_FORMAT_R16F,			// 16 bit FP format
+	IMAGE_FORMAT_R16F, // 16 bit FP format
 
-								// Depth-stencil texture formats
+	// Depth-stencil texture formats
 	IMAGE_FORMAT_D16,
 	IMAGE_FORMAT_D15S1,
 	IMAGE_FORMAT_D32,
@@ -2002,10 +2224,10 @@ enum ImageFormat
 	IMAGE_FORMAT_D24X8,
 	IMAGE_FORMAT_D24X4S4,
 	IMAGE_FORMAT_D24FS8,
-	IMAGE_FORMAT_D16_SHADOW,	// Specific formats for shadow mapping
-	IMAGE_FORMAT_D24X8_SHADOW,	// Specific formats for shadow mapping
+	IMAGE_FORMAT_D16_SHADOW, // Specific formats for shadow mapping
+	IMAGE_FORMAT_D24X8_SHADOW, // Specific formats for shadow mapping
 
-								// supporting these specific formats as non-tiled for procedural cpu access (360-specific)
+	// supporting these specific formats as non-tiled for procedural cpu access (360-specific)
 	IMAGE_FORMAT_LINEAR_BGRX8888,
 	IMAGE_FORMAT_LINEAR_RGBA8888,
 	IMAGE_FORMAT_LINEAR_ABGR8888,
@@ -2026,7 +2248,9 @@ enum ImageFormat
 class IHandleEntity
 {
 public:
-	virtual ~IHandleEntity() {}
+	virtual ~IHandleEntity()
+	{}
+
 	virtual void SetRefEHandle() = 0;
 	virtual void GetRefEHandle() const = 0;
 };
@@ -2034,30 +2258,28 @@ public:
 enum Collision_Group_t
 {
 	COLLISION_GROUP_NONE = 0,
-	COLLISION_GROUP_DEBRIS,			// Collides with nothing but world and static stuff
+	COLLISION_GROUP_DEBRIS, // Collides with nothing but world and static stuff
 	COLLISION_GROUP_DEBRIS_TRIGGER, // Same as debris, but hits triggers
-	COLLISION_GROUP_INTERACTIVE_DEBRIS,	// Collides with everything except other interactive debris or debris
-	COLLISION_GROUP_INTERACTIVE,	// Collides with everything except interactive debris or debris
+	COLLISION_GROUP_INTERACTIVE_DEBRIS, // Collides with everything except other interactive debris or debris
+	COLLISION_GROUP_INTERACTIVE, // Collides with everything except interactive debris or debris
 	COLLISION_GROUP_PLAYER,
 	COLLISION_GROUP_BREAKABLE_GLASS,
 	COLLISION_GROUP_VEHICLE,
-	COLLISION_GROUP_PLAYER_MOVEMENT,  // For HL2, same as Collision_Group_Player, for
-									  // TF2, this filters out other players and CBaseObjects
-	COLLISION_GROUP_NPC,			// Generic NPC group
-	COLLISION_GROUP_IN_VEHICLE,		// for any entity inside a vehicle
-	COLLISION_GROUP_WEAPON,			// for any weapons that need collision detection
-	COLLISION_GROUP_VEHICLE_CLIP,	// vehicle clip brush to restrict vehicle movement
-	COLLISION_GROUP_PROJECTILE,		// Projectiles!
-	COLLISION_GROUP_DOOR_BLOCKER,	// Blocks entities not permitted to get near moving doors
-	COLLISION_GROUP_PASSABLE_DOOR,	// Doors that the player shouldn't collide with
-	COLLISION_GROUP_DISSOLVING,		// Things that are dissolving are in this group
-	COLLISION_GROUP_PUSHAWAY,		// Nonsolid on client and server, pushaway in player code
+	COLLISION_GROUP_PLAYER_MOVEMENT, // For HL2, same as Collision_Group_Player, for
+	// TF2, this filters out other players and CBaseObjects
+	COLLISION_GROUP_NPC, // Generic NPC group
+	COLLISION_GROUP_IN_VEHICLE, // for any entity inside a vehicle
+	COLLISION_GROUP_WEAPON, // for any weapons that need collision detection
+	COLLISION_GROUP_VEHICLE_CLIP, // vehicle clip brush to restrict vehicle movement
+	COLLISION_GROUP_PROJECTILE, // Projectiles!
+	COLLISION_GROUP_DOOR_BLOCKER, // Blocks entities not permitted to get near moving doors
+	COLLISION_GROUP_PASSABLE_DOOR, // Doors that the player shouldn't collide with
+	COLLISION_GROUP_DISSOLVING, // Things that are dissolving are in this group
+	COLLISION_GROUP_PUSHAWAY, // Nonsolid on client and server, pushaway in player code
 
-	COLLISION_GROUP_NPC_ACTOR,		// Used so NPCs in scripts ignore the player.
-	COLLISION_GROUP_NPC_SCRIPTED,	// USed for NPCs in scripts that should not collide with each other
+	COLLISION_GROUP_NPC_ACTOR, // Used so NPCs in scripts ignore the player.
+	COLLISION_GROUP_NPC_SCRIPTED, // USed for NPCs in scripts that should not collide with each other
 	COLLISION_GROUP_PZ_CLIP,
-
-
 
 	COLLISION_GROUP_DEBRIS_BLOCK_PROJECTILE, // Only collides with bullets
 
@@ -2067,15 +2289,33 @@ enum Collision_Group_t
 struct string_t
 {
 public:
-	bool operator!() const							{ return ( pszValue == NULL ); }
-	bool operator==( const string_t &rhs ) const	{ return ( pszValue == rhs.pszValue ); }
-	bool operator!=( const string_t &rhs ) const	{ return ( pszValue != rhs.pszValue ); }
-	bool operator<( const string_t &rhs ) const		{ return ( ( void * )pszValue < ( void * )rhs.pszValue ); }
+	bool operator!() const
+	{
+		return ( pszValue == NULL );
+	}
 
-	const char *ToCStr() const						{ return ( pszValue ) ? pszValue : ""; }
+	bool operator==( const string_t& rhs ) const
+	{
+		return ( pszValue == rhs.pszValue );
+	}
+
+	bool operator!=( const string_t& rhs ) const
+	{
+		return ( pszValue != rhs.pszValue );
+	}
+
+	bool operator<( const string_t& rhs ) const
+	{
+		return ( ( void * )pszValue < ( void * )rhs.pszValue );
+	}
+
+	const char* ToCStr() const
+	{
+		return ( pszValue ) ? pszValue : "";
+	}
 
 protected:
-	const char *pszValue;
+	const char* pszValue;
 };
 
 #define PHYSICS_MULTIPLAYER_AUTODETECT	0	// use multiplayer physics mode as defined in model prop data
@@ -2086,37 +2326,37 @@ protected:
 class IMultiplayerPhysics
 {
 public:
-	virtual int		GetMultiplayerPhysicsMode() = 0;
-	virtual float	GetMass() = 0;
-	virtual bool	IsAsleep() = 0;
+	virtual int GetMultiplayerPhysicsMode() = 0;
+	virtual float GetMass() = 0;
+	virtual bool IsAsleep() = 0;
 };
 
 enum propdata_interactions_t
 {
-	PROPINTER_PHYSGUN_WORLD_STICK,		// "onworldimpact"	"stick"
-	PROPINTER_PHYSGUN_FIRST_BREAK,		// "onfirstimpact"	"break"
-	PROPINTER_PHYSGUN_FIRST_PAINT,		// "onfirstimpact"	"paintsplat"
-	PROPINTER_PHYSGUN_FIRST_IMPALE,		// "onfirstimpact"	"impale"
-	PROPINTER_PHYSGUN_LAUNCH_SPIN_NONE,	// "onlaunch"		"spin_none"
-	PROPINTER_PHYSGUN_LAUNCH_SPIN_Z,	// "onlaunch"		"spin_zaxis"
-	PROPINTER_PHYSGUN_BREAK_EXPLODE,	// "onbreak"		"explode_fire"
-	PROPINTER_PHYSGUN_BREAK_EXPLODE_ICE,	// "onbreak"	"explode_ice"
-	PROPINTER_PHYSGUN_DAMAGE_NONE,		// "damage"			"none"
+	PROPINTER_PHYSGUN_WORLD_STICK, // "onworldimpact"	"stick"
+	PROPINTER_PHYSGUN_FIRST_BREAK, // "onfirstimpact"	"break"
+	PROPINTER_PHYSGUN_FIRST_PAINT, // "onfirstimpact"	"paintsplat"
+	PROPINTER_PHYSGUN_FIRST_IMPALE, // "onfirstimpact"	"impale"
+	PROPINTER_PHYSGUN_LAUNCH_SPIN_NONE, // "onlaunch"		"spin_none"
+	PROPINTER_PHYSGUN_LAUNCH_SPIN_Z, // "onlaunch"		"spin_zaxis"
+	PROPINTER_PHYSGUN_BREAK_EXPLODE, // "onbreak"		"explode_fire"
+	PROPINTER_PHYSGUN_BREAK_EXPLODE_ICE, // "onbreak"	"explode_ice"
+	PROPINTER_PHYSGUN_DAMAGE_NONE, // "damage"			"none"
 
-	PROPINTER_FIRE_FLAMMABLE,			// "flammable"			"yes"
-	PROPINTER_FIRE_EXPLOSIVE_RESIST,	// "explosive_resist"	"yes"
-	PROPINTER_FIRE_IGNITE_HALFHEALTH,	// "ignite"				"halfhealth"
+	PROPINTER_FIRE_FLAMMABLE, // "flammable"			"yes"
+	PROPINTER_FIRE_EXPLOSIVE_RESIST, // "explosive_resist"	"yes"
+	PROPINTER_FIRE_IGNITE_HALFHEALTH, // "ignite"				"halfhealth"
 
-	PROPINTER_PHYSGUN_CREATE_FLARE,		// "onpickup"		"create_flare"
+	PROPINTER_PHYSGUN_CREATE_FLARE, // "onpickup"		"create_flare"
 
-	PROPINTER_PHYSGUN_ALLOW_OVERHEAD,	// "allow_overhead"	"yes"
+	PROPINTER_PHYSGUN_ALLOW_OVERHEAD, // "allow_overhead"	"yes"
 
-	PROPINTER_WORLD_BLOODSPLAT,			// "onworldimpact", "bloodsplat"
+	PROPINTER_WORLD_BLOODSPLAT, // "onworldimpact", "bloodsplat"
 
-	PROPINTER_PHYSGUN_NOTIFY_CHILDREN,	// "onfirstimpact" cause attached flechettes to explode
-	PROPINTER_MELEE_IMMUNE,				// "melee_immune"	"yes"
+	PROPINTER_PHYSGUN_NOTIFY_CHILDREN, // "onfirstimpact" cause attached flechettes to explode
+	PROPINTER_MELEE_IMMUNE, // "melee_immune"	"yes"
 
-										// If we get more than 32 of these, we'll need a different system
+	// If we get more than 32 of these, we'll need a different system
 
 	PROPINTER_NUM_INTERACTIONS,
 };
@@ -2133,56 +2373,56 @@ class IBreakableWithPropData
 {
 public:
 	// Damage modifiers
-	virtual void		SetDmgModBullet( float flDmgMod ) = 0;
-	virtual void		SetDmgModClub( float flDmgMod ) = 0;
-	virtual void		SetDmgModExplosive( float flDmgMod ) = 0;
-	virtual float		GetDmgModBullet( void ) = 0;
-	virtual float		GetDmgModClub( void ) = 0;
-	virtual float		GetDmgModExplosive( void ) = 0;
-	virtual float		GetDmgModFire( void ) = 0;
+	virtual void SetDmgModBullet( float flDmgMod ) = 0;
+	virtual void SetDmgModClub( float flDmgMod ) = 0;
+	virtual void SetDmgModExplosive( float flDmgMod ) = 0;
+	virtual float GetDmgModBullet( void ) = 0;
+	virtual float GetDmgModClub( void ) = 0;
+	virtual float GetDmgModExplosive( void ) = 0;
+	virtual float GetDmgModFire( void ) = 0;
 
 	// Explosive
-	virtual void		SetExplosiveRadius( float flRadius ) = 0;
-	virtual void		SetExplosiveDamage( float flDamage ) = 0;
-	virtual float		GetExplosiveRadius( void ) = 0;
-	virtual float		GetExplosiveDamage( void ) = 0;
+	virtual void SetExplosiveRadius( float flRadius ) = 0;
+	virtual void SetExplosiveDamage( float flDamage ) = 0;
+	virtual float GetExplosiveRadius( void ) = 0;
+	virtual float GetExplosiveDamage( void ) = 0;
 
 	// Physics damage tables
-	virtual void		SetPhysicsDamageTable( string_t iszTableName ) = 0;
-	virtual string_t	GetPhysicsDamageTable( void ) = 0;
+	virtual void SetPhysicsDamageTable( string_t iszTableName ) = 0;
+	virtual string_t GetPhysicsDamageTable( void ) = 0;
 
 	// Breakable chunks
-	virtual void		SetBreakableModel( string_t iszModel ) = 0;
-	virtual string_t 	GetBreakableModel( void ) = 0;
-	virtual void		SetBreakableSkin( int iSkin ) = 0;
-	virtual int			GetBreakableSkin( void ) = 0;
-	virtual void		SetBreakableCount( int iCount ) = 0;
-	virtual int			GetBreakableCount( void ) = 0;
-	virtual void		SetMaxBreakableSize( int iSize ) = 0;
-	virtual int			GetMaxBreakableSize( void ) = 0;
+	virtual void SetBreakableModel( string_t iszModel ) = 0;
+	virtual string_t GetBreakableModel( void ) = 0;
+	virtual void SetBreakableSkin( int iSkin ) = 0;
+	virtual int GetBreakableSkin( void ) = 0;
+	virtual void SetBreakableCount( int iCount ) = 0;
+	virtual int GetBreakableCount( void ) = 0;
+	virtual void SetMaxBreakableSize( int iSize ) = 0;
+	virtual int GetMaxBreakableSize( void ) = 0;
 
 	// LOS blocking
-	virtual void		SetPropDataBlocksLOS( bool bBlocksLOS ) = 0;
-	virtual void		SetPropDataIsAIWalkable( bool bBlocksLOS ) = 0;
+	virtual void SetPropDataBlocksLOS( bool bBlocksLOS ) = 0;
+	virtual void SetPropDataIsAIWalkable( bool bBlocksLOS ) = 0;
 
 	// Interactions
-	virtual void		SetInteraction( propdata_interactions_t Interaction ) = 0;
-	virtual bool		HasInteraction( propdata_interactions_t Interaction ) = 0;
+	virtual void SetInteraction( propdata_interactions_t Interaction ) = 0;
+	virtual bool HasInteraction( propdata_interactions_t Interaction ) = 0;
 
 	// Multiplayer physics mode
-	virtual void		SetPhysicsMode( int iMode ) = 0;
-	virtual int			GetPhysicsMode() = 0;
+	virtual void SetPhysicsMode( int iMode ) = 0;
+	virtual int GetPhysicsMode() = 0;
 
 	// Multiplayer breakable spawn behavior
-	virtual void		SetMultiplayerBreakMode( mp_break_t mode ) = 0;
-	virtual mp_break_t	GetMultiplayerBreakMode( void ) const = 0;
+	virtual void SetMultiplayerBreakMode( mp_break_t mode ) = 0;
+	virtual mp_break_t GetMultiplayerBreakMode( void ) const = 0;
 
 	// Used for debugging
-	virtual void		SetBasePropData( string_t iszBase ) = 0;
-	virtual string_t	GetBasePropData( void ) = 0;
+	virtual void SetBasePropData( string_t iszBase ) = 0;
+	virtual string_t GetBasePropData( void ) = 0;
 };
 
-#define FCVAR_NONE				0 
+#define FCVAR_NONE				0
 
 // Command to ConVars and ConCommands
 // ConVar Systems
@@ -2236,7 +2476,7 @@ public:
 // #define FCVAR_AVAILABLE			(1<<27)
 // #define FCVAR_AVAILABLE			(1<<31)
 
-#define FCVAR_MATERIAL_THREAD_MASK ( FCVAR_RELOAD_MATERIALS | FCVAR_RELOAD_TEXTURES | FCVAR_MATERIAL_SYSTEM_THREAD )	
+#define FCVAR_MATERIAL_THREAD_MASK ( FCVAR_RELOAD_MATERIALS | FCVAR_RELOAD_TEXTURES | FCVAR_MATERIAL_SYSTEM_THREAD )
 
 struct FileHandle_t;
 
@@ -2257,7 +2497,8 @@ public:
 	//	understand the implications before using this.
 	static void SetUseGrowableStringTable( bool bUseGrowableTable );
 
-	KeyValues( const char *setName ){}
+	KeyValues( const char* setName )
+	{}
 
 	//
 	// AutoDelete class to automatically free the keyvalues.
@@ -2270,111 +2511,146 @@ public:
 	class AutoDelete
 	{
 	public:
-		explicit inline AutoDelete( KeyValues *pKeyValues ) : m_pKeyValues( pKeyValues ) {}
-		explicit inline AutoDelete( const char *pchKVName ) : m_pKeyValues( new KeyValues( pchKVName ) ) {}
-		inline ~AutoDelete( void ) { if( m_pKeyValues ) m_pKeyValues->deleteThis(); }
-		inline void Assign( KeyValues *pKeyValues ) { m_pKeyValues = pKeyValues; }
-		KeyValues *operator->()	{ return m_pKeyValues; }
-		operator KeyValues *( )	{ return m_pKeyValues; }
+		explicit inline AutoDelete( KeyValues* pKeyValues )
+			: m_pKeyValues( pKeyValues )
+		{}
+
+		explicit inline AutoDelete( const char* pchKVName )
+			: m_pKeyValues( new KeyValues( pchKVName ) )
+		{}
+
+		inline ~AutoDelete( void )
+		{
+			if( m_pKeyValues )
+				m_pKeyValues->deleteThis();
+		}
+
+		inline void Assign( KeyValues* pKeyValues )
+		{
+			m_pKeyValues = pKeyValues;
+		}
+
+		KeyValues* operator->()
+		{
+			return m_pKeyValues;
+		}
+
+		operator KeyValues *()
+		{
+			return m_pKeyValues;
+		}
+
 	private:
-		AutoDelete( AutoDelete const &x ); // forbid
-		AutoDelete & operator= ( AutoDelete const &x ); // forbid
-		KeyValues *m_pKeyValues;
+		AutoDelete( AutoDelete const& x ); // forbid
+		AutoDelete& operator=( AutoDelete const& x ); // forbid
+		KeyValues* m_pKeyValues;
 	};
 
 	// Quick setup constructors
-	KeyValues( const char *setName, const char *firstKey, const char *firstValue );
-	KeyValues( const char *setName, const char *firstKey, const wchar_t *firstValue );
-	KeyValues( const char *setName, const char *firstKey, int firstValue );
-	KeyValues( const char *setName, const char *firstKey, const char *firstValue, const char *secondKey, const char *secondValue );
-	KeyValues( const char *setName, const char *firstKey, int firstValue, const char *secondKey, int secondValue );
+	KeyValues( const char* setName, const char* firstKey, const char* firstValue );
+	KeyValues( const char* setName, const char* firstKey, const wchar_t* firstValue );
+	KeyValues( const char* setName, const char* firstKey, int firstValue );
+	KeyValues( const char* setName, const char* firstKey, const char* firstValue, const char* secondKey, const char* secondValue );
+	KeyValues( const char* setName, const char* firstKey, int firstValue, const char* secondKey, int secondValue );
 
 	// Section name
-	const char *GetName() const;
-	void SetName( const char *setName );
+	const char* GetName() const;
+	void SetName( const char* setName );
 
 	// gets the name as a unique int
-	int GetNameSymbol() const { return m_iKeyName; }
+	int GetNameSymbol() const
+	{
+		return m_iKeyName;
+	}
 
 	// File access. Set UsesEscapeSequences true, if resource file/buffer uses Escape Sequences (eg \n, \t)
 	void UsesEscapeSequences( bool state ); // default false
 	void UsesConditionals( bool state ); // default true
-	bool LoadFromFile( void *filesystem, const char *resourceName, const char *pathID = NULL );
-	bool SaveToFile( void *filesystem, const char *resourceName, const char *pathID = NULL, bool sortKeys = false, bool bAllowEmptyString = false );
+	bool LoadFromFile( void* filesystem, const char* resourceName, const char* pathID = NULL );
+	bool SaveToFile( void* filesystem, const char* resourceName, const char* pathID = NULL, bool sortKeys = false, bool bAllowEmptyString = false );
 
 	// Read from a buffer...  Note that the buffer must be null terminated
-	bool LoadFromBuffer( char const *resourceName, const char *pBuffer, void* pFileSystem = NULL, const char *pPathID = NULL );
+	bool LoadFromBuffer( char const* resourceName, const char* pBuffer, void* pFileSystem = NULL, const char* pPathID = NULL );
 
 	// Read from a utlbuffer...
-	bool LoadFromBuffer( char const *resourceName, void*buf, void* pFileSystem = NULL, const char *pPathID = NULL );
+	bool LoadFromBuffer( char const* resourceName, void* buf, void* pFileSystem = NULL, const char* pPathID = NULL );
 
 	// Find a keyValue, create it if it is not found.
 	// Set bCreate to true to create the key if it doesn't already exist (which ensures a valid pointer will be returned)
-	KeyValues *FindKey( const char *keyName, bool bCreate = false );
-	KeyValues *FindKey( int keySymbol ) const;
-	KeyValues *CreateNewKey();		// creates a new key, with an autogenerated name.  name is guaranteed to be an integer, of value 1 higher than the highest other integer key name
-	void AddSubKey( KeyValues *pSubkey );	// Adds a subkey. Make sure the subkey isn't a child of some other keyvalues
-	void RemoveSubKey( KeyValues *subKey );	// removes a subkey from the list, DOES NOT DELETE IT
+	KeyValues* FindKey( const char* keyName, bool bCreate = false );
+	KeyValues* FindKey( int keySymbol ) const;
+	KeyValues* CreateNewKey(); // creates a new key, with an autogenerated name.  name is guaranteed to be an integer, of value 1 higher than the highest other integer key name
+	void AddSubKey( KeyValues* pSubkey ); // Adds a subkey. Make sure the subkey isn't a child of some other keyvalues
+	void RemoveSubKey( KeyValues* subKey ); // removes a subkey from the list, DOES NOT DELETE IT
 
-											// Key iteration.
-											//
-											// NOTE: GetFirstSubKey/GetNextKey will iterate keys AND values. Use the functions 
-											// below if you want to iterate over just the keys or just the values.
-											//
-	KeyValues *GetFirstSubKey() { return m_pSub; }	// returns the first subkey in the list
-	KeyValues *GetNextKey() { return m_pPeer; }		// returns the next subkey
-	void SetNextKey( KeyValues * pDat );
-	KeyValues *FindLastSubKey();	// returns the LAST subkey in the list.  This requires a linked list iteration to find the key.  Returns NULL if we don't have any children
+	// Key iteration.
+	//
+	// NOTE: GetFirstSubKey/GetNextKey will iterate keys AND values. Use the functions 
+	// below if you want to iterate over just the keys or just the values.
+	//
+	KeyValues* GetFirstSubKey()
+	{
+		return m_pSub;
+	} // returns the first subkey in the list
+	KeyValues* GetNextKey()
+	{
+		return m_pPeer;
+	} // returns the next subkey
+	void SetNextKey( KeyValues* pDat );
+	KeyValues* FindLastSubKey(); // returns the LAST subkey in the list.  This requires a linked list iteration to find the key.  Returns NULL if we don't have any children
 
-									//
-									// These functions can be used to treat it like a true key/values tree instead of 
-									// confusing values with keys.
-									//
-									// So if you wanted to iterate all subkeys, then all values, it would look like this:
-									//     for ( KeyValues *pKey = pRoot->GetFirstTrueSubKey(); pKey; pKey = pKey->GetNextTrueSubKey() )
-									//     {
-									//		   Msg( "Key name: %s\n", pKey->GetName() );
-									//     }
-									//     for ( KeyValues *pValue = pRoot->GetFirstValue(); pKey; pKey = pKey->GetNextValue() )
-									//     {
-									//         Msg( "Int value: %d\n", pValue->GetInt() );  // Assuming pValue->GetDataType() == TYPE_INT...
-									//     }
+	//
+	// These functions can be used to treat it like a true key/values tree instead of 
+	// confusing values with keys.
+	//
+	// So if you wanted to iterate all subkeys, then all values, it would look like this:
+	//     for ( KeyValues *pKey = pRoot->GetFirstTrueSubKey(); pKey; pKey = pKey->GetNextTrueSubKey() )
+	//     {
+	//		   Msg( "Key name: %s\n", pKey->GetName() );
+	//     }
+	//     for ( KeyValues *pValue = pRoot->GetFirstValue(); pKey; pKey = pKey->GetNextValue() )
+	//     {
+	//         Msg( "Int value: %d\n", pValue->GetInt() );  // Assuming pValue->GetDataType() == TYPE_INT...
+	//     }
 	KeyValues* GetFirstTrueSubKey();
 	KeyValues* GetNextTrueSubKey();
 
-	KeyValues* GetFirstValue();	// When you get a value back, you can use GetX and pass in NULL to get the value.
+	KeyValues* GetFirstValue(); // When you get a value back, you can use GetX and pass in NULL to get the value.
 	KeyValues* GetNextValue();
 
+	// Data access
+	int GetInt( const char* keyName = NULL, int defaultValue = 0 );
+	uint64 GetUint64( const char* keyName = NULL, uint64 defaultValue = 0 );
+	float GetFloat( const char* keyName = NULL, float defaultValue = 0.0f );
+	const char* GetString( const char* keyName = NULL, const char* defaultValue = "" );
+	const wchar_t* GetWString( const char* keyName = NULL, const wchar_t* defaultValue = L"" );
+	void* GetPtr( const char* keyName = NULL, void* defaultValue = ( void* )0 );
+	bool GetBool( const char* keyName = NULL, bool defaultValue = false );
+	Color GetColor( const char* keyName = NULL /* default value is all black */ );
+	bool IsEmpty( const char* keyName = NULL );
 
 	// Data access
-	int   GetInt( const char *keyName = NULL, int defaultValue = 0 );
-	uint64 GetUint64( const char *keyName = NULL, uint64 defaultValue = 0 );
-	float GetFloat( const char *keyName = NULL, float defaultValue = 0.0f );
-	const char *GetString( const char *keyName = NULL, const char *defaultValue = "" );
-	const wchar_t *GetWString( const char *keyName = NULL, const wchar_t *defaultValue = L"" );
-	void *GetPtr( const char *keyName = NULL, void *defaultValue = ( void* )0 );
-	bool GetBool( const char *keyName = NULL, bool defaultValue = false );
-	Color GetColor( const char *keyName = NULL /* default value is all black */ );
-	bool  IsEmpty( const char *keyName = NULL );
-
-	// Data access
-	int   GetInt( int keySymbol, int defaultValue = 0 );
+	int GetInt( int keySymbol, int defaultValue = 0 );
 	float GetFloat( int keySymbol, float defaultValue = 0.0f );
-	const char *GetString( int keySymbol, const char *defaultValue = "" );
-	const wchar_t *GetWString( int keySymbol, const wchar_t *defaultValue = L"" );
-	void *GetPtr( int keySymbol, void *defaultValue = ( void* )0 );
+	const char* GetString( int keySymbol, const char* defaultValue = "" );
+	const wchar_t* GetWString( int keySymbol, const wchar_t* defaultValue = L"" );
+	void* GetPtr( int keySymbol, void* defaultValue = ( void* )0 );
 	Color GetColor( int keySymbol /* default value is all black */ );
-	bool  IsEmpty( int keySymbol );
+	bool IsEmpty( int keySymbol );
 
 	// Key writing
-	void SetWString( const char *keyName, const wchar_t *value );
-	void SetString( const char *keyName, const char *value );
-	void SetInt( const char *keyName, int value );
-	void SetUint64( const char *keyName, uint64 value );
-	void SetFloat( const char *keyName, float value );
-	void SetPtr( const char *keyName, void *value );
-	void SetColor( const char *keyName, Color value );
-	void SetBool( const char *keyName, bool value ) { SetInt( keyName, value ? 1 : 0 ); }
+	void SetWString( const char* keyName, const wchar_t* value );
+	void SetString( const char* keyName, const char* value );
+	void SetInt( const char* keyName, int value );
+	void SetUint64( const char* keyName, uint64 value );
+	void SetFloat( const char* keyName, float value );
+	void SetPtr( const char* keyName, void* value );
+	void SetColor( const char* keyName, Color value );
+
+	void SetBool( const char* keyName, bool value )
+	{
+		SetInt( keyName, value ? 1 : 0 );
+	}
 
 	// Adds a chain... if we don't find stuff in this keyvalue, we'll look
 	// in the one we're chained to.
@@ -2382,14 +2658,14 @@ public:
 
 	void RecursiveSaveToFile( void* buf, int indentLevel, bool sortKeys = false, bool bAllowEmptyString = false );
 
-	bool WriteAsBinary( void*buffer );
-	bool ReadAsBinary( void*buffer, int nStackDepth = 0 );
+	bool WriteAsBinary( void* buffer );
+	bool ReadAsBinary( void* buffer, int nStackDepth = 0 );
 
 	// Allocate & create a new copy of the keys
-	KeyValues *MakeCopy( void ) const;
+	KeyValues* MakeCopy( void ) const;
 
 	// Make a new copy of all subkeys, add them all to the passed-in keyvalues
-	void CopySubkeys( KeyValues *pParent ) const;
+	void CopySubkeys( KeyValues* pParent ) const;
 
 	// Clear out all subkeys, and the current value
 	void Clear( void );
@@ -2407,39 +2683,40 @@ public:
 		TYPE_UINT64,
 		TYPE_NUMTYPES,
 	};
-	types_t GetDataType( const char *keyName = NULL );
+
+	types_t GetDataType( const char* keyName = NULL );
 
 	// Virtual deletion function - ensures that KeyValues object is deleted from correct heap
 	void deleteThis();
 
-	void SetStringValue( char const *strValue );
+	void SetStringValue( char const* strValue );
 
 	// unpack a key values list into a structure
-	void UnpackIntoStructure( struct KeyValuesUnpackStructure const *pUnpackTable, void *pDest, size_t DestSizeInBytes );
+	void UnpackIntoStructure( struct KeyValuesUnpackStructure const* pUnpackTable, void* pDest, size_t DestSizeInBytes );
 
 	// Process conditional keys for widescreen support.
-	bool ProcessResolutionKeys( const char *pResString );
+	bool ProcessResolutionKeys( const char* pResString );
 
 	// Dump keyvalues recursively into a dump context
-	bool Dump( class IKeyValuesDumpContext *pDump, int nIndentLevel = 0 );
+	bool Dump( class IKeyValuesDumpContext* pDump, int nIndentLevel = 0 );
 
 	// Merge in another KeyValues, keeping "our" settings
-	void RecursiveMergeKeyValues( KeyValues *baseKV );
+	void RecursiveMergeKeyValues( KeyValues* baseKV );
 
 private:
-	KeyValues( KeyValues& );	// prevent copy constructor being used
+	KeyValues( KeyValues& ); // prevent copy constructor being used
 
-								// prevent delete being called except through deleteThis()
+	// prevent delete being called except through deleteThis()
 	~KeyValues();
 
-	KeyValues* CreateKey( const char *keyName );
+	KeyValues* CreateKey( const char* keyName );
 
 	/// Create a child key, given that we know which child is currently the last child.
 	/// This avoids the O(N^2) behaviour when adding children in sequence to KV,
 	/// when CreateKey() wil have to re-locate the end of the list each time.  This happens,
 	/// for example, every time we load any KV file whatsoever.
-	KeyValues* CreateKeyUsingKnownLastChild( const char *keyName, KeyValues *pLastChild );
-	void AddSubkeyUsingKnownLastChild( KeyValues *pSubKey, KeyValues *pLastChild );
+	KeyValues* CreateKeyUsingKnownLastChild( const char* keyName, KeyValues* pLastChild );
+	void AddSubkeyUsingKnownLastChild( KeyValues* pSubKey, KeyValues* pLastChild );
 
 	void RecursiveCopyKeyValues( KeyValues& src );
 	void RemoveEverything();
@@ -2448,74 +2725,81 @@ private:
 
 	// NOTE: If both filesystem and pBuf are non-null, it'll save to both of them.
 	// If filesystem is null, it'll ignore f.
-	void RecursiveSaveToFile( void *filesystem, FileHandle_t f, void *pBuf, int indentLevel, bool sortKeys, bool bAllowEmptyString );
-	void SaveKeyToFile( KeyValues *dat, void *filesystem, FileHandle_t f, void *pBuf, int indentLevel, bool sortKeys, bool bAllowEmptyString );
-	void WriteConvertedString( void *filesystem, FileHandle_t f, void *pBuf, const char *pszString );
+	void RecursiveSaveToFile( void* filesystem, FileHandle_t f, void* pBuf, int indentLevel, bool sortKeys, bool bAllowEmptyString );
+	void SaveKeyToFile( KeyValues* dat, void* filesystem, FileHandle_t f, void* pBuf, int indentLevel, bool sortKeys, bool bAllowEmptyString );
+	void WriteConvertedString( void* filesystem, FileHandle_t f, void* pBuf, const char* pszString );
 
-	void RecursiveLoadFromBuffer( char const *resourceName, void*buf );
+	void RecursiveLoadFromBuffer( char const* resourceName, void* buf );
 
 	// For handling #include "filename"
 	void AppendIncludedKeys( void* includedKeys );
-	void ParseIncludedKeys( char const *resourceName, const char *filetoinclude,
-		void* pFileSystem, const char *pPathID, void* includedKeys );
+	void ParseIncludedKeys( char const* resourceName, const char* filetoinclude,
+	                        void* pFileSystem, const char* pPathID, void* includedKeys );
 
 	// For handling #base "filename"
 	void MergeBaseKeys( void* baseKeys );
 
 	// NOTE: If both filesystem and pBuf are non-null, it'll save to both of them.
 	// If filesystem is null, it'll ignore f.
-	void InternalWrite( void *filesystem, FileHandle_t f, void *pBuf, const void *pData, int len );
+	void InternalWrite( void* filesystem, FileHandle_t f, void* pBuf, const void* pData, int len );
 
 	void Init();
-	const char * ReadToken( void*buf, bool &wasQuoted, bool &wasConditional );
-	void WriteIndents( void *filesystem, FileHandle_t f, void *pBuf, int indentLevel );
+	const char* ReadToken( void* buf, bool& wasQuoted, bool& wasConditional );
+	void WriteIndents( void* filesystem, FileHandle_t f, void* pBuf, int indentLevel );
 
 	void FreeAllocatedValue();
 	void AllocateValueBlock( int size );
 
-	int m_iKeyName;	// keyname is a symbol defined in KeyValuesSystem
+	int m_iKeyName; // keyname is a symbol defined in KeyValuesSystem
 
-					// These are needed out of the union because the API returns string pointers
-	char *m_sValue;
-	wchar_t *m_wsValue;
+	// These are needed out of the union because the API returns string pointers
+	char* m_sValue;
+	wchar_t* m_wsValue;
 
 	// we don't delete these
 	union
 	{
 		int m_iValue;
 		float m_flValue;
-		void *m_pValue;
+		void* m_pValue;
 		unsigned char m_Color[ 4 ];
 	};
 
-	char	   m_iDataType;
-	char	   m_bHasEscapeSequences; // true, if while parsing this KeyValue, Escape Sequences are used (default false)
-	char	   m_bEvaluateConditionals; // true, if while parsing this KeyValue, conditionals blocks are evaluated (default true)
-	char	   unused[ 1 ];
+	char m_iDataType;
+	char m_bHasEscapeSequences; // true, if while parsing this KeyValue, Escape Sequences are used (default false)
+	char m_bEvaluateConditionals; // true, if while parsing this KeyValue, conditionals blocks are evaluated (default true)
+	char unused[ 1 ];
 
-	KeyValues *m_pPeer;	// pointer to next key in list
-	KeyValues *m_pSub;	// pointer to Start of a new sub key list
-	KeyValues *m_pChain;// Search here if it's not in our list
+	KeyValues* m_pPeer; // pointer to next key in list
+	KeyValues* m_pSub; // pointer to Start of a new sub key list
+	KeyValues* m_pChain;// Search here if it's not in our list
 
 private:
 	// Statics to implement the optional growable string table
 	// Function pointers that will determine which mode we are in
-	static int( *s_pfGetSymbolForString )( const char *name, bool bCreate );
-	static const char *( *s_pfGetStringForSymbol )( int symbol );
-	static void *s_pGrowableStringTable;
+	static int ( *s_pfGetSymbolForString )( const char* name, bool bCreate );
+	static const char*( *s_pfGetStringForSymbol )( int symbol );
+	static void* s_pGrowableStringTable;
 
 public:
 	// Functions that invoke the default behavior
-	static int GetSymbolForStringClassic( const char *name, bool bCreate = true );
-	static const char *GetStringForSymbolClassic( int symbol );
+	static int GetSymbolForStringClassic( const char* name, bool bCreate = true );
+	static const char* GetStringForSymbolClassic( int symbol );
 
 	// Functions that use the growable string table
-	static int GetSymbolForStringGrowable( const char *name, bool bCreate = true );
-	static const char *GetStringForSymbolGrowable( int symbol );
+	static int GetSymbolForStringGrowable( const char* name, bool bCreate = true );
+	static const char* GetStringForSymbolGrowable( int symbol );
 
 	// Functions to get external access to whichever of the above functions we're going to call.
-	static int CallGetSymbolForString( const char *name, bool bCreate = true ) { return s_pfGetSymbolForString( name, bCreate ); }
-	static const char *CallGetStringForSymbol( int symbol ) { return s_pfGetStringForSymbol( symbol ); }
+	static int CallGetSymbolForString( const char* name, bool bCreate = true )
+	{
+		return s_pfGetSymbolForString( name, bCreate );
+	}
+
+	static const char* CallGetStringForSymbol( int symbol )
+	{
+		return s_pfGetStringForSymbol( symbol );
+	}
 };
 
 struct ColorRGBExp32

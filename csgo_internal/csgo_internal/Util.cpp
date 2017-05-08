@@ -6,30 +6,28 @@ InitKeyValuesFn U::InitKeyValuesEx;
 LoadFromBufferFn U::LoadFromBufferEx;
 IsReadyFn U::IsReady;
 
-
 void U::SetupInterfaces()
 {
-	I::Client			= U::CaptureInterface<IBaseClientDll>( strenc( "client.dll" ), strenc( "VClient018" ) );
-	I::ClientMode		= **( IClientModeShared*** ) ( ( *( DWORD** ) I::Client )[10] + 0x5 );
-	I::ClientEntList	= U::CaptureInterface<IClientEntityList>( strenc( "client.dll" ), strenc( "VClientEntityList003" ) );
-	I::Cvar				= U::CaptureInterface<ICVar>( strenc( "vstdlib.dll" ), strenc( "VEngineCvar007" ) );
-	I::Engine			= U::CaptureInterface<IEngineClient>( strenc( "engine.dll" ), strenc( "VEngineClient014" ) );
-	I::EngineTrace		= U::CaptureInterface<IEngineTrace>( strenc( "engine.dll" ), strenc( "EngineTraceClient004" ) );
-	I::InputSystem		= U::CaptureInterface<IInputSystem>( strenc( "inputsystem.dll" ), strenc( "InputSystemVersion001" ) );
-	I::Globals			= **( IGlobalVarsBase*** ) ( ( *( DWORD** ) I::Client )[0] + 0x53 );
-	I::Surface			= U::CaptureInterface<ISurface>( strenc( "vguimatsurface.dll" ), strenc( "VGUI_Surface031" ) );
-	I::VPanel			= U::CaptureInterface<IVPanel>( strenc( "vgui2.dll" ), strenc( "VGUI_Panel009" ) );
-	I::RenderView		= U::CaptureInterface<IVRenderView>( strenc( "engine.dll" ), strenc( "VEngineRenderView014" ) );
-	I::ModelRender		= U::CaptureInterface<IVModelRender>( strenc( "engine.dll" ), strenc( "VEngineModel016" ) );
-	I::MaterialSystem	= U::CaptureInterface<IMaterialSystem>( strenc( "materialsystem.dll" ), strenc( "VMaterialSystem080" ) );
-	I::vrtEffects = U::CaptureInterface<IVEffects>(strenc("engine.dll"), strenc("VEngineEffects001"));
-	I::ModelInfo		= U::CaptureInterface<IVModelInfo>( strenc( "engine.dll" ), strenc( "VModelInfoClient004" ) );
-	I::Prediction		= U::CaptureInterface<IPrediction>( strenc( "client.dll" ), strenc( "VClientPrediction001" ) );
-	I::Physprops		= U::CaptureInterface<IPhysicsSurfaceProps>( strenc( "vphysics.dll" ), strenc( "VPhysicsSurfaceProps001" ) );
-	I::DebugOverlay		= U::CaptureInterface<IVDebugOverlay>( strenc( "engine.dll" ), strenc( "VDebugOverlay004" ) );
-	I::StudioRender		= U::CaptureInterface<IStudioRender>( strenc( "studiorender.dll" ), strenc( "VStudioRender026" ) );
+	I::Client = U::CaptureInterface< IBaseClientDll >( strenc( "client.dll" ), strenc( "VClient018" ) );
+	I::ClientMode = **( IClientModeShared*** ) ( ( *( DWORD** ) I::Client )[ 10 ] + 0x5 );
+	I::ClientEntList = U::CaptureInterface< IClientEntityList >( strenc( "client.dll" ), strenc( "VClientEntityList003" ) );
+	I::Cvar = U::CaptureInterface< ICVar >( strenc( "vstdlib.dll" ), strenc( "VEngineCvar007" ) );
+	I::Engine = U::CaptureInterface< IEngineClient >( strenc( "engine.dll" ), strenc( "VEngineClient014" ) );
+	I::EngineTrace = U::CaptureInterface< IEngineTrace >( strenc( "engine.dll" ), strenc( "EngineTraceClient004" ) );
+	I::InputSystem = U::CaptureInterface< IInputSystem >( strenc( "inputsystem.dll" ), strenc( "InputSystemVersion001" ) );
+	I::Globals = **( IGlobalVarsBase*** ) ( ( *( DWORD** ) I::Client )[ 0 ] + 0x53 );
+	I::Surface = U::CaptureInterface< ISurface >( strenc( "vguimatsurface.dll" ), strenc( "VGUI_Surface031" ) );
+	I::VPanel = U::CaptureInterface< IVPanel >( strenc( "vgui2.dll" ), strenc( "VGUI_Panel009" ) );
+	I::RenderView = U::CaptureInterface< IVRenderView >( strenc( "engine.dll" ), strenc( "VEngineRenderView014" ) );
+	I::ModelRender = U::CaptureInterface< IVModelRender >( strenc( "engine.dll" ), strenc( "VEngineModel016" ) );
+	I::MaterialSystem = U::CaptureInterface< IMaterialSystem >( strenc( "materialsystem.dll" ), strenc( "VMaterialSystem080" ) );
+	I::vrtEffects = U::CaptureInterface< IVEffects >( strenc("engine.dll"), strenc("VEngineEffects001") );
+	I::ModelInfo = U::CaptureInterface< IVModelInfo >( strenc( "engine.dll" ), strenc( "VModelInfoClient004" ) );
+	I::Prediction = U::CaptureInterface< IPrediction >( strenc( "client.dll" ), strenc( "VClientPrediction001" ) );
+	I::Physprops = U::CaptureInterface< IPhysicsSurfaceProps >( strenc( "vphysics.dll" ), strenc( "VPhysicsSurfaceProps001" ) );
+	I::DebugOverlay = U::CaptureInterface< IVDebugOverlay >( strenc( "engine.dll" ), strenc( "VDebugOverlay004" ) );
+	I::StudioRender = U::CaptureInterface< IStudioRender >( strenc( "studiorender.dll" ), strenc( "VStudioRender026" ) );
 }
-
 
 // learn_more
 DWORD U::FindPattern( std::string moduleName, std::string pattern )
@@ -37,7 +35,8 @@ DWORD U::FindPattern( std::string moduleName, std::string pattern )
 	const char* pat = pattern.c_str();
 	DWORD firstMatch = 0;
 	DWORD rangeStart = ( DWORD )GetModuleHandleA( moduleName.c_str() );
-	MODULEINFO miModInfo; GetModuleInformation( GetCurrentProcess(), ( HMODULE )rangeStart, &miModInfo, sizeof( MODULEINFO ) );
+	MODULEINFO miModInfo;
+	GetModuleInformation( GetCurrentProcess(), ( HMODULE )rangeStart, &miModInfo, sizeof( MODULEINFO) );
 	DWORD rangeEnd = rangeStart + miModInfo.SizeOfImage;
 	for( DWORD pCur = rangeStart; pCur < rangeEnd; pCur++ )
 	{
@@ -52,11 +51,11 @@ DWORD U::FindPattern( std::string moduleName, std::string pattern )
 			if( !pat[ 2 ] )
 				return firstMatch;
 
-			if( *( PWORD )pat == '\?\?' || *( PBYTE )pat != '\?' )
+			if( *( PWORD )pat == '\?\ ? ' || *( PBYTE )pat != '\ ? '  )
 				pat += 3;
 
 			else
-				pat += 2;    //one ?
+				pat += 2; //one ?
 		}
 		else
 		{
@@ -67,9 +66,9 @@ DWORD U::FindPattern( std::string moduleName, std::string pattern )
 	return NULL;
 }
 
-CBaseEntity* U::GetLocalPlayer( )
+CBaseEntity* U::GetLocalPlayer()
 {
-	return I::ClientEntList->GetClientEntity( I::Engine->GetLocalPlayer( ) );
+	return I::ClientEntList->GetClientEntity( I::Engine->GetLocalPlayer() );
 }
 
 CNetVarManager* U::NetVars = new CNetVarManager;
@@ -121,7 +120,7 @@ float U::RandomFloat( float min, float max )
 	assert( max > min );
 	float random = ( ( float )rand() ) / ( float )RAND_MAX;
 	float range = max - min;
-	return ( random*range ) + min;
+	return ( random * range ) + min;
 }
 
 void U::SetupHooks()

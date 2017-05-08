@@ -31,23 +31,23 @@ enum FontFlags_t
 class ISurface
 {
 public:
-	void		DrawSetColor(int r, int g, int b, int a);
-	void		DrawSetColor(Color col);
-	void		DrawFilledRect(int x0, int y0, int x1, int y1);
-	void		DrawOutlinedRect(int x0, int y0, int x1, int y1);
-	void		DrawLine(int x0, int y0, int x1, int y1);
-	void		DrawPolyLine(int *px, int *py, int numPoints);
-	void		DrawSetTextFont(HFont font);
-	void		DrawSetTextColor(int r, int g, int b, int a);
-	void		DrawSetTextColor(Color col);
-	void		DrawSetTextPos(int x, int y);
-	void		DrawPrintText(const wchar_t *text, int textLen, FontDrawType_t drawType = FONT_DRAW_DEFAULT);
-	void		DrawSetTextureRGBA(int id, const unsigned char *rgba, int wide, int tall);
-	void		DrawSetTexture(int id);
-	int			CreateNewTextureID(bool procedural = false);
-	HFont		Create_Font();
-	bool		SetFontGlyphSet(HFont font, const char *windowsFontName, int tall, int weight, int blur, int scanlines, int flags, int nRangeMin = 0, int nRangeMax = 0);
-	void		GetTextSize(HFont font, const wchar_t *text, int &wide, int &tall);
-	void		DrawOutlinedCircle(int x, int y, int radius, int segments);
-	void		DrawTexturedPolygon(int n, Vertex_t *pVertice, bool bClipVertices = true);
+	void DrawSetColor( int r, int g, int b, int a );
+	void DrawSetColor( Color col );
+	void DrawFilledRect( int x0, int y0, int x1, int y1 );
+	void DrawOutlinedRect( int x0, int y0, int x1, int y1 );
+	void DrawLine( int x0, int y0, int x1, int y1 );
+	void DrawPolyLine( int* px, int* py, int numPoints );
+	void DrawSetTextFont( HFont font );
+	void DrawSetTextColor( int r, int g, int b, int a );
+	void DrawSetTextColor( Color col );
+	void DrawSetTextPos( int x, int y );
+	void DrawPrintText( const wchar_t* text, int textLen, FontDrawType_t drawType = FONT_DRAW_DEFAULT );
+	void DrawSetTextureRGBA( int id, const unsigned char* rgba, int wide, int tall );
+	void DrawSetTexture( int id );
+	int CreateNewTextureID( bool procedural = false );
+	HFont Create_Font();
+	bool SetFontGlyphSet( HFont font, const char* windowsFontName, int tall, int weight, int blur, int scanlines, int flags, int nRangeMin = 0, int nRangeMax = 0 );
+	void GetTextSize( HFont font, const wchar_t* text, int& wide, int& tall );
+	void DrawOutlinedCircle( int x, int y, int radius, int segments );
+	void DrawTexturedPolygon( int n, Vertex_t* pVertice, bool bClipVertices = true );
 };

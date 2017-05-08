@@ -3,5 +3,5 @@
 class IVPanel
 {
 public:
-	const char* GetName(int iPanel);
+	const char* GetName( int iPanel );
 };

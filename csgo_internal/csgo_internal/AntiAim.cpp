@@ -121,17 +121,14 @@ void CAntiAim::antiAimYaw()
 	flip = !flip;
 	flip2 = !flip2;
 
-	
 	if( Vars.Ragebot.Antiaim.AimAtPlayer )
 		aimAtPlayer();
-	
+
 	if( Vars.Ragebot.Antiaim.Yaw == AA_YAW_NORMAL )
 	{
 		G::SendPacket = true;
 		temp.y += 180.0f;
 	}
-	
-	
 
 	if( Vars.Ragebot.Antiaim.Yaw == AA_YAW_JITTER )
 	{
@@ -141,7 +138,7 @@ void CAntiAim::antiAimYaw()
 		{
 			if( flip )
 				temp.y = 270.0f;
-			
+
 			else
 				temp.y = 90.0f;
 		}
@@ -226,7 +223,7 @@ void CAntiAim::aimAtPlayer()
 
 	Vector eye_position = G::LocalPlayer->GetEyePosition();
 
-	float best_dist = G::LocalPlayer->GetWeapon()->GetCSWpnData()->m_flRange;
+	float best_dist = G::LocalPlayer->GetWeapon()->GetCSWpnData()->flRange;
 
 	CBaseEntity* target = I::ClientEntList->GetClientEntity( G::BestTarget );
 

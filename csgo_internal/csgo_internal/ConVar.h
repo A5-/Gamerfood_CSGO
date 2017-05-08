@@ -3,13 +3,13 @@
 class ConVar
 {
 public:
-	void SetValue( const char *value );
+	void SetValue( const char* value );
 	void SetValue( float value );
 	void SetValue( int value );
 	void SetValue( Color value );
 	void InternalSetString( const char* str );
-	char* GetName( );
-	char* GetDefault( );
+	char* GetName();
+	char* GetDefault();
 
 	char pad_0x0000[0x4]; //0x0000
 	ConVar* pNext; //0x0004 
@@ -31,7 +31,8 @@ public:
 	void* fnChangeCallback; //0x0044 
 };//Size=0x0048
 
-class SpoofedConvar {
+class SpoofedConvar
+{
 public:
 	SpoofedConvar();
 	SpoofedConvar( const char* szCVar );
@@ -39,16 +40,16 @@ public:
 
 	~SpoofedConvar();
 
-	bool           IsSpoofed();
-	void           Spoof();
+	bool IsSpoofed();
+	void Spoof();
 
-	void           SetFlags( int flags );
-	int            GetFlags();
+	void SetFlags( int flags );
+	int GetFlags();
 
-	void           SetBool( bool bValue );
-	void           SetInt( int iValue );
-	void           SetFloat( float flValue );
-	void           SetString( const char* szValue );
+	void SetBool( bool bValue );
+	void SetInt( int iValue );
+	void SetFloat( float flValue );
+	void SetString( const char* szValue );
 
 private:
 	ConVar* m_pOriginalCVar = nullptr;

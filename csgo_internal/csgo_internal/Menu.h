@@ -41,7 +41,7 @@ const char* chamsMode[] =
 	"Textured"
 };
 
-const char* chatspamMode[] = 
+const char* chatspamMode[] =
 {
 	"Random",
 	"In Order"
@@ -58,14 +58,14 @@ const char* aimBones[] =
 	"Head"
 };
 
-const char* targetMode[] = 
+const char* targetMode[] =
 {
 	"FOV",
 	"Distance",
 	"Threat"
 };
 
-const char* keyNames[] = 
+const char* keyNames[] =
 {
 	"",
 	"Mouse 1",

@@ -1,6 +1,7 @@
 #include "Cheat.h"
 
 FrameStageNotifyFn oFrameStageNotify;
+
 void __stdcall Hooks::FrameStageNotify( ClientFrameStage_t stage )
 {
 	QAngle aim_punch_old;

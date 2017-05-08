@@ -4,6 +4,7 @@
 void GUI_Init( IDirect3DDevice9* pDevice );
 
 EndSceneFn oEndScene;
+
 long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 {
 	if( !G::d3dinit )
@@ -31,9 +32,11 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 			ImGui::Checkbox( charenc( "Misc Settings" ), &Vars.Menu.Misc );
 			ImGui::Separator();
 			ImGui::Columns( 2, charenc( "##config-settings" ), false );
-			if( ImGui::Button( charenc( "Save Config" ), ImVec2( 93.f, 20.f ) ) ) Config->Save();
+			if( ImGui::Button( charenc( "Save Config" ), ImVec2( 93.f, 20.f ) ) )
+				Config->Save();
 			ImGui::NextColumn();
-			if( ImGui::Button( charenc( "Load Config" ), ImVec2( 93.f, 20.f ) ) ) Config->Load();
+			if( ImGui::Button( charenc( "Load Config" ), ImVec2( 93.f, 20.f ) ) )
+				Config->Load();
 			ImGui::Columns( 1 );
 		}
 		ImGui::End(); //End main window
@@ -45,7 +48,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::Separator();
 				ImGui::Text( charenc( "Aimbot" ) );
 				ImGui::Separator();
-				ImGui::Checkbox( charenc( "Enabled" ), &Vars.Ragebot.Enabled );	
+				ImGui::Checkbox( charenc( "Enabled" ), &Vars.Ragebot.Enabled );
 				ImGui::Combo( charenc( "Hold Key" ), &Vars.Ragebot.HoldKey, keyNames, ARRAYSIZE( keyNames ) );
 				ImGui::Checkbox( charenc( "Hold" ), &Vars.Ragebot.Hold );
 				ImGui::Checkbox( charenc( "Auto Fire" ), &Vars.Ragebot.AutoFire );
@@ -149,7 +152,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::NextColumn();
 				ImGui::Checkbox( charenc( "Glow" ), &Vars.Visuals.Glow );
 				ImGui::Checkbox( charenc( "Bullet Trace" ), &Vars.Visuals.BulletTrace );
-				ImGui::Checkbox(charenc("Dlights"), &Vars.Visuals.Dlights);
+				ImGui::Checkbox( charenc("Dlights"), &Vars.Visuals.Dlights );
 				ImGui::Columns( 1 );
 				ImGui::SliderFloat( charenc( "Trace Length" ), &Vars.Visuals.BulletTraceLength, 1.f, 3000.f, "%.0f" );
 
@@ -220,19 +223,23 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::Text( charenc( "Custom Name" ) );
 				ImGui::Separator();
 				ImGui::PushItemWidth( 180 );
-				static char buf1[ 128 ] = ""; ImGui::InputText( charenc( "##Name" ), buf1, 128 );
+				static char buf1[ 128 ] = "";
+				ImGui::InputText( charenc( "##Name" ), buf1, 128 );
 				ImGui::SameLine();
 				ImGui::PushItemWidth( 50 );
-				if( ImGui::Button( charenc( "Change Name" ) ) ) E::Misc->ChangeName( buf1 );
+				if( ImGui::Button( charenc( "Change Name" ) ) )
+					E::Misc->ChangeName( buf1 );
 				ImGui::Separator();
 
 				ImGui::Text( charenc( "Chat Spam" ) );
 				ImGui::Separator();
 				ImGui::PushItemWidth( 180 );
-				static char buf2[ 128 ] = ""; ImGui::InputText( charenc( "##File" ), buf2, 128 );
+				static char buf2[ 128 ] = "";
+				ImGui::InputText( charenc( "##File" ), buf2, 128 );
 				ImGui::SameLine();
 				ImGui::PushItemWidth( 50 );
-				if( ImGui::Button( charenc( "Load File" ) ) ) E::Misc->ReadChatspam( buf2 );
+				if( ImGui::Button( charenc( "Load File" ) ) )
+					E::Misc->ReadChatspam( buf2 );
 				ImGui::PushItemWidth( 180 );
 				ImGui::Combo( charenc( "Mode" ), &Vars.Misc.ChatSpamMode, chatspamMode, ARRAYSIZE( chatspamMode ) );
 				ImGui::Checkbox( charenc( "ChatSpam" ), &Vars.Misc.ChatSpam );
@@ -248,7 +255,8 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 				ImGui::Separator();
 				ImGui::Text( charenc( "Netvar Dump" ) );
 				ImGui::Separator();
-				if( ImGui::Button( charenc( "Save Dump" ) ) ) NetVarManager->DumpNetvars();
+				if( ImGui::Button( charenc( "Save Dump" ) ) )
+					NetVarManager->DumpNetvars();
 			}
 			ImGui::End(); //End Misc window
 		}
@@ -260,6 +268,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 }
 
 ResetFn oReset;
+
 long __stdcall Hooks::Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentationParameters )
 {
 	if( !G::d3dinit )
@@ -270,11 +279,10 @@ long __stdcall Hooks::Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* p
 	auto hr = oReset( pDevice, pPresentationParameters );
 	ImGui_ImplDX9_CreateDeviceObjects();
 
-
 	return hr;
 }
 
-void GUI_Init( IDirect3DDevice9* pDevice ) 
+void GUI_Init( IDirect3DDevice9* pDevice )
 {
 	ImGui_ImplDX9_Init( G::Window, pDevice );
 

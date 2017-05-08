@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "imaterialsystem.h"
 
 //-----------------------------------------------------------------------------
@@ -80,31 +79,28 @@ inline VertexFormat_t VERTEX_TEXCOORD_SIZE( int nIndex, int nNumCoords )
 	return n64 << nShift;
 }
 
-
-
 //-----------------------------------------------------------------------------
 // Gets at various vertex format info...
 //-----------------------------------------------------------------------------
 inline int VertexFlags( VertexFormat_t vertexFormat )
 {
-	return static_cast<int> ( vertexFormat & ( ( 1 << ( VERTEX_LAST_BIT + 1 ) ) - 1 ) );
+	return static_cast< int >( vertexFormat & ( ( 1 << ( VERTEX_LAST_BIT + 1 ) ) - 1 ) );
 }
 
 inline int NumBoneWeights( VertexFormat_t vertexFormat )
 {
-	return static_cast<int> ( ( vertexFormat >> VERTEX_BONE_WEIGHT_BIT ) & 0x7 );
+	return static_cast< int >( ( vertexFormat >> VERTEX_BONE_WEIGHT_BIT ) & 0x7 );
 }
 
 inline int UserDataSize( VertexFormat_t vertexFormat )
 {
-	return static_cast<int> ( ( vertexFormat >> USER_DATA_SIZE_BIT ) & 0x7 );
+	return static_cast< int >( ( vertexFormat >> USER_DATA_SIZE_BIT ) & 0x7 );
 }
 
 inline int TexCoordSize( int nTexCoordIndex, VertexFormat_t vertexFormat )
 {
-	return static_cast<int> ( ( vertexFormat >> ( TEX_COORD_SIZE_BIT + 3 * nTexCoordIndex ) ) & 0x7 );
+	return static_cast< int >( ( vertexFormat >> ( TEX_COORD_SIZE_BIT + 3 * nTexCoordIndex ) ) & 0x7 );
 }
-
 
 //-----------------------------------------------------------------------------
 // VertexElement_t (enumerates all usable vertex elements)
@@ -178,59 +174,109 @@ inline void Detect_VertexElement_t_Changes( VertexElement_t element ) // GREPs f
 	Assert( VERTEX_ELEMENT_NUMELEMENTS == 50 );
 	switch( element )
 	{
-	case VERTEX_ELEMENT_POSITION:		Assert( VERTEX_ELEMENT_POSITION == 0 ); break;
-	case VERTEX_ELEMENT_POSITION4D:		Assert( VERTEX_ELEMENT_POSITION4D == 1 ); break;
-	case VERTEX_ELEMENT_NORMAL:			Assert( VERTEX_ELEMENT_NORMAL == 2 ); break;
-	case VERTEX_ELEMENT_NORMAL4D:		Assert( VERTEX_ELEMENT_NORMAL4D == 3 ); break;
-	case VERTEX_ELEMENT_COLOR:			Assert( VERTEX_ELEMENT_COLOR == 4 ); break;
-	case VERTEX_ELEMENT_SPECULAR:		Assert( VERTEX_ELEMENT_SPECULAR == 5 ); break;
-	case VERTEX_ELEMENT_TANGENT_S:		Assert( VERTEX_ELEMENT_TANGENT_S == 6 ); break;
-	case VERTEX_ELEMENT_TANGENT_T:		Assert( VERTEX_ELEMENT_TANGENT_T == 7 ); break;
-	case VERTEX_ELEMENT_WRINKLE:		Assert( VERTEX_ELEMENT_WRINKLE == 8 ); break;
-	case VERTEX_ELEMENT_BONEINDEX:		Assert( VERTEX_ELEMENT_BONEINDEX == 9 ); break;
-	case VERTEX_ELEMENT_BONEWEIGHTS1:	Assert( VERTEX_ELEMENT_BONEWEIGHTS1 == 10 ); break;
-	case VERTEX_ELEMENT_BONEWEIGHTS2:	Assert( VERTEX_ELEMENT_BONEWEIGHTS2 == 11 ); break;
-	case VERTEX_ELEMENT_BONEWEIGHTS3:	Assert( VERTEX_ELEMENT_BONEWEIGHTS3 == 12 ); break;
-	case VERTEX_ELEMENT_BONEWEIGHTS4:	Assert( VERTEX_ELEMENT_BONEWEIGHTS4 == 13 ); break;
-	case VERTEX_ELEMENT_USERDATA1:		Assert( VERTEX_ELEMENT_USERDATA1 == 14 ); break;
-	case VERTEX_ELEMENT_USERDATA2:		Assert( VERTEX_ELEMENT_USERDATA2 == 15 ); break;
-	case VERTEX_ELEMENT_USERDATA3:		Assert( VERTEX_ELEMENT_USERDATA3 == 16 ); break;
-	case VERTEX_ELEMENT_USERDATA4:		Assert( VERTEX_ELEMENT_USERDATA4 == 17 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_0:	Assert( VERTEX_ELEMENT_TEXCOORD1D_0 == 18 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_1:	Assert( VERTEX_ELEMENT_TEXCOORD1D_1 == 19 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_2:	Assert( VERTEX_ELEMENT_TEXCOORD1D_2 == 20 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_3:	Assert( VERTEX_ELEMENT_TEXCOORD1D_3 == 21 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_4:	Assert( VERTEX_ELEMENT_TEXCOORD1D_4 == 22 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_5:	Assert( VERTEX_ELEMENT_TEXCOORD1D_5 == 23 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_6:	Assert( VERTEX_ELEMENT_TEXCOORD1D_6 == 24 ); break;
-	case VERTEX_ELEMENT_TEXCOORD1D_7:	Assert( VERTEX_ELEMENT_TEXCOORD1D_7 == 25 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_0:	Assert( VERTEX_ELEMENT_TEXCOORD2D_0 == 26 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_1:	Assert( VERTEX_ELEMENT_TEXCOORD2D_1 == 27 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_2:	Assert( VERTEX_ELEMENT_TEXCOORD2D_2 == 28 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_3:	Assert( VERTEX_ELEMENT_TEXCOORD2D_3 == 29 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_4:	Assert( VERTEX_ELEMENT_TEXCOORD2D_4 == 30 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_5:	Assert( VERTEX_ELEMENT_TEXCOORD2D_5 == 31 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_6:	Assert( VERTEX_ELEMENT_TEXCOORD2D_6 == 32 ); break;
-	case VERTEX_ELEMENT_TEXCOORD2D_7:	Assert( VERTEX_ELEMENT_TEXCOORD2D_7 == 33 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_0:	Assert( VERTEX_ELEMENT_TEXCOORD3D_0 == 34 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_1:	Assert( VERTEX_ELEMENT_TEXCOORD3D_1 == 35 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_2:	Assert( VERTEX_ELEMENT_TEXCOORD3D_2 == 36 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_3:	Assert( VERTEX_ELEMENT_TEXCOORD3D_3 == 37 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_4:	Assert( VERTEX_ELEMENT_TEXCOORD3D_4 == 38 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_5:	Assert( VERTEX_ELEMENT_TEXCOORD3D_5 == 39 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_6:	Assert( VERTEX_ELEMENT_TEXCOORD3D_6 == 40 ); break;
-	case VERTEX_ELEMENT_TEXCOORD3D_7:	Assert( VERTEX_ELEMENT_TEXCOORD3D_7 == 41 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_0:	Assert( VERTEX_ELEMENT_TEXCOORD4D_0 == 42 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_1:	Assert( VERTEX_ELEMENT_TEXCOORD4D_1 == 43 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_2:	Assert( VERTEX_ELEMENT_TEXCOORD4D_2 == 44 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_3:	Assert( VERTEX_ELEMENT_TEXCOORD4D_3 == 45 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_4:	Assert( VERTEX_ELEMENT_TEXCOORD4D_4 == 46 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_5:	Assert( VERTEX_ELEMENT_TEXCOORD4D_5 == 47 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_6:	Assert( VERTEX_ELEMENT_TEXCOORD4D_6 == 48 ); break;
-	case VERTEX_ELEMENT_TEXCOORD4D_7:	Assert( VERTEX_ELEMENT_TEXCOORD4D_7 == 49 ); break;
-	default:
-		Assert( 0 ); // Invalid input or VertexElement_t has definitely changed
-		break;
+		case VERTEX_ELEMENT_POSITION: Assert( VERTEX_ELEMENT_POSITION == 0 );
+			break;
+		case VERTEX_ELEMENT_POSITION4D: Assert( VERTEX_ELEMENT_POSITION4D == 1 );
+			break;
+		case VERTEX_ELEMENT_NORMAL: Assert( VERTEX_ELEMENT_NORMAL == 2 );
+			break;
+		case VERTEX_ELEMENT_NORMAL4D: Assert( VERTEX_ELEMENT_NORMAL4D == 3 );
+			break;
+		case VERTEX_ELEMENT_COLOR: Assert( VERTEX_ELEMENT_COLOR == 4 );
+			break;
+		case VERTEX_ELEMENT_SPECULAR: Assert( VERTEX_ELEMENT_SPECULAR == 5 );
+			break;
+		case VERTEX_ELEMENT_TANGENT_S: Assert( VERTEX_ELEMENT_TANGENT_S == 6 );
+			break;
+		case VERTEX_ELEMENT_TANGENT_T: Assert( VERTEX_ELEMENT_TANGENT_T == 7 );
+			break;
+		case VERTEX_ELEMENT_WRINKLE: Assert( VERTEX_ELEMENT_WRINKLE == 8 );
+			break;
+		case VERTEX_ELEMENT_BONEINDEX: Assert( VERTEX_ELEMENT_BONEINDEX == 9 );
+			break;
+		case VERTEX_ELEMENT_BONEWEIGHTS1: Assert( VERTEX_ELEMENT_BONEWEIGHTS1 == 10 );
+			break;
+		case VERTEX_ELEMENT_BONEWEIGHTS2: Assert( VERTEX_ELEMENT_BONEWEIGHTS2 == 11 );
+			break;
+		case VERTEX_ELEMENT_BONEWEIGHTS3: Assert( VERTEX_ELEMENT_BONEWEIGHTS3 == 12 );
+			break;
+		case VERTEX_ELEMENT_BONEWEIGHTS4: Assert( VERTEX_ELEMENT_BONEWEIGHTS4 == 13 );
+			break;
+		case VERTEX_ELEMENT_USERDATA1: Assert( VERTEX_ELEMENT_USERDATA1 == 14 );
+			break;
+		case VERTEX_ELEMENT_USERDATA2: Assert( VERTEX_ELEMENT_USERDATA2 == 15 );
+			break;
+		case VERTEX_ELEMENT_USERDATA3: Assert( VERTEX_ELEMENT_USERDATA3 == 16 );
+			break;
+		case VERTEX_ELEMENT_USERDATA4: Assert( VERTEX_ELEMENT_USERDATA4 == 17 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_0: Assert( VERTEX_ELEMENT_TEXCOORD1D_0 == 18 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_1: Assert( VERTEX_ELEMENT_TEXCOORD1D_1 == 19 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_2: Assert( VERTEX_ELEMENT_TEXCOORD1D_2 == 20 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_3: Assert( VERTEX_ELEMENT_TEXCOORD1D_3 == 21 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_4: Assert( VERTEX_ELEMENT_TEXCOORD1D_4 == 22 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_5: Assert( VERTEX_ELEMENT_TEXCOORD1D_5 == 23 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_6: Assert( VERTEX_ELEMENT_TEXCOORD1D_6 == 24 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD1D_7: Assert( VERTEX_ELEMENT_TEXCOORD1D_7 == 25 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_0: Assert( VERTEX_ELEMENT_TEXCOORD2D_0 == 26 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_1: Assert( VERTEX_ELEMENT_TEXCOORD2D_1 == 27 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_2: Assert( VERTEX_ELEMENT_TEXCOORD2D_2 == 28 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_3: Assert( VERTEX_ELEMENT_TEXCOORD2D_3 == 29 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_4: Assert( VERTEX_ELEMENT_TEXCOORD2D_4 == 30 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_5: Assert( VERTEX_ELEMENT_TEXCOORD2D_5 == 31 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_6: Assert( VERTEX_ELEMENT_TEXCOORD2D_6 == 32 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD2D_7: Assert( VERTEX_ELEMENT_TEXCOORD2D_7 == 33 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_0: Assert( VERTEX_ELEMENT_TEXCOORD3D_0 == 34 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_1: Assert( VERTEX_ELEMENT_TEXCOORD3D_1 == 35 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_2: Assert( VERTEX_ELEMENT_TEXCOORD3D_2 == 36 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_3: Assert( VERTEX_ELEMENT_TEXCOORD3D_3 == 37 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_4: Assert( VERTEX_ELEMENT_TEXCOORD3D_4 == 38 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_5: Assert( VERTEX_ELEMENT_TEXCOORD3D_5 == 39 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_6: Assert( VERTEX_ELEMENT_TEXCOORD3D_6 == 40 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD3D_7: Assert( VERTEX_ELEMENT_TEXCOORD3D_7 == 41 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_0: Assert( VERTEX_ELEMENT_TEXCOORD4D_0 == 42 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_1: Assert( VERTEX_ELEMENT_TEXCOORD4D_1 == 43 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_2: Assert( VERTEX_ELEMENT_TEXCOORD4D_2 == 44 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_3: Assert( VERTEX_ELEMENT_TEXCOORD4D_3 == 45 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_4: Assert( VERTEX_ELEMENT_TEXCOORD4D_4 == 46 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_5: Assert( VERTEX_ELEMENT_TEXCOORD4D_5 == 47 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_6: Assert( VERTEX_ELEMENT_TEXCOORD4D_6 == 48 );
+			break;
+		case VERTEX_ELEMENT_TEXCOORD4D_7: Assert( VERTEX_ELEMENT_TEXCOORD4D_7 == 49 );
+			break;
+		default:
+			Assert( 0 ); // Invalid input or VertexElement_t has definitely changed
+			break;
 	}
 }
 
@@ -242,7 +288,6 @@ inline void Detect_VertexElement_t_Changes( VertexElement_t element ) // GREPs f
 #define COMPRESSED_NORMALS_COMBINEDTANGENTS_UBYTE4	1
 //#define COMPRESSED_NORMALS_TYPE						COMPRESSED_NORMALS_SEPARATETANGENTS_SHORT2
 #define COMPRESSED_NORMALS_TYPE						COMPRESSED_NORMALS_COMBINEDTANGENTS_UBYTE4
-
 
 //-----------------------------------------------------------------------------
 // Shader state flags can be read from the FLAGS materialvar
@@ -270,7 +315,7 @@ enum MaterialVarFlags_t
 	MATERIAL_VAR_IGNOREZ = ( 1 << 15 ),
 	MATERIAL_VAR_DECAL = ( 1 << 16 ),
 	MATERIAL_VAR_ENVMAPSPHERE = ( 1 << 17 ), // OBSOLETE
-											 //	MATERIAL_VAR_UNUSED					  = (1 << 18),
+	//	MATERIAL_VAR_UNUSED					  = (1 << 18),
 	MATERIAL_VAR_ENVMAPCAMERASPACE = ( 1 << 19 ), // OBSOLETE
 	MATERIAL_VAR_BASEALPHAENVMAPMASK = ( 1 << 20 ),
 	MATERIAL_VAR_TRANSLUCENT = ( 1 << 21 ),
@@ -289,7 +334,6 @@ enum MaterialVarFlags_t
 	// .vmts or can be set directly from client code. Other, internal
 	// flags should to into the flag enum in IMaterialInternal.h
 };
-
 
 //-----------------------------------------------------------------------------
 // Internal flags not accessible from outside the material system. Stored in Flags2
@@ -332,7 +376,6 @@ enum MaterialVarFlags2_t
 	MATERIAL_VAR2_SUPPORTS_TESSELLATION = ( 1 << 23 )
 };
 
-
 //-----------------------------------------------------------------------------
 // Preview image return values
 //-----------------------------------------------------------------------------
@@ -343,7 +386,6 @@ enum PreviewImageRetVal_t
 	MATERIAL_NO_PREVIEW_IMAGE,
 };
 
-
 //-----------------------------------------------------------------------------
 // material interface
 //-----------------------------------------------------------------------------
@@ -353,155 +395,162 @@ public:
 	// Get the name of the material.  This is a full path to 
 	// the vmt file starting from "hl2/materials" (or equivalent) without
 	// a file extension.
-	virtual const char *	GetName() const = 0;
-	virtual const char *	GetTextureGroupName() const = 0;
+	virtual const char* GetName() const = 0;
+	virtual const char* GetTextureGroupName() const = 0;
 
 	// Get the preferred size/bitDepth of a preview image of a material.
 	// This is the sort of image that you would use for a thumbnail view
 	// of a material, or in WorldCraft until it uses materials to render.
 	// separate this for the tools maybe
-	virtual PreviewImageRetVal_t GetPreviewImageProperties( int *width, int *height, ImageFormat *imageFormat, bool* isTranslucent ) const = 0;
+	virtual PreviewImageRetVal_t GetPreviewImageProperties( int* width, int* height, ImageFormat* imageFormat, bool* isTranslucent ) const = 0;
 
 	// Get a preview image at the specified width/height and bitDepth.
 	// Will do resampling if necessary.(not yet!!! :) )
 	// Will do color format conversion. (works now.)
-	virtual PreviewImageRetVal_t GetPreviewImage( unsigned char *data, int width, int height, ImageFormat imageFormat ) const = 0;
+	virtual PreviewImageRetVal_t GetPreviewImage( unsigned char* data, int width, int height, ImageFormat imageFormat ) const = 0;
 	// 
-	virtual int				GetMappingWidth() = 0;
-	virtual int				GetMappingHeight() = 0;
+	virtual int GetMappingWidth() = 0;
+	virtual int GetMappingHeight() = 0;
 
-	virtual int				GetNumAnimationFrames() = 0;
+	virtual int GetNumAnimationFrames() = 0;
 
 	// For material subrects (material pages).  Offset(u,v) and scale(u,v) are normalized to texture.
-	virtual bool			InMaterialPage( void ) = 0;
-	virtual	void			GetMaterialOffset( float *pOffset ) = 0;
-	virtual void			GetMaterialScale( float *pScale ) = 0;
-	virtual IMaterial		*GetMaterialPage( void ) = 0;
+	virtual bool InMaterialPage( void ) = 0;
+	virtual void GetMaterialOffset( float* pOffset ) = 0;
+	virtual void GetMaterialScale( float* pScale ) = 0;
+	virtual IMaterial* GetMaterialPage( void ) = 0;
 
 	// find a vmt variable.
 	// This is how game code affects how a material is rendered.
 	// The game code must know about the params that are used by
 	// the shader for the material that it is trying to affect.
-	virtual IMaterialVar *	FindVar( const char *varName, bool *found, bool complain = true ) = 0;
+	virtual IMaterialVar* FindVar( const char* varName, bool* found, bool complain = true ) = 0;
 
 	// The user never allocates or deallocates materials.  Reference counting is
 	// used instead.  Garbage collection is done upon a call to 
 	// IMaterialSystem::UncacheUnusedMaterials.
-	virtual void			IncrementReferenceCount( void ) = 0;
-	virtual void			DecrementReferenceCount( void ) = 0;
+	virtual void IncrementReferenceCount( void ) = 0;
+	virtual void DecrementReferenceCount( void ) = 0;
 
-	inline void AddRef() { IncrementReferenceCount(); }
-	inline void Release() { DecrementReferenceCount(); }
+	inline void AddRef()
+	{
+		IncrementReferenceCount();
+	}
+
+	inline void Release()
+	{
+		DecrementReferenceCount();
+	}
 
 	// Each material is assigned a number that groups it with like materials
 	// for sorting in the application.
-	virtual int 			GetEnumerationID( void ) const = 0;
+	virtual int GetEnumerationID( void ) const = 0;
 
-	virtual void			GetLowResColorSample( float s, float t, float *color ) const = 0;
+	virtual void GetLowResColorSample( float s, float t, float* color ) const = 0;
 
 	// This computes the state snapshots for this material
-	virtual void			RecomputeStateSnapshots() = 0;
+	virtual void RecomputeStateSnapshots() = 0;
 
 	// Are we translucent?
-	virtual bool			IsTranslucent() = 0;
+	virtual bool IsTranslucent() = 0;
 
 	// Are we alphatested?
-	virtual bool			IsAlphaTested() = 0;
+	virtual bool IsAlphaTested() = 0;
 
 	// Are we vertex lit?
-	virtual bool			IsVertexLit() = 0;
+	virtual bool IsVertexLit() = 0;
 
 	// Gets the vertex format
-	virtual VertexFormat_t	GetVertexFormat() const = 0;
+	virtual VertexFormat_t GetVertexFormat() const = 0;
 
 	// returns true if this material uses a material proxy
-	virtual bool			HasProxy( void ) const = 0;
+	virtual bool HasProxy( void ) const = 0;
 
-	virtual bool			UsesEnvCubemap( void ) = 0;
+	virtual bool UsesEnvCubemap( void ) = 0;
 
-	virtual bool			NeedsTangentSpace( void ) = 0;
+	virtual bool NeedsTangentSpace( void ) = 0;
 
-	virtual bool			NeedsPowerOfTwoFrameBufferTexture( bool bCheckSpecificToThisFrame = true ) = 0;
-	virtual bool			NeedsFullFrameBufferTexture( bool bCheckSpecificToThisFrame = true ) = 0;
+	virtual bool NeedsPowerOfTwoFrameBufferTexture( bool bCheckSpecificToThisFrame = true ) = 0;
+	virtual bool NeedsFullFrameBufferTexture( bool bCheckSpecificToThisFrame = true ) = 0;
 
 	// returns true if the shader doesn't do skinning itself and requires
 	// the data that is sent to it to be preskinned.
-	virtual bool			NeedsSoftwareSkinning( void ) = 0;
+	virtual bool NeedsSoftwareSkinning( void ) = 0;
 
 	// Apply constant color or alpha modulation
-	virtual void			AlphaModulate( float alpha ) = 0;
-	virtual void			ColorModulate( float r, float g, float b ) = 0;
+	virtual void AlphaModulate( float alpha ) = 0;
+	virtual void ColorModulate( float r, float g, float b ) = 0;
 
 	// Material Var flags...
-	virtual void			SetMaterialVarFlag( MaterialVarFlags_t flag, bool on ) = 0;
-	virtual bool			GetMaterialVarFlag( MaterialVarFlags_t flag ) = 0;
+	virtual void SetMaterialVarFlag( MaterialVarFlags_t flag, bool on ) = 0;
+	virtual bool GetMaterialVarFlag( MaterialVarFlags_t flag ) = 0;
 
 	// Gets material reflectivity
-	virtual void			GetReflectivity( Vector& reflect ) = 0;
+	virtual void GetReflectivity( Vector& reflect ) = 0;
 
 	// Gets material property flags
-	virtual bool			GetPropertyFlag( MaterialPropertyTypes_t type ) = 0;
+	virtual bool GetPropertyFlag( MaterialPropertyTypes_t type ) = 0;
 
 	// Is the material visible from both sides?
-	virtual bool			IsTwoSided() = 0;
+	virtual bool IsTwoSided() = 0;
 
 	// Sets the shader associated with the material
-	virtual void			SetShader( const char *pShaderName ) = 0;
+	virtual void SetShader( const char* pShaderName ) = 0;
 
 	// Can't be const because the material might have to precache itself.
-	virtual int				GetNumPasses( void ) = 0;
+	virtual int GetNumPasses( void ) = 0;
 
 	// Can't be const because the material might have to precache itself.
-	virtual int				GetTextureMemoryBytes( void ) = 0;
+	virtual int GetTextureMemoryBytes( void ) = 0;
 
 	// Meant to be used with materials created using CreateMaterial
 	// It updates the materials to reflect the current values stored in the material vars
-	virtual void			Refresh() = 0;
+	virtual void Refresh() = 0;
 
 	// GR - returns true is material uses lightmap alpha for blending
-	virtual bool			NeedsLightmapBlendAlpha( void ) = 0;
+	virtual bool NeedsLightmapBlendAlpha( void ) = 0;
 
 	// returns true if the shader doesn't do lighting itself and requires
 	// the data that is sent to it to be prelighted
-	virtual bool			NeedsSoftwareLighting( void ) = 0;
+	virtual bool NeedsSoftwareLighting( void ) = 0;
 
 	// Gets at the shader parameters
-	virtual int				ShaderParamCount() const = 0;
-	virtual IMaterialVar	**GetShaderParams( void ) = 0;
+	virtual int ShaderParamCount() const = 0;
+	virtual IMaterialVar** GetShaderParams( void ) = 0;
 
 	// Returns true if this is the error material you get back from IMaterialSystem::FindMaterial if
 	// the material can't be found.
-	virtual bool			IsErrorMaterial() const = 0;
+	virtual bool IsErrorMaterial() const = 0;
 
-	virtual void			Unused() = 0;
+	virtual void Unused() = 0;
 
 	// Gets the current alpha modulation
-	virtual float			GetAlphaModulation() = 0;
-	virtual void			GetColorModulation( float *r, float *g, float *b ) = 0;
+	virtual float GetAlphaModulation() = 0;
+	virtual void GetColorModulation( float* r, float* g, float* b ) = 0;
 
 	// Is this translucent given a particular alpha modulation?
-	virtual bool			IsTranslucentUnderModulation( float fAlphaModulation = 1.0f ) const = 0;
+	virtual bool IsTranslucentUnderModulation( float fAlphaModulation = 1.0f ) const = 0;
 
 	// fast find that stores the index of the found var in the string table in local cache
-	virtual IMaterialVar *	FindVarFast( char const *pVarName, unsigned int *pToken ) = 0;
+	virtual IMaterialVar* FindVarFast( char const* pVarName, unsigned int* pToken ) = 0;
 
 	// Sets new VMT shader parameters for the material
-	virtual void			SetShaderAndParams( void *pKeyValues ) = 0;
-	virtual const char *	GetShaderName() const = 0;
+	virtual void SetShaderAndParams( void* pKeyValues ) = 0;
+	virtual const char* GetShaderName() const = 0;
 
-	virtual void			DeleteIfUnreferenced() = 0;
+	virtual void DeleteIfUnreferenced() = 0;
 
-	virtual bool			IsSpriteCard() = 0;
+	virtual bool IsSpriteCard() = 0;
 
-	virtual void			CallBindProxy( void *proxyData ) = 0;
+	virtual void CallBindProxy( void* proxyData ) = 0;
 
-	virtual void			RefreshPreservingMaterialVars() = 0;
+	virtual void RefreshPreservingMaterialVars() = 0;
 
-	virtual bool			WasReloadedFromWhitelist() = 0;
+	virtual bool WasReloadedFromWhitelist() = 0;
 
-	virtual bool			SetTempExcluded( bool bSet , int nExcludedDimensionLimit ) = 0;
+	virtual bool SetTempExcluded( bool bSet, int nExcludedDimensionLimit ) = 0;
 
-	virtual int				GetReferenceCount() const = 0;
+	virtual int GetReferenceCount() const = 0;
 };
 
 extern IMaterial* visible_tex;
@@ -509,12 +558,10 @@ extern IMaterial* hidden_tex;
 extern IMaterial* visible_flat;
 extern IMaterial* hidden_flat;
 
-
-inline bool IsErrorMaterial( IMaterial *pMat )
+inline bool IsErrorMaterial( IMaterial* pMat )
 {
 	return !pMat || pMat->IsErrorMaterial();
 }
-
 
 //
 // Vertex stream specifications
@@ -524,15 +571,15 @@ struct VertexStreamSpec_t
 {
 	enum StreamSpec_t
 	{
-		STREAM_DEFAULT,		// stream 0: with position, normal, etc.
-		STREAM_SPECULAR1,	// stream 1: following specular vhv lighting
-		STREAM_FLEXDELTA,	// stream 2: flex deltas
-		STREAM_MORPH,		// stream 3: morph
-		STREAM_UNIQUE_A,	// unique stream 4
-		STREAM_UNIQUE_B,	// unique stream 5
-		STREAM_UNIQUE_C,	// unique stream 6
-		STREAM_UNIQUE_D,	// unique stream 7
-		STREAM_SUBDQUADS,	// stream 8: quad buffer for subd's
+		STREAM_DEFAULT, // stream 0: with position, normal, etc.
+		STREAM_SPECULAR1, // stream 1: following specular vhv lighting
+		STREAM_FLEXDELTA, // stream 2: flex deltas
+		STREAM_MORPH, // stream 3: morph
+		STREAM_UNIQUE_A, // unique stream 4
+		STREAM_UNIQUE_B, // unique stream 5
+		STREAM_UNIQUE_C, // unique stream 6
+		STREAM_UNIQUE_D, // unique stream 7
+		STREAM_SUBDQUADS, // stream 8: quad buffer for subd's
 	};
 
 	enum
@@ -544,11 +591,11 @@ struct VertexStreamSpec_t
 	StreamSpec_t iStreamSpec;
 };
 
-inline VertexStreamSpec_t * FindVertexStreamSpec( VertexFormat_t iElement, VertexStreamSpec_t *arrVertexStreamSpec )
+inline VertexStreamSpec_t* FindVertexStreamSpec( VertexFormat_t iElement, VertexStreamSpec_t* arrVertexStreamSpec )
 {
 	for( ; arrVertexStreamSpec &&
-		arrVertexStreamSpec->iVertexDataElement != VERTEX_FORMAT_UNKNOWN;
-		++arrVertexStreamSpec )
+	       arrVertexStreamSpec->iVertexDataElement != VERTEX_FORMAT_UNKNOWN;
+	       ++arrVertexStreamSpec )
 	{
 		if( arrVertexStreamSpec->iVertexDataElement == iElement )
 			return arrVertexStreamSpec;

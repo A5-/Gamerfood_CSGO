@@ -6,30 +6,30 @@ float CAutowall::GetHitgroupDamageMultiplier( int iHitGroup )
 {
 	switch( iHitGroup )
 	{
-	case HITGROUP_HEAD:
-	{
-		return 4.0f;
-	}
-	case HITGROUP_CHEST:
-	case HITGROUP_LEFTARM:
-	case HITGROUP_RIGHTARM:
-	{
-		return 1.0f;
-	}
-	case HITGROUP_STOMACH:
-	{
-		return 1.25f;
-	}
-	case HITGROUP_LEFTLEG:
-	case HITGROUP_RIGHTLEG:
-	{
-		return 0.75f;
-	}
+		case HITGROUP_HEAD:
+		{
+			return 4.0f;
+		}
+		case HITGROUP_CHEST:
+		case HITGROUP_LEFTARM:
+		case HITGROUP_RIGHTARM:
+		{
+			return 1.0f;
+		}
+		case HITGROUP_STOMACH:
+		{
+			return 1.25f;
+		}
+		case HITGROUP_LEFTLEG:
+		case HITGROUP_RIGHTLEG:
+		{
+			return 0.75f;
+		}
 	}
 	return 1.0f;
 }
 
-void CAutowall::ScaleDamage( int hitgroup, CBaseEntity *enemy, float weapon_armor_ratio, float &current_damage )
+void CAutowall::ScaleDamage( int hitgroup, CBaseEntity* enemy, float weapon_armor_ratio, float& current_damage )
 {
 	current_damage *= GetHitgroupDamageMultiplier( hitgroup );
 
@@ -55,15 +55,15 @@ bool CAutowall::DidHitNonWorldEntity( CBaseEntity* m_pEnt )
 	return m_pEnt != NULL && m_pEnt == I::ClientEntList->GetClientEntity( 0 );
 }
 
-bool CAutowall::TraceToExit(Vector& end, trace_t& tr, float x, float y, float z, float x2, float y2, float z2, trace_t* trace)
+bool CAutowall::TraceToExit( Vector& end, trace_t& tr, float x, float y, float z, float x2, float y2, float z2, trace_t* trace )
 {
-	typedef bool(__fastcall* TraceToExitFn)(Vector&, trace_t&, float, float, float, float, float, float, trace_t*);
-	static TraceToExitFn TraceToExit = (TraceToExitFn)U::FindPattern("client.dll", "55 8B EC 83 EC 2C F3 0F 10 75 ? 33 C0");
+	typedef bool (__fastcall* TraceToExitFn)( Vector&, trace_t&, float, float, float, float, float, float, trace_t* );
+	static TraceToExitFn TraceToExit = ( TraceToExitFn )U::FindPattern( "client.dll", "55 8B EC 83 EC 2C F3 0F 10 75 ? 33 C0" );
 
-	if (!TraceToExit)
+	if( !TraceToExit )
 	{
 		return false;
-		U::PrintMessage("TraceToExit not found\n");
+		U::PrintMessage( "TraceToExit not found\n" );
 	}
 	_asm
 	{
@@ -81,14 +81,14 @@ bool CAutowall::TraceToExit(Vector& end, trace_t& tr, float x, float y, float z,
 	}
 }
 
-bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData &data )
+bool CAutowall::HandleBulletPenetration( WeaponInfo_t* wpn_data, FireBulletData& data )
 {
-	surfacedata_t *enter_surface_data = I::Physprops->GetSurfaceData( data.enter_trace.surface.surfaceProps );
+	surfacedata_t* enter_surface_data = I::Physprops->GetSurfaceData( data.enter_trace.surface.surfaceProps );
 	int enter_material = enter_surface_data->game.material;
 	float enter_surf_penetration_mod = *( float* )( ( DWORD )enter_surface_data + 76 );
 
 	data.trace_length += data.enter_trace.fraction * data.trace_length_remaining;
-	data.current_damage *= pow( ( wpn_data->m_flRangeModifier ), ( data.trace_length * 0.002 ) );
+	data.current_damage *= pow( ( wpn_data->flRangeModifier ), ( data.trace_length * 0.002 ) );
 
 	if( ( data.trace_length > 3000.f ) || ( enter_surf_penetration_mod < 0.1f ) )
 		data.penetrate_count = 0;
@@ -98,13 +98,10 @@ bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData 
 
 	Vector dummy;
 	trace_t trace_exit;
-	if (!TraceToExit(dummy, data.enter_trace, data.enter_trace.endpos.x, data.enter_trace.endpos.y, data.enter_trace.endpos.z, data.direction.x, data.direction.y, data.direction.z, &trace_exit))
+	if( !TraceToExit( dummy, data.enter_trace, data.enter_trace.endpos.x, data.enter_trace.endpos.y, data.enter_trace.endpos.z, data.direction.x, data.direction.y, data.direction.z, &trace_exit ) )
 		return false;
 
-
-
-
-	surfacedata_t *exit_surface_data = I::Physprops->GetSurfaceData( trace_exit.surface.surfaceProps );
+	surfacedata_t* exit_surface_data = I::Physprops->GetSurfaceData( trace_exit.surface.surfaceProps );
 	int exit_material = exit_surface_data->game.material;
 
 	float exit_surf_penetration_mod = *( float* )( ( DWORD )exit_surface_data + 76 );
@@ -130,7 +127,7 @@ bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData 
 	}
 
 	float v34 = fmaxf( 0.f, 1.0f / combined_penetration_modifier );
-	float v35 = ( data.current_damage * final_damage_modifier ) + v34 * 3.0f * fmaxf( 0.0f, ( 3.0f / wpn_data->m_flPenetration ) * 1.25f );
+	float v35 = ( data.current_damage * final_damage_modifier ) + v34 * 3.0f * fmaxf( 0.0f, ( 3.0f / wpn_data->flPenetration ) * 1.25f );
 	float thickness = ( trace_exit.endpos - data.enter_trace.endpos ).Length();
 
 	thickness *= thickness;
@@ -154,7 +151,7 @@ bool CAutowall::HandleBulletPenetration( WeaponInfo_t *wpn_data, FireBulletData 
 	return true;
 }
 
-bool CAutowall::SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData &data )
+bool CAutowall::SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData& data )
 {
 	data.penetrate_count = 4;
 	data.trace_length = 0.0f;
@@ -163,11 +160,11 @@ bool CAutowall::SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData &
 	if( weaponData == NULL )
 		return false;
 
-	data.current_damage = ( float )weaponData->m_iDamage;
+	data.current_damage = ( float )weaponData->iDamage;
 
 	while( ( data.penetrate_count > 0 ) && ( data.current_damage >= 1.0f ) )
 	{
-		data.trace_length_remaining = weaponData->m_flRange - data.trace_length;
+		data.trace_length_remaining = weaponData->flRange - data.trace_length;
 
 		Vector end = data.src + data.direction * data.trace_length_remaining;
 
@@ -175,11 +172,11 @@ bool CAutowall::SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData &
 		U::TraceLine( data.src, end, MASK_SHOT, G::LocalPlayer, &data.enter_trace );
 
 		Ray_t ray;
-		ray.Init( data.src, end + data.direction*40.f );
+		ray.Init( data.src, end + data.direction * 40.f );
 
 		I::EngineTrace->TraceRay( ray, MASK_SHOT, &data.filter, &data.enter_trace );
 
-		U::TraceLine( data.src, end + data.direction*40.f, MASK_SHOT, G::LocalPlayer, &data.enter_trace );
+		U::TraceLine( data.src, end + data.direction * 40.f, MASK_SHOT, G::LocalPlayer, &data.enter_trace );
 
 		if( data.enter_trace.fraction == 1.0f )
 			break;
@@ -187,8 +184,8 @@ bool CAutowall::SimulateFireBullet( CBaseCombatWeapon* pWeapon, FireBulletData &
 		if( ( data.enter_trace.hitgroup <= 7 ) && ( data.enter_trace.hitgroup > 0 ) )
 		{
 			data.trace_length += data.enter_trace.fraction * data.trace_length_remaining;
-			data.current_damage *= pow( weaponData->m_flRangeModifier, data.trace_length * 0.002 );
-			ScaleDamage( data.enter_trace.hitgroup, data.enter_trace.m_pEnt, weaponData->m_flArmorRatio, data.current_damage );
+			data.current_damage *= pow( weaponData->flRangeModifier, data.trace_length * 0.002 );
+			ScaleDamage( data.enter_trace.hitgroup, data.enter_trace.m_pEnt, weaponData->flArmorRatio, data.current_damage );
 
 			return true;
 		}

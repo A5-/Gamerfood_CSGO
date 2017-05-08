@@ -4,12 +4,12 @@ HFont F::Meme;
 HFont F::ESP;
 HFont F::Watermark;
 
-void D::SetupFonts( )
+void D::SetupFonts()
 {
 	// fuck these non windows fonts
-	I::Surface->SetFontGlyphSet( F::Meme		= I::Surface->Create_Font( ), charenc( "Comic Sans MS" ), 30, FW_DONTCARE, NULL, NULL, FONTFLAG_ANTIALIAS );
-	I::Surface->SetFontGlyphSet( F::ESP			= I::Surface->Create_Font(), charenc( "Consolas" ), 12, FW_DONTCARE, NULL, NULL, FONTFLAG_OUTLINE );
-	I::Surface->SetFontGlyphSet( F::Watermark	= I::Surface->Create_Font(), charenc( "MS Sans Serif" ), 12, FW_DONTCARE, NULL, NULL, FONTFLAG_OUTLINE );
+	I::Surface->SetFontGlyphSet( F::Meme = I::Surface->Create_Font(), charenc( "Comic Sans MS" ), 30, FW_DONTCARE, NULL, NULL, FONTFLAG_ANTIALIAS );
+	I::Surface->SetFontGlyphSet( F::ESP = I::Surface->Create_Font(), charenc( "Consolas" ), 12, FW_DONTCARE, NULL, NULL, FONTFLAG_OUTLINE );
+	I::Surface->SetFontGlyphSet( F::Watermark = I::Surface->Create_Font(), charenc( "MS Sans Serif" ), 12, FW_DONTCARE, NULL, NULL, FONTFLAG_OUTLINE );
 }
 
 void D::DrawString( HFont font, int x, int y, Color color, DWORD alignment, const char* msg, ... )
@@ -59,18 +59,20 @@ void D::DrawRect( int x, int y, int w, int h, Color col )
 	I::Surface->DrawFilledRect( x, y, x + w, y + h );
 }
 
-void D::DrawRectRainbow( int x, int y, int width, int height, float flSpeed, float &flRainbow )
+void D::DrawRectRainbow( int x, int y, int width, int height, float flSpeed, float& flRainbow )
 {
 	Color colColor( 0, 0, 0 );
 
 	flRainbow += flSpeed;
-	if ( flRainbow > 1.f ) flRainbow = 0.f;
+	if( flRainbow > 1.f )
+		flRainbow = 0.f;
 
-	for ( int i = 0; i < width; i++ )
+	for( int i = 0; i < width; i++ )
 	{
 		float hue = ( 1.f / ( float ) width ) * i;
 		hue -= flRainbow;
-		if ( hue < 0.f ) hue += 1.f;
+		if( hue < 0.f )
+			hue += 1.f;
 
 		Color colRainbow = colColor.FromHSB( hue, 1.f, 1.f );
 		D::DrawRect( x + i, y, 1, height, colRainbow );
@@ -79,13 +81,13 @@ void D::DrawRectRainbow( int x, int y, int width, int height, float flSpeed, flo
 
 void D::DrawRectGradientHorizontal( int x, int y, int width, int height, Color color1, Color color2 )
 {
-	float flDifferenceR = ( float ) ( color2.r( ) - color1.r( ) ) / ( float ) width;
-	float flDifferenceG = ( float ) ( color2.g( ) - color1.g( ) ) / ( float ) width;
-	float flDifferenceB = ( float ) ( color2.b( ) - color1.b( ) ) / ( float ) width;
+	float flDifferenceR = ( float ) ( color2.r() - color1.r() ) / ( float ) width;
+	float flDifferenceG = ( float ) ( color2.g() - color1.g() ) / ( float ) width;
+	float flDifferenceB = ( float ) ( color2.b() - color1.b() ) / ( float ) width;
 
-	for ( float i = 0.f; i < width; i++ )
+	for( float i = 0.f; i < width; i++ )
 	{
-		Color colGradient = Color( color1.r( ) + ( flDifferenceR * i ), color1.g( ) + ( flDifferenceG * i ), color1.b( ) + ( flDifferenceB * i ), color1.a( ) );
+		Color colGradient = Color( color1.r() + ( flDifferenceR * i ), color1.g() + ( flDifferenceG * i ), color1.b() + ( flDifferenceB * i ), color1.a() );
 		D::DrawRect( x + i, y, 1, height, colGradient );
 	}
 }
@@ -119,7 +121,7 @@ void D::DrawCorner( int iX, int iY, int iWidth, int iHeight, bool bRight, bool b
 	int iRealX = bRight ? iX - iWidth : iX;
 	int iRealY = bDown ? iY - iHeight : iY;
 
-	if ( bDown && bRight )
+	if( bDown && bRight )
 		iWidth = iWidth + 1;
 
 	D::DrawRect( iRealX, iY, iWidth, 1, colDraw );
@@ -143,19 +145,19 @@ void D::DrawPolygon( int count, Vertex_t* Vertexs, Color color )
 
 void D::DrawRoundedBox( int x, int y, int w, int h, int r, int v, Color col )
 {
-	std::vector<Vertex_t> p;
-	for ( int _i = 0; _i < 3; _i++ )
+	std::vector< Vertex_t > p;
+	for( int _i = 0; _i < 3; _i++ )
 	{
 		int _x = x + ( _i < 2 && r || w - r );
 		int _y = y + ( _i % 3 > 0 && r || h - r );
-		for ( int i = 0; i < v; i++ )
+		for( int i = 0; i < v; i++ )
 		{
 			int a = RAD2DEG( ( i / v ) * -90 - _i * 90 );
 			p.push_back( Vertex_t( Vector2D( _x + sin( a ) * r, _y + cos( a ) * r ) ) );
 		}
 	}
 
-	D::DrawPolygon( 4 * ( v + 1 ), &p[0], col );
+	D::DrawPolygon( 4 * ( v + 1 ), &p[ 0 ], col );
 	/*
 	function DrawRoundedBox(x, y, w, h, r, v, col)
 	local p = {};
@@ -178,19 +180,19 @@ void D::DrawRoundedBox( int x, int y, int w, int h, int r, int v, Color col )
 	// I did it in lua cause I have no idea how the vertex_t struct works and i'm still aids at C++
 }
 
-bool D::ScreenTransform( const Vector &point, Vector &screen ) // tots not pasted
+bool D::ScreenTransform( const Vector& point, Vector& screen ) // tots not pasted
 {
 	float w;
-	const VMatrix &worldToScreen = I::Engine->WorldToScreenMatrix( );
+	const VMatrix& worldToScreen = I::Engine->WorldToScreenMatrix();
 
-	screen.x = worldToScreen[0][0] * point[0] + worldToScreen[0][1] * point[1] + worldToScreen[0][2] * point[2] + worldToScreen[0][3];
-	screen.y = worldToScreen[1][0] * point[0] + worldToScreen[1][1] * point[1] + worldToScreen[1][2] * point[2] + worldToScreen[1][3];
-	w = worldToScreen[3][0] * point[0] + worldToScreen[3][1] * point[1] + worldToScreen[3][2] * point[2] + worldToScreen[3][3];
+	screen.x = worldToScreen[ 0 ][ 0 ] * point[ 0 ] + worldToScreen[ 0 ][ 1 ] * point[ 1 ] + worldToScreen[ 0 ][ 2 ] * point[ 2 ] + worldToScreen[ 0 ][ 3 ];
+	screen.y = worldToScreen[ 1 ][ 0 ] * point[ 0 ] + worldToScreen[ 1 ][ 1 ] * point[ 1 ] + worldToScreen[ 1 ][ 2 ] * point[ 2 ] + worldToScreen[ 1 ][ 3 ];
+	w = worldToScreen[ 3 ][ 0 ] * point[ 0 ] + worldToScreen[ 3 ][ 1 ] * point[ 1 ] + worldToScreen[ 3 ][ 2 ] * point[ 2 ] + worldToScreen[ 3 ][ 3 ];
 	screen.z = 0.0f;
 
 	bool behind = false;
 
-	if ( w < 0.001f )
+	if( w < 0.001f )
 	{
 		behind = true;
 		screen.x *= 100000;
@@ -207,9 +209,9 @@ bool D::ScreenTransform( const Vector &point, Vector &screen ) // tots not paste
 	return behind;
 }
 
-bool D::WorldToScreen( const Vector &origin, Vector &screen )
+bool D::WorldToScreen( const Vector& origin, Vector& screen )
 {
-	if ( !ScreenTransform( origin, screen ) )
+	if( !ScreenTransform( origin, screen ) )
 	{
 		int ScreenWidth, ScreenHeight;
 		I::Engine->GetScreenSize( ScreenWidth, ScreenHeight );
@@ -245,8 +247,7 @@ int D::GetStringWidth( HFont font, const char* msg, ... )
 void D::Draw3DBox( Vector* boxVectors, Color color )
 {
 	Vector boxVectors0, boxVectors1, boxVectors2, boxVectors3,
-		boxVectors4, boxVectors5, boxVectors6, boxVectors7;
-
+	       boxVectors4, boxVectors5, boxVectors6, boxVectors7;
 
 	if( D::WorldToScreen( boxVectors[ 0 ], boxVectors0 ) &&
 		D::WorldToScreen( boxVectors[ 1 ], boxVectors1 ) &&
@@ -257,7 +258,6 @@ void D::Draw3DBox( Vector* boxVectors, Color color )
 		D::WorldToScreen( boxVectors[ 6 ], boxVectors6 ) &&
 		D::WorldToScreen( boxVectors[ 7 ], boxVectors7 ) )
 	{
-
 		/*
 			   .+--5---+
 			 .8 4    6'|
@@ -292,7 +292,6 @@ void D::Draw3DBox( Vector* boxVectors, Color color )
 		lines[ 8 ][ 0 ] = { boxVectors7.x, boxVectors7.y };
 		lines[ 8 ][ 1 ] = { boxVectors6.x, boxVectors6.y };
 
-
 		lines[ 9 ][ 0 ] = { boxVectors5.x, boxVectors5.y };
 		lines[ 9 ][ 1 ] = { boxVectors1.x, boxVectors1.y };
 
@@ -312,7 +311,7 @@ void D::Draw3DBox( Vector* boxVectors, Color color )
 void D::DrawCircle( float x, float y, float r, float s, Color color )
 {
 	float Step = M_PI * 2.0 / s;
-	for( float a = 0; a < ( M_PI*2.0 ); a += Step )
+	for( float a = 0; a < ( M_PI * 2.0 ); a += Step )
 	{
 		float x1 = r * cos( a ) + x;
 		float y1 = r * sin( a ) + y;

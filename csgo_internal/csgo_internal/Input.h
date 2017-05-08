@@ -3,7 +3,8 @@
 class CInput
 {
 public:
-	CInput() {};
+	CInput()
+	{};
 
 	void GetClicked();
 	bool Holding( int, int, int, int );
@@ -11,4 +12,6 @@ public:
 	bool Clicked( int, int, int, int );
 private:
 	bool bClicked, bMouseD;
-}; extern CInput* Input;
+};
+
+extern CInput* Input;

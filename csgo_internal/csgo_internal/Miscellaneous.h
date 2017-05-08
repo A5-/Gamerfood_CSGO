@@ -16,11 +16,9 @@ public:
 	void AirStuck();
 	void Panic();
 private:
-	
 
 private:
 	bool m_bInitialized = false;
-	std::vector<std::string> m_spamlines;
-	std::vector<std::string> m_insults;
-
+	std::vector< std::string > m_spamlines;
+	std::vector< std::string > m_insults;
 };

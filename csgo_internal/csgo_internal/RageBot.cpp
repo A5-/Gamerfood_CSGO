@@ -110,10 +110,10 @@ void CRageBot::FindTarget()
 				{
 					m_besthitbox = hitbox;
 					m_target = true;
-				}	
+				}
 			}
 		}
-		
+
 		// threat target method spreads the damage evenally across all players that you're able to do damage to
 		// if a target is aiming at you they're are prioritised
 		if( Vars.Ragebot.TargetMethod == 2 )
@@ -185,7 +185,8 @@ void CRageBot::GoToTarget()
 		bool bFinished = Aimstep( G::LastAngle, aim_angle, angNextAngle, Vars.Ragebot.AimstepAmount );
 		G::UserCmd->viewangles = angNextAngle;
 		G::LastAngle = angNextAngle;
-		if( bFinished ) auto_shoot = true;
+		if( bFinished )
+			auto_shoot = true;
 	}
 	else if( can_shoot )
 	{
@@ -217,7 +218,7 @@ void CRageBot::GoToTarget()
 
 void CRageBot::DropTarget()
 {
-	if( !EntityIsValid( G::BestTarget ) ||  Vars.Ragebot.HitScanAll || Vars.Ragebot.HitScanHitbox ) 
+	if( !EntityIsValid( G::BestTarget ) || Vars.Ragebot.HitScanAll || Vars.Ragebot.HitScanHitbox )
 		G::BestTarget = -1;
 }
 
@@ -229,10 +230,10 @@ bool CRageBot::Aimstep( QAngle src, QAngle dst, QAngle& out, int steps )
 
 	if( delta_angle.x > steps )
 		src.x += steps;
-	
+
 	else if( delta_angle.x < -steps )
 		src.x -= steps;
-	
+
 	else
 	{
 		x_finished = true;
@@ -241,10 +242,10 @@ bool CRageBot::Aimstep( QAngle src, QAngle dst, QAngle& out, int steps )
 
 	if( delta_angle.y > steps )
 		src.y += steps;
-	
+
 	else if( delta_angle.y < -steps )
 		src.y -= steps;
-	
+
 	else
 	{
 		y_finished = true;
@@ -265,14 +266,13 @@ bool CRageBot::GetHitbox( CBaseEntity* target, Hitbox* hitbox )
 	if( !target->SetupBones( matrix, MAXSTUDIOBONES, BONE_USED_BY_HITBOX, 0 ) )
 		return false;
 
-
-	studiohdr_t *hdr = I::ModelInfo->GetStudioModel( target->GetModel() );
+	studiohdr_t* hdr = I::ModelInfo->GetStudioModel( target->GetModel() );
 
 	if( !hdr )
 		return false;
 
-	mstudiohitboxset_t *hitboxSet = hdr->pHitboxSet( target->GetHitboxSet() );
-	mstudiobbox_t *untransformedBox = hitboxSet->pHitbox( hitbox->hitbox );
+	mstudiohitboxset_t* hitboxSet = hdr->pHitboxSet( target->GetHitboxSet() );
+	mstudiobbox_t* untransformedBox = hitboxSet->pHitbox( hitbox->hitbox );
 
 	Vector bbmin = untransformedBox->bbmin;
 	Vector bbmax = untransformedBox->bbmax;
@@ -293,7 +293,6 @@ bool CRageBot::GetHitbox( CBaseEntity* target, Hitbox* hitbox )
 		Vector( bbmin.x, bbmin.y, bbmax.z ),
 		Vector( bbmax.x, bbmin.y, bbmax.z ) };
 
-
 	for( int index = 0; index <= 8; ++index )
 	{
 		if( index != 0 )
@@ -305,7 +304,7 @@ bool CRageBot::GetHitbox( CBaseEntity* target, Hitbox* hitbox )
 	return true;
 }
 
-bool CRageBot::GetBestPoint( CBaseEntity* target, Hitbox* hitbox, BestPoint *point )
+bool CRageBot::GetBestPoint( CBaseEntity* target, Hitbox* hitbox, BestPoint* point )
 {
 	Vector center = hitbox->points[ 0 ];
 
@@ -316,8 +315,8 @@ bool CRageBot::GetBestPoint( CBaseEntity* target, Hitbox* hitbox, BestPoint *poi
 		float pitch = target->GetEyeAngles().x;
 		if( ( pitch > 0.f ) && ( pitch <= 89.f ) )
 		{
-			Vector height		= ( ( ( high - hitbox->points[ 0 ] ) / 3 ) * 4 );
-			Vector new_height	= ( hitbox->points[ 0 ] + ( height * ( pitch / 89.f ) ) );
+			Vector height = ( ( ( high - hitbox->points[ 0 ] ) / 3 ) * 4 );
+			Vector new_height = ( hitbox->points[ 0 ] + ( height * ( pitch / 89.f ) ) );
 
 			hitbox->points[ 0 ] = new_height;
 			point->flags |= FL_HIGH;
@@ -374,7 +373,6 @@ bool CRageBot::BestAimPointAll( CBaseEntity* target, Vector& hitbox )
 		hitbox = aim_point.point;
 		return true;
 	}
-		
 
 	return false;
 }
@@ -388,28 +386,28 @@ bool CRageBot::BestAimPointHitbox( CBaseEntity* target, Vector& hitbox )
 
 	switch( Vars.Ragebot.Hitbox )
 	{
-	case 0:
-		hitboxnum = 3;
-		break;
-	case 1:
-		hitboxnum = 6;
-		break;
-	case 2:
-	case 3:
-		hitboxnum = 4;
-		break;
-	case 4:
-		hitboxnum = 7;
-		break;
-	case 5:
-		hitboxnum = 1;
-		break;
-	case 6:
-		hitboxnum = 0;
-		break;
-	default:
-		hitboxnum = 0;
-		break;
+		case 0:
+			hitboxnum = 3;
+			break;
+		case 1:
+			hitboxnum = 6;
+			break;
+		case 2:
+		case 3:
+			hitboxnum = 4;
+			break;
+		case 4:
+			hitboxnum = 7;
+			break;
+		case 5:
+			hitboxnum = 1;
+			break;
+		case 6:
+			hitboxnum = 0;
+			break;
+		default:
+			hitboxnum = 0;
+			break;
 	}
 
 	Hitbox hitboxx( hitboxnum );
@@ -460,9 +458,9 @@ bool CRageBot::EntityIsValid( int i )
 
 void CRageBot::CFixMove::Start()
 {
-	m_oldangle		= G::UserCmd->viewangles;
-	m_oldforward	= G::UserCmd->forwardmove;
-	m_oldsidemove	= G::UserCmd->sidemove;
+	m_oldangle = G::UserCmd->viewangles;
+	m_oldforward = G::UserCmd->forwardmove;
+	m_oldsidemove = G::UserCmd->sidemove;
 }
 
 void CRageBot::CFixMove::End()

@@ -1,13 +1,16 @@
 ﻿#include "Cheat.h"
 
 CreateMoveFn oCreateMove;
+
 bool __stdcall Hooks::CreateMove( float flInputSampleTime, CUserCmd* cmd )
 {
 	G::LocalPlayer = U::GetLocalPlayer();
 	G::UserCmd = cmd;
 
-	if( Vars.Ragebot.Enabled ) Vars.Legitbot.Aimbot.Enabled = false;
-	else if( Vars.Legitbot.Aimbot.Enabled ) Vars.Ragebot.Enabled = false;
+	if( Vars.Ragebot.Enabled )
+		Vars.Legitbot.Aimbot.Enabled = false;
+	else if( Vars.Legitbot.Aimbot.Enabled )
+		Vars.Ragebot.Enabled = false;
 
 	if( cmd->command_number == 0 || !I::Engine->IsInGame() )
 		return false;

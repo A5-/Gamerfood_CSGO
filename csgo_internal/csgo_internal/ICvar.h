@@ -20,15 +20,15 @@ struct CVarDLLIdentifier_t;
 class ICVar : public IAppSystem
 {
 public:
-	virtual void			func10() = 0;															 
-	virtual void			RegisterConCommand( ConVar *pCommandBase ) = 0; 
-	virtual void			UnregisterConCommand( ConVar *pCommandBase ) = 0;
-	virtual void			func13() = 0;
-	virtual ConVar			*FindVar( const char *var_name ) = 0;
-	virtual void			func15() = 0;
-	virtual void			func16() = 0;
-	virtual void			func17() = 0;
-	virtual void			func18() = 0;
-	virtual void			func19() = 0;
-	virtual void			func20() = 0;
+	virtual void func10() = 0;
+	virtual void RegisterConCommand( ConVar* pCommandBase ) = 0;
+	virtual void UnregisterConCommand( ConVar* pCommandBase ) = 0;
+	virtual void func13() = 0;
+	virtual ConVar* FindVar( const char* var_name ) = 0;
+	virtual void func15() = 0;
+	virtual void func16() = 0;
+	virtual void func17() = 0;
+	virtual void func18() = 0;
+	virtual void func19() = 0;
+	virtual void func20() = 0;
 };

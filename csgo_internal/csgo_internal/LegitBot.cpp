@@ -106,7 +106,6 @@ void CLegitBot::DropTarget()
 		m_ibesttargetlegit = -1;
 		curAimTime = 0.f;
 	}
-		
 }
 
 bool CLegitBot::EntityIsValid( int i )
@@ -145,9 +144,9 @@ void CLegitBot::Triggerbot()
 	viewangle += G::LocalPlayer->GetPunch() * 2.f;
 
 	M::AngleVectors( viewangle, &forward );
-	forward *= G::LocalPlayer->GetWeapon()->GetCSWpnData()->m_flRange; 
+	forward *= G::LocalPlayer->GetWeapon()->GetCSWpnData()->m_flRange;
 	filter.pSkip = G::LocalPlayer;
-	src = G::LocalPlayer->GetEyePosition(); 
+	src = G::LocalPlayer->GetEyePosition();
 	dst = src + forward;
 
 	ray.Init( src, dst );
@@ -171,7 +170,7 @@ void CLegitBot::Triggerbot()
 	if( Vars.Legitbot.Triggerbot.Filter.Legs && ( hitgroup == HITGROUP_LEFTLEG || hitgroup == HITGROUP_RIGHTLEG ) )
 		didHit = true;
 
-	if ( ( Vars.Legitbot.Triggerbot.Filter.Friendly || tr.m_pEnt->GetTeam() != G::LocalPlayer->GetTeam() ) && tr.m_pEnt->GetHealth() > 0 && !tr.m_pEnt->GetImmune() )
+	if( ( Vars.Legitbot.Triggerbot.Filter.Friendly || tr.m_pEnt->GetTeam() != G::LocalPlayer->GetTeam() ) && tr.m_pEnt->GetHealth() > 0 && !tr.m_pEnt->GetImmune() )
 	{
 		float hitchance = 75.f + ( Vars.Legitbot.Triggerbot.HitChanceAmt / 4 );
 		if( didHit && ( !Vars.Legitbot.Triggerbot.HitChance || ( 1.0f - G::LocalPlayer->GetWeapon()->GetAccuracyPenalty() ) * 100.f >= hitchance ) )
@@ -183,7 +182,7 @@ QAngle m_oldangle;
 
 void CLegitBot::RCS()
 {
-	if( G::UserCmd->buttons & IN_ATTACK ) 
+	if( G::UserCmd->buttons & IN_ATTACK )
 	{
 		QAngle aimpunch = G::LocalPlayer->GetPunch() * 2.f;
 
@@ -191,7 +190,8 @@ void CLegitBot::RCS()
 
 		m_oldangle = aimpunch;
 	}
-	else {
+	else
+	{
 		m_oldangle.x = m_oldangle.y = m_oldangle.z = 0;
 	}
 }

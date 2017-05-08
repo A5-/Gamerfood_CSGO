@@ -12,7 +12,7 @@ struct Hitbox
 		hitbox = newHitBox;
 	}
 
-	int  hitbox;
+	int hitbox;
 	Vector points[ 9 ];
 };
 
@@ -44,10 +44,10 @@ struct BestPoint
 	}
 
 	Vector point;
-	int  index;
-	int  dmg;
-	int  flags;
-	int  hitbox;
+	int index;
+	int dmg;
+	int flags;
+	int hitbox;
 };
 
 class CRageBot
@@ -56,20 +56,19 @@ public:
 	void Run();
 	bool Autowall( CBaseEntity* other, const Vector& startpos, const Vector& endpos, float* damage );
 	bool Aimstep( QAngle src, QAngle dst, QAngle& out, int steps );
-	
+
 private:
 	void FindTarget();
 	void GoToTarget();
 	void DropTarget();
 	bool GhettoAutowall( CBaseEntity* );
-	
+
 	bool EntityIsValid( int i );
 	bool IsEnemyUsingAntiAim( CBaseEntity* );
 	bool GetHitbox( CBaseEntity* target, Hitbox* hitbox );
 	bool GetBestPoint( CBaseEntity* target, Hitbox* hitbox, BestPoint* point );
 	bool BestAimPointAll( CBaseEntity* target, Vector& hitbox );
 	bool BestAimPointHitbox( CBaseEntity* target, Vector& hitbox );
-
 
 	class CFixMove
 	{

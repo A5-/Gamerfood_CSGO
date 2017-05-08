@@ -4,7 +4,7 @@
 
 COffsets offsets;
 
-void Offsets::GrabOffsets( )
+void Offsets::GrabOffsets()
 {
 	offsets.m_iHealth = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_iHealth" ) );
 	offsets.m_iTeamNum = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_iTeamNum" ) );

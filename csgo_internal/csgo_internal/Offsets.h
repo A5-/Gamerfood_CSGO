@@ -66,10 +66,11 @@ struct COffsets
 	DWORD InitKeyValuesEx;
 	DWORD ServerRankRevealAllEx;
 	DWORD IsReadyEx;
-}; 
+};
+
 extern COffsets offsets;
 
 namespace Offsets
 {
-	extern void GrabOffsets( );
+	extern void GrabOffsets();
 }

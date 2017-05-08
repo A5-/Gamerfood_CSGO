@@ -8,13 +8,13 @@
 
 struct IDirect3DDevice9;
 
-IMGUI_API bool        ImGui_ImplDX9_Init(void* hwnd, IDirect3DDevice9* device);
-IMGUI_API void        ImGui_ImplDX9_Shutdown();
-IMGUI_API void        ImGui_ImplDX9_NewFrame();
+IMGUI_API bool ImGui_ImplDX9_Init( void* hwnd, IDirect3DDevice9* device );
+IMGUI_API void ImGui_ImplDX9_Shutdown();
+IMGUI_API void ImGui_ImplDX9_NewFrame();
 
 // Use if you want to reset your rendering device without losing ImGui state.
-IMGUI_API void        ImGui_ImplDX9_InvalidateDeviceObjects();
-IMGUI_API bool        ImGui_ImplDX9_CreateDeviceObjects();
+IMGUI_API void ImGui_ImplDX9_InvalidateDeviceObjects();
+IMGUI_API bool ImGui_ImplDX9_CreateDeviceObjects();
 
 // Handler for Win32 messages, update mouse/keyboard data.
 // You may or not need this for your implementation, but it can serve as reference for handling inputs.

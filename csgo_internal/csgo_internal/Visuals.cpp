@@ -18,16 +18,15 @@ void CVisuals::Run()
 		DrawCrosshair( Color::Red() );
 		if( !crosshair )
 		{
-			I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 0" ) );
+			I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 0" ), nullptr );
 			crosshair = true;
 		}
-			
 	}
 	else
 	{
 		if( crosshair )
 		{
-			I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 1" ) );
+			I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 1" ), nullptr );
 			crosshair = false;
 		}
 	}
@@ -53,24 +52,28 @@ void CVisuals::PlayerESP( int index )
 
 	if( !Vars.Visuals.Filter.Enemies && Entity->IsEnemy() )
 		return;
-	
-	if (Vars.Visuals.Dlights)
+
+	if( Vars.Visuals.Dlights )
 	{
-		dlight_t* dLight = I::vrtEffects->CL_AllocDlight(Entity->index);
+		dlight_t* dLight = I::vrtEffects->CL_AllocDlight( Entity->index );
 		dLight->die = I::Globals->curtime + 0.05f;
 		dLight->radius = 200.f;
-		if (Entity->IsEnemy()) {
+		if( Entity->IsEnemy() )
+		{
 			dLight->color.r = 200;
 			dLight->color.g = 200;
-			dLight->color.b = 60; }
-		else {
+			dLight->color.b = 60;
+		}
+		else
+		{
 			dLight->color.r = 2;
 			dLight->color.g = 48;
-			dLight->color.b = 22; }
+			dLight->color.b = 22;
+		}
 		dLight->color.exponent = 5;
 		dLight->key = Entity->index;
 		dLight->decay = dLight->radius / 5.0f;
-		dLight->origin = Entity->GetOrigin() + Vector(0, 0, 2);
+		dLight->origin = Entity->GetOrigin() + Vector( 0, 0, 2 );
 	}
 
 	Vector max = Entity->GetCollideable()->OBBMaxs();
@@ -87,8 +90,8 @@ void CVisuals::PlayerESP( int index )
 	if( Entity->GetClientClass()->m_ClassID == 85 ) // CHostage ClassID - Thx
 	{
 		if( Vars.Visuals.Info.Name )
-			D::DrawString(F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage"));
-			
+			D::DrawString( F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage") );
+
 		return;
 	}
 
@@ -133,7 +136,7 @@ void CVisuals::WorldESP( int index )
 
 	if( !D::WorldToScreen( pos3D, pos ) )
 		return;
-	
+
 	int owner = Entity->GetOwner();
 
 	if( owner == -1 )
@@ -155,7 +158,7 @@ void CVisuals::WorldESP( int index )
 				D::DrawString( F::ESP, pos.x, pos.y, Color::White(), FONT_RIGHT, "%s", charenc( "Deagle") );
 			}
 		}
-		
+
 		if( Entity->GetClientClass()->m_ClassID == 29 && Vars.Visuals.Filter.C4 )
 			D::DrawString( F::ESP, pos.x, pos.y, Color::LightBlue(), FONT_RIGHT, "%s", charenc( "C4" ) );
 	}
@@ -184,60 +187,59 @@ void CVisuals::DrawGlow()
 
 		switch( Entity->GetClientClass()->m_ClassID )
 		{
-
-		case 1:
-			if( Vars.Visuals.Filter.Weapons )
-				glowEntity->set( Color( 255, 138, 46, 250 ) );
-			
-			break;
-
-		case 29:
-			if( Vars.Visuals.Filter.C4 )
-				glowEntity->set( Color( 84, 147, 230, 250 ) );
-			
-			break;
-
-		case 35:
-			if( Vars.Visuals.Glow )
-			{
-				if( !Vars.Visuals.Filter.Friendlies && !Entity->IsEnemy() )
-					break;
-
-				if( !Vars.Visuals.Filter.Enemies && Entity->IsEnemy() )
-					break;
-
-				if( Entity->m_visible )
-					glowEntity->set( Entity->IsEnemy() ? Color( 232, 209, 32, 250 ) : Color( 72, 219, 75, 250 ) );
-
-				else
-					glowEntity->set( Entity->IsEnemy() ? Color( 200, 60, 60, 250 ) : Color( 84, 167, 255, 250 ) );
-			}
-			break;
-
-		case 39:
-			if( Vars.Visuals.Filter.Weapons )
-				glowEntity->set( Color( 255, 138, 46, 250 ) );
-
-			break;
-
-		case 41:
-			if( Vars.Visuals.Filter.Decoy )
-				glowEntity->set( Color( 230, 78, 255, 250 ) );
-
-			break;
-
-		case 105:
-			if( Vars.Visuals.Filter.C4 )
-				glowEntity->set( Color( 255, 39, 33, 250 ) );
-			break;
-
-		default:
-			if( Vars.Visuals.Filter.Weapons )
-			{
-				if( strstr( Entity->GetClientClass()->m_pNetworkName, charenc( "CWeapon" ) ) )
+			case 1:
+				if( Vars.Visuals.Filter.Weapons )
 					glowEntity->set( Color( 255, 138, 46, 250 ) );
-			}
-			break;
+
+				break;
+
+			case 29:
+				if( Vars.Visuals.Filter.C4 )
+					glowEntity->set( Color( 84, 147, 230, 250 ) );
+
+				break;
+
+			case 35:
+				if( Vars.Visuals.Glow )
+				{
+					if( !Vars.Visuals.Filter.Friendlies && !Entity->IsEnemy() )
+						break;
+
+					if( !Vars.Visuals.Filter.Enemies && Entity->IsEnemy() )
+						break;
+
+					if( Entity->m_visible )
+						glowEntity->set( Entity->IsEnemy() ? Color( 232, 209, 32, 250 ) : Color( 72, 219, 75, 250 ) );
+
+					else
+						glowEntity->set( Entity->IsEnemy() ? Color( 200, 60, 60, 250 ) : Color( 84, 167, 255, 250 ) );
+				}
+				break;
+
+			case 39:
+				if( Vars.Visuals.Filter.Weapons )
+					glowEntity->set( Color( 255, 138, 46, 250 ) );
+
+				break;
+
+			case 41:
+				if( Vars.Visuals.Filter.Decoy )
+					glowEntity->set( Color( 230, 78, 255, 250 ) );
+
+				break;
+
+			case 105:
+				if( Vars.Visuals.Filter.C4 )
+					glowEntity->set( Color( 255, 39, 33, 250 ) );
+				break;
+
+			default:
+				if( Vars.Visuals.Filter.Weapons )
+				{
+					if( strstr( Entity->GetClientClass()->m_pNetworkName, charenc( "CWeapon" ) ) )
+						glowEntity->set( Color( 255, 138, 46, 250 ) );
+				}
+				break;
 		}
 	}
 }
@@ -313,7 +315,8 @@ void CVisuals::Watermark()
 {
 	static float rainbow;
 	rainbow += 0.005f;
-	if ( rainbow > 1.f ) rainbow = 0.f;
+	if( rainbow > 1.f )
+		rainbow = 0.f;
 	D::DrawString( F::Watermark, 5, 11, Color::FromHSB( rainbow, 1.f, 1.f ), FONT_LEFT, "%s", charenc( "TEAMGAMERFOOD.COM" ) );
 }
 
@@ -335,15 +338,15 @@ void CVisuals::HealthBar( Vector bot, Vector top, float health )
 
 	UINT hp = h - ( UINT )( ( h * health ) / 100 ); // Percentage
 
-	int Red = 255 - ( health*2.55 );
-	int Green = health*2.55;
+	int Red = 255 - ( health * 2.55 );
+	int Green = health * 2.55;
 
 	D::DrawOutlinedRect( ( top.x - offset ) - 1, top.y - 1, 3, h + 2, Color::Black() );
 
 	D::DrawLine( ( top.x - offset ), top.y + hp, ( top.x - offset ), top.y + h, Color( Red, Green, 0, 255 ) );
 }
 
-void CVisuals::Skeleton( CBaseEntity *Entity, Color color )
+void CVisuals::Skeleton( CBaseEntity* Entity, Color color )
 {
 	studiohdr_t* pStudioModel = I::ModelInfo->GetStudioModel( Entity->GetModel() );
 	if( pStudioModel )
@@ -373,7 +376,7 @@ void CVisuals::Skeleton( CBaseEntity *Entity, Color color )
 
 void CVisuals::DrawHitbox( matrix3x4a_t* matrix, Vector bbmin, Vector bbmax, int bone, Color color )
 {
-	Vector points[] = { 
+	Vector points[] = {
 		Vector( bbmin.x, bbmin.y, bbmin.z ),
 		Vector( bbmin.x, bbmax.y, bbmin.z ),
 		Vector( bbmax.x, bbmax.y, bbmin.z ),
@@ -397,7 +400,7 @@ void CVisuals::DrawHitbox( matrix3x4a_t* matrix, Vector bbmin, Vector bbmax, int
 	D::Draw3DBox( pointsTransformed, color );
 }
 
-void CVisuals::Hitboxes( CBaseEntity *Entity, Color color )
+void CVisuals::Hitboxes( CBaseEntity* Entity, Color color )
 {
 	matrix3x4a_t matrix[ MAXSTUDIOBONES ];
 

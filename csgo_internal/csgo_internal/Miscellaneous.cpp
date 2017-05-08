@@ -4,7 +4,7 @@
 
 void CMiscellaneous::Initialize()
 {
-	if ( m_bInitialized )
+	if( m_bInitialized )
 		return;
 }
 
@@ -14,34 +14,32 @@ void CMiscellaneous::Run()
 }
 
 void CMiscellaneous::Think()
-{
-
-}
+{}
 
 void CMiscellaneous::Bunnyhop()
 {
 	static bool bLastJumped = false;
 	static bool bShouldFake = false;
 
-	if( !bLastJumped && bShouldFake ) 
+	if( !bLastJumped && bShouldFake )
 	{
 		bShouldFake = false;
 		G::UserCmd->buttons |= IN_JUMP;
 	}
-	else if( G::UserCmd->buttons & IN_JUMP ) 
+	else if( G::UserCmd->buttons & IN_JUMP )
 	{
-		if( G::LocalPlayer->GetFlags() & FL_ONGROUND ) 
+		if( G::LocalPlayer->GetFlags() & FL_ONGROUND )
 		{
 			bLastJumped = true;
 			bShouldFake = true;
 		}
-		else 
+		else
 		{
 			G::UserCmd->buttons &= ~IN_JUMP;
 			bLastJumped = false;
 		}
 	}
-	else 
+	else
 	{
 		bLastJumped = false;
 		bShouldFake = false;
@@ -53,13 +51,13 @@ void CMiscellaneous::AutoStrafe()
 	if( G::LocalPlayer->GetFlags() & FL_ONGROUND )
 		return;
 
-	if( G::UserCmd->mousedx > 1 || G::UserCmd->mousedx < -1 ) {
+	if( G::UserCmd->mousedx > 1 || G::UserCmd->mousedx < -1 )
+	{
 		G::UserCmd->sidemove = G::UserCmd->mousedx < 0.f ? -400.f : 400.f;
 	}
 }
 
 size_t linenum = 0;
-
 
 void CMiscellaneous::Chatspam()
 {
@@ -71,7 +69,7 @@ void CMiscellaneous::Chatspam()
 
 	nextTime = flServerTime + 0.5f;
 
-	if ( m_spamlines.empty() )
+	if( m_spamlines.empty() )
 		return;
 
 	if( Vars.Misc.ChatSpamMode == 0 )
@@ -81,7 +79,7 @@ void CMiscellaneous::Chatspam()
 	strcpy( str, charenc( "say " ) );
 	strcat( str, m_spamlines[ linenum ].c_str() );
 
-	I::Engine->ClientCmd_Unrestricted( str );
+	I::Engine->ClientCmd_Unrestricted( str, nullptr );
 
 	if( Vars.Misc.ChatSpamMode == 1 )
 	{
@@ -97,11 +95,11 @@ void CMiscellaneous::ReadChatspam( const char* fileName )
 	m_spamlines.clear();
 
 	std::ifstream spamfile( fileName );
-	if ( spamfile.good() )
+	if( spamfile.good() )
 	{
 		std::string line;
 
-		while ( std::getline( spamfile, line ) )
+		while( std::getline( spamfile, line ) )
 			m_spamlines.push_back( line );
 
 		linenum = 0;
@@ -133,8 +131,8 @@ void CMiscellaneous::Panic()
 	if( !G::PressedKeys[ VK_END ] )
 		return;
 
-	I::Engine->ClientCmd_Unrestricted( charenc( "cl_mouseenable 1" ) );
-	I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 1" ) );
+	I::Engine->ClientCmd_Unrestricted( charenc( "cl_mouseenable 1" ), nullptr );
+	I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 1" ), nullptr );
 
 	H::ModelRender->UnHook();
 	H::VPanel->UnHook();

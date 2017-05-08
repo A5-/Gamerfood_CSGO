@@ -18,4 +18,3 @@ private:
 	//int m_fbestfov;
 	//int m_ibesttarget;
 };
-

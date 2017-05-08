@@ -1,6 +1,7 @@
 #include "Cheat.h"
 
 PaintTraverseFn oPaintTraverse;
+
 void __stdcall Hooks::PaintTraverse( unsigned int panel, bool forceRepaint, bool allowForce )
 {
 	oPaintTraverse( panel, forceRepaint, allowForce );
@@ -13,8 +14,8 @@ void __stdcall Hooks::PaintTraverse( unsigned int panel, bool forceRepaint, bool
 		if( panelname[ 0 ] == 'M' && panelname[ 2 ] == 't' )
 			drawPanel = panel;
 	}
-		
-	if ( panel != drawPanel )
+
+	if( panel != drawPanel )
 		return;
 
 	// dumb fix so we can have no visuals but still see the menu

@@ -1,6 +1,6 @@
 #pragma once
 
-template <typename T>
+template< typename T >
 class ConfigItem
 {
 	std::string category, name;
@@ -14,7 +14,7 @@ public:
 	}
 };
 
-template <typename T>
+template< typename T >
 class ConfigValue
 {
 public:
@@ -32,9 +32,9 @@ public:
 class CConfig
 {
 protected:
-	std::vector<ConfigValue<int>*> ints;
-	std::vector<ConfigValue<bool>*> bools;
-	std::vector<ConfigValue<float>*> floats;
+	std::vector< ConfigValue< int >* > ints;
+	std::vector< ConfigValue< bool >* > bools;
+	std::vector< ConfigValue< float >* > floats;
 private:
 	void SetupValue( int&, int, std::string, std::string );
 	void SetupValue( bool&, bool, std::string, std::string );

@@ -5,7 +5,7 @@ class VTHook
 public:
 	VTHook()
 	{
-		memset( this, 0, sizeof( VTHook ) );
+		memset( this, 0, sizeof( VTHook) );
 	}
 
 	VTHook( PDWORD* ppdwClassBase )
@@ -24,10 +24,11 @@ public:
 		m_OldVT = *ppdwClassBase;
 		m_VTSize = GetVTCount( *ppdwClassBase );
 		m_NewVT = new DWORD[ m_VTSize ];
-		memcpy( m_NewVT, m_OldVT, sizeof( DWORD ) * m_VTSize );
+		memcpy( m_NewVT, m_OldVT, sizeof( DWORD) * m_VTSize );
 		*ppdwClassBase = m_NewVT;
 		return true;
 	}
+
 	bool bInitialize( PDWORD** pppdwClassBase ) // fix for pp
 	{
 		return bInitialize( *pppdwClassBase );
@@ -93,7 +94,8 @@ private:
 		}
 		return dwIndex;
 	}
-	PDWORD*	m_ClassBase;
-	PDWORD	m_NewVT, m_OldVT;
-	DWORD	m_VTSize;
+
+	PDWORD* m_ClassBase;
+	PDWORD m_NewVT, m_OldVT;
+	DWORD m_VTSize;
 };
