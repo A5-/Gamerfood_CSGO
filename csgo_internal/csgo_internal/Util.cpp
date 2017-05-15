@@ -15,7 +15,7 @@ void U::SetupInterfaces()
 	I::Engine = U::CaptureInterface< IEngineClient >( strenc( "engine.dll" ), strenc( "VEngineClient014" ) );
 	I::EngineTrace = U::CaptureInterface< IEngineTrace >( strenc( "engine.dll" ), strenc( "EngineTraceClient004" ) );
 	I::InputSystem = U::CaptureInterface< IInputSystem >( strenc( "inputsystem.dll" ), strenc( "InputSystemVersion001" ) );
-	I::Globals = **( IGlobalVarsBase*** ) ( ( *( DWORD** ) I::Client )[ 0 ] + 0x53 );
+	I::Globals = **( IGlobalVarsBase*** ) ( ( *( DWORD** ) I::Client )[0] + 0x1B );
 	I::Surface = U::CaptureInterface< ISurface >( strenc( "vguimatsurface.dll" ), strenc( "VGUI_Surface031" ) );
 	I::VPanel = U::CaptureInterface< IVPanel >( strenc( "vgui2.dll" ), strenc( "VGUI_Panel009" ) );
 	I::RenderView = U::CaptureInterface< IVRenderView >( strenc( "engine.dll" ), strenc( "VEngineRenderView014" ) );
