@@ -60,10 +60,9 @@ void Offsets::GrabOffsets()
 	offsets.m_iItemDefinitionIndex = U::NetVars->GetOffset( charenc( "DT_BaseAttributableItem" ), charenc( "m_iItemDefinitionIndex" ) );
 
 	offsets.CalcPlayerView = U::FindPattern( strenc( "client.dll" ), strenc( " 84 C0 75 08 57 8B CE E8 ?? ?? ?? ?? 8B 06" ) );
-	offsets.GlowManager = *( DWORD* )( U::FindPattern( strenc( "client.dll" ), strenc( "F3 ?? ?? ?? ?? ?? ?? ?? 83 C8 01 C7 05" ) ) + 0x4 );
+	offsets.GlowManager = *(DWORD *)(U::FindPattern(("client.dll"), ("0F 11 05 ?? ?? ?? ?? 83 C8 01 C7 05 ?? ?? ?? ?? 00 00 00 00")) + 3);
 	offsets.d3d9Device = **( DWORD** )( U::FindPattern( strenc( "shaderapidx9.dll" ), strenc( "A1 ?? ?? ?? ?? 50 8B 08 FF 51 0C" ) ) + 1 );
 	offsets.LoadFromBufferEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 34 53 8B 5D 0C 89 4C 24 04" ) );
 	offsets.InitKeyValuesEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 51 33 C0 C7 45" ) );
 	offsets.ServerRankRevealAllEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 8B 0D ? ? ? ? 68 ? ? ? ? " ) );
-	offsets.IsReadyEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 51 56 8B 35 ? ? ? ? 80 7E 58 00" ) );
-}
+	offsets.IsReadyEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 08 56 8B 35 ? ? ? ? 57 8B 8E ? ? ? ?" ) );
