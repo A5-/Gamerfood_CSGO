@@ -10,7 +10,8 @@ void __stdcall Hooks::FrameStageNotify( ClientFrameStage_t stage )
 	QAngle* aim_punch = nullptr;
 	QAngle* view_punch = nullptr;
 
-	if (I::Engine->IsInGame()) {
+	if (I::Engine->IsInGame()) 
+	{
 		if (stage == FRAME_RENDER_START && Vars.Visuals.Removals.VisualRecoil)
 		{
 			if (G::LocalPlayer && G::LocalPlayer->GetAlive())
@@ -34,10 +35,11 @@ void __stdcall Hooks::FrameStageNotify( ClientFrameStage_t stage )
 				CBaseEntity* pCurEntity = I::ClientEntList->GetClientEntity(i);
 				if (!pCurEntity) continue;
 
-				*(int*)((uintptr_t)pCurEntity + 0xA30) = I::Globals ->framecount; //we'll skip occlusion checks now
-				*(int*)((uintptr_t)pCurEntity + 0xA28) = 0;//clear occlusion flags
+				*(int*)((uintptr_t)pCurEntity + 0xA30) = I::Globals ->framecount;
+				*(int*)((uintptr_t)pCurEntity + 0xA28) = 0;
 			}
 		}
+	}	
 
 	oFrameStageNotify( stage );
 
