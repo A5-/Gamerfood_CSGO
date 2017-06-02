@@ -66,3 +66,4 @@ void Offsets::GrabOffsets()
 	offsets.InitKeyValuesEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 51 33 C0 C7 45" ) );
 	offsets.ServerRankRevealAllEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 8B 0D ? ? ? ? 68 ? ? ? ? " ) );
 	offsets.IsReadyEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 08 56 8B 35 ? ? ? ? 57 8B 8E ? ? ? ?" ) );
+}
