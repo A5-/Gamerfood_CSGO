@@ -144,7 +144,7 @@ void CLegitBot::Triggerbot()
 	viewangle += G::LocalPlayer->GetPunch() * 2.f;
 
 	M::AngleVectors( viewangle, &forward );
-	forward *= G::LocalPlayer->GetWeapon()->GetCSWpnData()->m_flRange;
+	forward *= G::LocalPlayer->GetWeapon()->GetCSWpnData()->flRange;
 	filter.pSkip = G::LocalPlayer;
 	src = G::LocalPlayer->GetEyePosition();
 	dst = src + forward;
