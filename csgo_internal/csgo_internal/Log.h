@@ -4,7 +4,7 @@
 
 //#define LOG_ENABLED
 
-#ifndef LOG_ENABLED
+#ifdef LOG_ENABLED
 #define LOG_INIT Log::init()
 #define LOG_FREE Log::free()
 #define LOG(...) Log::Log(__FUNCTION__, __VA_ARGS__)
