@@ -125,7 +125,7 @@ void CNetVarManager::DumpTable( RecvTable* table, int depth )
 	}
 }
 
-void CNetVarManager::DumpNetvars( std::string path )
+void CNetVarManager::DumpNetvars()
 {
 	m_file.open( "C:/Users/Admin/Desktop/netdump.txt" );
 	m_file << strenc( "NetVar Dump by A5 / teamgamerfood\n\nhaha look proper formatting \n\n" );
