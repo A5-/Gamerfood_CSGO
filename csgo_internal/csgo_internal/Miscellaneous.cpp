@@ -142,4 +142,6 @@ void CMiscellaneous::Panic()
 	//H::StudioRender->UnHook();
 	H::D3D9->UnHook();
 	SetWindowLongPtr( G::Window, GWL_WNDPROC, ( LONG_PTR )Hooks::oldWindowProc );
+
+    LOG_FREE;
 }

@@ -15,3 +15,4 @@
 #include "Autowall.h"
 #include "AntiAim.h"
 #include "GlowManager.h"
+#include "Log.h"

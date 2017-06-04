@@ -285,6 +285,9 @@
     <ClInclude Include="AntiAim.h">
       <Filter>Header Files\Cheat\RageHelpers</Filter>
     </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files\Cheat\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

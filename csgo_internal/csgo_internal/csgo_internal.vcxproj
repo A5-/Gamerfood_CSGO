@@ -168,6 +168,7 @@
     <ClInclude Include="IVModelRender.h" />
     <ClInclude Include="IVPanel.h" />
     <ClInclude Include="LegitBot.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Misc.h" />

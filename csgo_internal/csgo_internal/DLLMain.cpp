@@ -2,6 +2,8 @@
 
 void CheatThread()
 {
+    LOG_INIT;
+
 	U::Setup();
 
 	// loop for functions/features that are not needed in a hooked function

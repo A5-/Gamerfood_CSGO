@@ -51,7 +51,7 @@ DWORD U::FindPattern( std::string moduleName, std::string pattern )
 			if( !pat[ 2 ] )
 				return firstMatch;
 
-			if( *( PWORD )pat == '\?\ ? ' || *( PBYTE )pat != '\ ? '  )
+			if( *( PWORD )pat == '\?\?' || *( PBYTE )pat != '\?' )
 				pat += 3;
 
 			else
@@ -160,13 +160,25 @@ void U::Setup()
 {
 	U::SetupInterfaces();
 
+    LOG("Interfaces setup!");
+
 	U::SetupOffsets();
+
+    LOG("Offsets setup!");
 
 	D::SetupFonts();
 
+    LOG("Fonts setup!");
+
 	U::SetupTextures();
+
+    LOG("Textures setup!");
 
 	U::SetupHooks();
 
+    LOG("Hooks setup!");
+
 	Config->Load();
+
+    LOG("Config Loaded!");
 }
