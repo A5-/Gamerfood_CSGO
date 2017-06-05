@@ -44,6 +44,20 @@ void CVisuals::PlayerESP( int index )
 {
 	CBaseEntity* Entity = I::ClientEntList->GetClientEntity( index );
 
+	if (Entity && Vars.Visuals.Info.Name)
+		if (Entity->GetClientClass()->m_ClassID == 85)
+		{
+			if (Entity->GetDormant())
+				return;
+
+			Vector Origin, Screen;
+			Origin = Entity->GetOrigin() + Vector(0, 0, Entity->GetCollideable()->OBBMaxs().z);
+			if (D::WorldToScreen(Origin, Screen))
+				D::DrawString(F::ESP, Screen.x, Screen.y, Color::Green(), FONT_CENTER, charenc("Hostage"));
+			
+			return;
+		}
+	
 	if( EntityIsInvalid( Entity ) )
 		return;
 
@@ -86,14 +100,6 @@ void CVisuals::PlayerESP( int index )
 
 	float height = ( pos.y - top.y );
 	float width = height / 4.f;
-
-	if( Entity->GetClientClass()->m_ClassID == 85 ) // CHostage ClassID - Thx
-	{
-		if( Vars.Visuals.Info.Name )
-			D::DrawString( F::ESP, top.x, top.y + 3, Color::Green(), FONT_CENTER, charenc("Hostage") );
-
-		return;
-	}
 
 	if( Vars.Visuals.Skeleton )
 		Skeleton( Entity, Color::White() );
