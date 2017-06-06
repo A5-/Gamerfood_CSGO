@@ -27,15 +27,15 @@ bool __stdcall Hooks::CreateMove( float flInputSampleTime, CUserCmd* cmd )
 
 	E::LegitBot->Run();
 
-	if( Vars.Ragebot.Enabled )
-		E::RageBot->Run();
-
 	if( Vars.Misc.Bhop )
 		E::Misc->Bunnyhop();
 
 	if( Vars.Misc.AutoStrafe )
 		E::Misc->AutoStrafe();
 
+	if( Vars.Ragebot.Enabled )
+		E::RageBot->Run();
+	
 	if( Vars.Misc.AirStuck )
 		E::Misc->AirStuck();
 
