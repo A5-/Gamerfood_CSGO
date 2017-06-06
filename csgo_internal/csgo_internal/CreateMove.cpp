@@ -12,11 +12,8 @@ bool __stdcall Hooks::CreateMove( float flInputSampleTime, CUserCmd* cmd )
 	else if( Vars.Legitbot.Aimbot.Enabled )
 		Vars.Ragebot.Enabled = false;
 
-	if( cmd->command_number == 0 || !I::Engine->IsInGame() )
+	if( cmd->command_number == 0 )
 		return false;
-
-	if( !G::LocalPlayer || !G::LocalPlayer->GetAlive() )
-		return G::Return;
 
 	DWORD* framePointer;
 	__asm mov framePointer, ebp;
