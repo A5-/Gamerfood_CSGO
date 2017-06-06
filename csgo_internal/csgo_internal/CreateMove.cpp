@@ -45,8 +45,10 @@ bool __stdcall Hooks::CreateMove( float flInputSampleTime, CUserCmd* cmd )
 	if( Vars.Visuals.Removals.VisualRecoil && Vars.Legitbot.Aimbot.RCS && Vars.Legitbot.Aimbot.Enabled )
 		return false;
 
-	if( ( !Vars.Ragebot.Silent && Vars.Ragebot.Enabled ) )
-		I::Engine->SetViewAngles( G::UserCmd->viewangles );
+	if (Vars.Ragebot.Enabled && Vars.Ragebot.Silent)
+		return false;
 
+	I::Engine->SetViewAngles( G::UserCmd->viewangles );
+	
 	return false;
 }
