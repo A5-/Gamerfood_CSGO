@@ -15,15 +15,12 @@ void D::SetupFonts()
 void D::DrawString( HFont font, int x, int y, Color color, DWORD alignment, const char* msg, ... )
 {
 	va_list va_alist;
-	char buf[1024];
+	static char buf[1024];
 	va_start( va_alist, msg );
 	_vsnprintf( buf, sizeof( buf ), msg, va_alist );
 	va_end( va_alist );
-	wchar_t wbuf[1024];
+	static wchar_t wbuf[1024];
 	MultiByteToWideChar( CP_UTF8, 0, buf, 256, wbuf, 256 );
-
-	int r = 255, g = 255, b = 255, a = 255;
-	color.GetColor( r, g, b, a );
 
 	int width, height;
 	I::Surface->GetTextSize( font, wbuf, width, height );
@@ -34,21 +31,17 @@ void D::DrawString( HFont font, int x, int y, Color color, DWORD alignment, cons
 		x -= width / 2;
 
 	I::Surface->DrawSetTextFont( font );
-	I::Surface->DrawSetTextColor( r, g, b, a );
+	I::Surface->DrawSetTextColor( color );
 	I::Surface->DrawSetTextPos( x, y - height / 2 );
 	I::Surface->DrawPrintText( wbuf, wcslen( wbuf ) );
 }
 
 void D::DrawStringUnicode( HFont font, int x, int y, Color color, bool bCenter, const wchar_t* msg, ... )
 {
-	int r = 255, g = 255, b = 255, a = 255;
-	color.GetColor( r, g, b, a );
-
 	int iWidth, iHeight;
-
 	I::Surface->GetTextSize( font, msg, iWidth, iHeight );
 	I::Surface->DrawSetTextFont( font );
-	I::Surface->DrawSetTextColor( r, g, b, a );
+	I::Surface->DrawSetTextColor( color );
 	I::Surface->DrawSetTextPos( !bCenter ? x : x - iWidth / 2, y - iHeight / 2 );
 	I::Surface->DrawPrintText( msg, wcslen( msg ) );
 }
@@ -182,8 +175,10 @@ void D::DrawRoundedBox( int x, int y, int w, int h, int r, int v, Color col )
 
 bool D::ScreenTransform( const Vector& point, Vector& screen ) // tots not pasted
 {
+	static VMatrix worldToScreen;
+	
 	float w;
-	const VMatrix& worldToScreen = I::Engine->WorldToScreenMatrix();
+	worldToScreen = I::Engine->WorldToScreenMatrix();
 
 	screen.x = worldToScreen[ 0 ][ 0 ] * point[ 0 ] + worldToScreen[ 0 ][ 1 ] * point[ 1 ] + worldToScreen[ 0 ][ 2 ] * point[ 2 ] + worldToScreen[ 0 ][ 3 ];
 	screen.y = worldToScreen[ 1 ][ 0 ] * point[ 0 ] + worldToScreen[ 1 ][ 1 ] * point[ 1 ] + worldToScreen[ 1 ][ 2 ] * point[ 2 ] + worldToScreen[ 1 ][ 3 ];
@@ -230,11 +225,11 @@ bool D::WorldToScreen( const Vector& origin, Vector& screen )
 int D::GetStringWidth( HFont font, const char* msg, ... )
 {
 	va_list va_alist;
-	char buf[1024];
+	static char buf[1024];
 	va_start( va_alist, msg );
 	_vsnprintf( buf, sizeof( buf ), msg, va_alist );
 	va_end( va_alist );
-	wchar_t wbuf[1024];
+	static wchar_t wbuf[1024];
 	MultiByteToWideChar( CP_UTF8, 0, buf, 256, wbuf, 256 );
 
 	int iWidth, iHeight;
@@ -246,7 +241,7 @@ int D::GetStringWidth( HFont font, const char* msg, ... )
 
 void D::Draw3DBox( Vector* boxVectors, Color color )
 {
-	Vector boxVectors0, boxVectors1, boxVectors2, boxVectors3,
+	static Vector boxVectors0, boxVectors1, boxVectors2, boxVectors3,
 	       boxVectors4, boxVectors5, boxVectors6, boxVectors7;
 
 	if( D::WorldToScreen( boxVectors[ 0 ], boxVectors0 ) &&

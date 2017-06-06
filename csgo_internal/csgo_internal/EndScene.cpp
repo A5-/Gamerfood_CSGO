@@ -268,6 +268,7 @@ long __stdcall Hooks::EndScene( IDirect3DDevice9* pDevice )
 }
 
 ResetFn oReset;
+void D::SetupFonts(void);
 
 long __stdcall Hooks::Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentationParameters )
 {
@@ -275,9 +276,10 @@ long __stdcall Hooks::Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* p
 		return oReset( pDevice, pPresentationParameters );
 
 	ImGui_ImplDX9_InvalidateDeviceObjects();
-
 	auto hr = oReset( pDevice, pPresentationParameters );
 	ImGui_ImplDX9_CreateDeviceObjects();
+	
+	D::SetupFonts();
 
 	return hr;
 }

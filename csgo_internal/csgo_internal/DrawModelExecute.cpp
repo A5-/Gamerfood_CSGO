@@ -49,14 +49,25 @@ void __stdcall Hooks::DrawModelExecute( void* context, void* state, const ModelR
 				}
 			}
 
-			else if( modelName.find( strenc( "flash" ) ) != std::string::npos && Vars.Visuals.Removals.Flash )
+			else if( modelName.find( strenc( "flash" ) ) != std::string::npos )
 			{
-				IMaterial* flash = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
-				IMaterial* flashWhite = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang_white" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
-				flash->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
-				flashWhite->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
-				I::ModelRender->ForcedMaterialOverride( flash );
-				I::ModelRender->ForcedMaterialOverride( flashWhite );
+				if( Vars.Visuals.Removals.Flash )
+				{
+					IMaterial* flash = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
+					IMaterial* flashWhite = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang_white" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
+					flash->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
+					flashWhite->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
+					I::ModelRender->ForcedMaterialOverride( flash );
+					I::ModelRender->ForcedMaterialOverride( flashWhite );
+				}
+				
+				else
+				{
+					IMaterial* flash = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
+					IMaterial* flashWhite = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang_white" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
+					flash->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, false );
+					flashWhite->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, false );
+				}
 			}
 
 			else if( modelName.find( "arms" ) != std::string::npos && Vars.Visuals.Removals.Hands )
