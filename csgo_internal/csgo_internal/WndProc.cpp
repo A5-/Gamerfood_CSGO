@@ -59,6 +59,14 @@ LRESULT __stdcall Hooks::WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lP
 		case WM_KEYUP:
 			G::PressedKeys[ wParam ] = false;
 			break;
+		case WM_SYSKEYDOWN:
+			if (wParam == VK_MENU)
+				G::PressedKeys[VK_MENU] = true;
+			break;
+		case WM_SYSKEYUP:
+			if (wParam == VK_MENU)
+				G::PressedKeys[VK_MENU] = false;
+			break;
 		default: break;
 	}
 
