@@ -116,7 +116,7 @@ void CVisuals::PlayerESP( int index )
 		HealthBar( pos, top, Entity->GetHealth() );
 
 	if( Vars.Visuals.BulletTrace )
-		BulletTrace( Entity, Color( 200, 50, 50, 150 ) );
+		BulletTrace( Entity, Color( 200, 255, 50, 150 ) );
 
 	int bottom = 0;
 
@@ -201,7 +201,7 @@ void CVisuals::DrawGlow()
 
 			case 29:
 				if( Vars.Visuals.Filter.C4 )
-					glowEntity->set( Color( 84, 147, 230, 250 ) );
+					glowEntity->set( Color( 255, 147, 230, 250 ) );
 
 				break;
 
@@ -323,7 +323,7 @@ void CVisuals::Watermark()
 	rainbow += 0.005f;
 	if( rainbow > 1.f )
 		rainbow = 0.f;
-	D::DrawString( F::Watermark, 5, 11, Color::FromHSB( rainbow, 1.f, 1.f ), FONT_LEFT, "%s", charenc( "TEAMGAMERFOOD.COM" ) );
+	D::DrawString( F::Watermark, 5, 11, Color::FromHSB( rainbow, 1.f, 1.f ), FONT_LEFT, "%s", charenc( ">:(" ) );
 }
 
 void CVisuals::PlayerBox( float x, float y, float w, float h, Color clr )
