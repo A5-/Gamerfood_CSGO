@@ -1,5 +1,7 @@
 #pragma once
 
+#define INVALID_EHANDLE_INDEX	0xFFFFFFFF
+
 struct virtualmeshlist_t;
 
 class CBaseHandle
