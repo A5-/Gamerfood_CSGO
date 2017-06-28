@@ -45,6 +45,26 @@ protected:
 	unsigned long m_Index;
 };
 
+inline CBaseHandle::CBaseHandle()
+{
+	m_Index = INVALID_EHANDLE_INDEX;
+}
+
+inline CBaseHandle::CBaseHandle(const CBaseHandle &other)
+{
+	m_Index = other.m_Index;
+}
+
+inline CBaseHandle::CBaseHandle(unsigned long value)
+{
+	m_Index = value;
+}
+
+inline CBaseHandle::CBaseHandle(int iEntry, int iSerialNumber)
+{
+	Init(iEntry, iSerialNumber);
+}
+
 class ITraceListData
 {
 public:
