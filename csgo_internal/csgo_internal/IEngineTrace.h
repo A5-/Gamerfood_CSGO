@@ -1,5 +1,7 @@
 #pragma once
 
+#define INVALID_EHANDLE_INDEX	0xFFFFFFFF
+
 struct virtualmeshlist_t;
 
 class CBaseHandle
@@ -44,6 +46,26 @@ protected:
 	// The high NUM_SERIAL_NUM_BITS bits are the serial number.
 	unsigned long m_Index;
 };
+
+inline CBaseHandle::CBaseHandle()
+{
+	m_Index = INVALID_EHANDLE_INDEX;
+}
+
+inline CBaseHandle::CBaseHandle(const CBaseHandle &other)
+{
+	m_Index = other.m_Index;
+}
+
+inline CBaseHandle::CBaseHandle(unsigned long value)
+{
+	m_Index = value;
+}
+
+inline CBaseHandle::CBaseHandle(int iEntry, int iSerialNumber)
+{
+	Init(iEntry, iSerialNumber);
+}
 
 class ITraceListData
 {
