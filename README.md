@@ -6,3 +6,4 @@ Please open issues to of found ones so I can link them in here
 
 * http://hattrick.go.ro
 * https://bitwise.systems/store/product/2-csgo-internal/
+* http://beardhook.xyz/
