@@ -49,13 +49,13 @@ const char* chatspamMode[] =
 
 const char* aimBones[] =
 {
-	"Pelvis",
-	"Lower Body",
-	"Crotch",
+	"Lower Stomach",
+	"Feet",
+	"Head",
 	"Stomach",
-	"Chest",
-	"Neck",
-	"Head"
+	"Higher Stomach",
+	"Lower Chest",
+	"Chest"
 };
 
 const char* targetMode[] =
