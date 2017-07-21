@@ -67,6 +67,42 @@ inline CBaseHandle::CBaseHandle(int iEntry, int iSerialNumber)
 	Init(iEntry, iSerialNumber);
 }
 
+inline bool CBaseHandle::operator !=(const CBaseHandle &other) const
+{
+	return m_Index != other.m_Index;
+}
+
+inline bool CBaseHandle::operator ==(const CBaseHandle &other) const
+{
+	return m_Index == other.m_Index;
+}
+
+inline bool CBaseHandle::operator ==(const IHandleEntity* pEnt) const
+{
+	return Get() == pEnt;
+}
+
+inline bool CBaseHandle::operator !=(const IHandleEntity* pEnt) const
+{
+	return Get() != pEnt;
+}
+
+inline bool CBaseHandle::operator <(const CBaseHandle &other) const
+{
+	return m_Index < other.m_Index;
+}
+
+/* inline bool CBaseHandle::operator <(const IHandleEntity *pEntity) const
+{
+	unsigned long otherIndex = (pEntity) ? pEntity->GetRefEHandle().m_Index : INVALID_EHANDLE_INDEX;
+	return m_Index < otherIndex;
+}*/
+
+inline const CBaseHandle& CBaseHandle::operator=(const IHandleEntity *pEntity)
+{
+	return Set(pEntity);
+}
+
 class ITraceListData
 {
 public:
