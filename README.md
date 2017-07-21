@@ -5,5 +5,6 @@ Fully featured CSGO cheat by Team Gamerfood
 Please open issues of found ones so I can link them in here
 
 * http://hattrick.go.ro
-* https://bitwise.systems/store/product/2-csgo-internal/
+* http://bitwise.systems/store/product/2-csgo-internal/
 * http://beardhook.xyz/
+* http://virtuouscheats.com
