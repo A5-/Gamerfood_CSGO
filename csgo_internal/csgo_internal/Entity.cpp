@@ -334,11 +334,10 @@ float& CBaseCombatWeapon::GetFallbackWear()
 
 WeaponInfo_t* CBaseCombatWeapon::GetCSWpnData()
 {
-	if( !this )
-		return nullptr;
-
+	if( !this ) return nullptr;
 	typedef WeaponInfo_t*( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc< OriginalFn >( this, 456 )( this );
+	return U::GetVFunc<OriginalFn>(this, 446)(this);
+	//return U::GetVFunc<OriginalFn>( this, 456 )( this ); //Wrong since update 18.08.17 
 }
 
 bool CBaseCombatWeapon::IsEmpty()
@@ -360,20 +359,17 @@ void CBaseCombatWeapon::UpdateAccuracyPenalty()
 
 float CBaseCombatWeapon::GetWeaponCone()
 {
-	if( !this )
-		return 0.f;
-
+	if( !this ) return 0.f;
 	typedef float ( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc< OriginalFn >( this, 478 )( this );
+	return U::GetVFunc< OriginalFn >( this, 478 )( this ); //What do we miss here?
 }
 
 float CBaseCombatWeapon::GetWeaponSpread()
 {
-	if( !this )
-		return 0.f;
-
-	typedef float ( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc< OriginalFn >( this, 479 )( this );
+	if( !this ) return 0.f;
+	typedef float( __thiscall* OriginalFn )( void* );
+	return U::GetVFunc<OriginalFn>( this, 439 )( this );
+	//return U::GetVFunc<OriginalFn>( this, 479 )( this ); //Wrong since update 18.08.17 
 }
 
 bool CBaseCombatWeapon::IsGun()
