@@ -8,3 +8,4 @@ Please open issues of found ones so I can link them in here
 * http://bitwise.systems/store/product/2-csgo-internal/
 * http://beardhook.xyz/
 * http://virtuouscheats.com
+* https://www.unknowncheats.me/forum/cs-go-releases/229403-beardhook-selfleaked.html
