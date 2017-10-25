@@ -85,12 +85,8 @@ private:
 	{
 		DWORD dwIndex = 0;
 
-		for( dwIndex = 0; pdwVMT[ dwIndex ]; dwIndex++ )
-		{
-			if( IsBadCodePtr( ( FARPROC )pdwVMT[ dwIndex ] ) )
-			{
-				break;
-			}
+		while (IsBadCodePtr((FARPROC)pdwVMT[dwIndex]) == false) {
+			dwIndex++;
 		}
 		return dwIndex;
 	}
