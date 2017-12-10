@@ -83,7 +83,7 @@ bool CAutowall::HandleBulletPenetration( WeaponInfo_t* wpn_data, FireBulletData&
 {
 	surfacedata_t* enter_surface_data = I::Physprops->GetSurfaceData( data.enter_trace.surface.surfaceProps );
 	int enter_material = enter_surface_data->game.material;
-	float enter_surf_penetration_mod = *( float* )( ( DWORD )enter_surface_data + 76 );
+	float enter_surf_penetration_mod = *( float* )( ( DWORD )enter_surface_data + 88 );
 
 	data.trace_length += data.enter_trace.fraction * data.trace_length_remaining;
 	data.current_damage *= pow( ( wpn_data->flRangeModifier ), ( data.trace_length * 0.002 ) );
