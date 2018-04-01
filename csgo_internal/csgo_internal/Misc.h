@@ -2133,6 +2133,7 @@ struct ModelRenderInfo_t
 {
 	Vector origin;
 	QAngle angles;
+	char pad0[0x04];
 	void* pRenderable;
 	const model_t* pModel;
 	const matrix3x4_t* pModelToWorld;
