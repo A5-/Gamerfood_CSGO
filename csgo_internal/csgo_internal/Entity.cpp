@@ -336,7 +336,7 @@ WeaponInfo_t* CBaseCombatWeapon::GetCSWpnData()
 {
 	if( !this ) return nullptr;
 	typedef WeaponInfo_t*( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>(this, 446)(this);
+	return U::GetVFunc<OriginalFn>(this, 447)(this);
 	//return U::GetVFunc<OriginalFn>( this, 456 )( this ); //Wrong since update 18.08.17 
 }
 
