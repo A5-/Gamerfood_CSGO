@@ -336,8 +336,7 @@ WeaponInfo_t* CBaseCombatWeapon::GetCSWpnData()
 {
 	if( !this ) return nullptr;
 	typedef WeaponInfo_t*( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>(this, 447)(this);
-	//return U::GetVFunc<OriginalFn>( this, 456 )( this ); //Wrong since update 18.08.17 
+	return U::GetVFunc<OriginalFn>(this, 445)(this);
 }
 
 bool CBaseCombatWeapon::IsEmpty()
@@ -361,15 +360,14 @@ float CBaseCombatWeapon::GetWeaponCone()
 {
 	if( !this ) return 0.f;
 	typedef float ( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc< OriginalFn >( this, 478 )( this ); //What do we miss here?
+	return U::GetVFunc< OriginalFn >( this, 478 )( this );
 }
 
 float CBaseCombatWeapon::GetWeaponSpread()
 {
 	if( !this ) return 0.f;
 	typedef float( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>( this, 439 )( this );
-	//return U::GetVFunc<OriginalFn>( this, 479 )( this ); //Wrong since update 18.08.17 
+	return U::GetVFunc<OriginalFn>( this, 437 )( this );
 }
 
 bool CBaseCombatWeapon::IsGun()
@@ -378,7 +376,6 @@ bool CBaseCombatWeapon::IsGun()
 		return false;
 
 	int id = this->GetWeaponID();
-	//If your aimbot is broken, this is the reason. Just an FYI.
 
 	switch( id )
 	{
