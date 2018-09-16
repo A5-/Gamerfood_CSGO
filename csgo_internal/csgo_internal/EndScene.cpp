@@ -282,6 +282,22 @@ long __stdcall Hooks::Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* p
 	return hr;
 }
 
+LockCursorFn oLockCursor;
+
+void __stdcall Hooks::LockCursor( )
+{
+    if (Vars.Menu.Opened)
+    {
+        I::Surface->UnlockCursor();
+        I::InputSystem->EnableInput(false);
+
+        return;
+    }
+    else
+        I::InputSystem->EnableInput(true);
+    oLockCursor();
+}
+
 void GUI_Init( IDirect3DDevice9* pDevice )
 {
 	ImGui_ImplDX9_Init( G::Window, pDevice );

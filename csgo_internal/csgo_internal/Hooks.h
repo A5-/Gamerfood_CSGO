@@ -30,6 +30,9 @@ extern ResetFn oReset;
 using OverrideMouseInputFn = void( __stdcall*)( float* pX, float* pY );
 extern OverrideMouseInputFn oOverrideMouseInput;
 
+using LockCursorFn = void( __stdcall*)( );
+extern LockCursorFn oLockCursor;
+
 namespace Hooks
 {
 	extern bool __stdcall CreateMove( float flInputSampleTime, CUserCmd* cmd );
@@ -40,6 +43,7 @@ namespace Hooks
 	extern void __stdcall PlaySound_CSGO( const char* fileName );
 	extern long __stdcall EndScene( IDirect3DDevice9* pDevice );
 	extern long __stdcall Reset( IDirect3DDevice9* pDevice, D3DPRESENT_PARAMETERS* pPresentationParameters );
+    extern void __stdcall LockCursor( );
 
 	extern WNDPROC oldWindowProc;
 	extern LRESULT __stdcall WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam );

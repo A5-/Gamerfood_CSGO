@@ -13,9 +13,6 @@ void CheatThread()
 		{
 			if( Vars.Misc.ChatSpam )
 				E::Misc->Chatspam();
-
-			if( Vars.Misc.Ranks && G::PressedKeys[ VK_TAB ] )
-				U::ServerRankRevealAll();
 		}
 
 		Sleep( 1 );

@@ -272,9 +272,9 @@ int CBaseEntity::GetCollisionGroup()
 	return *( int* ) ( ( DWORD )this + offsets.m_CollisionGroup );
 }
 
-int& CBaseCombatWeapon::GetWeaponID()
+short& CBaseCombatWeapon::GetWeaponID()
 {
-	return *( int* ) ( ( DWORD )this + offsets.m_iWeaponID );
+	return *( short* ) ( ( DWORD )this + offsets.m_iWeaponID );
 }
 
 float& CBaseCombatWeapon::GetNextPrimaryAttack()
@@ -336,7 +336,7 @@ WeaponInfo_t* CBaseCombatWeapon::GetCSWpnData()
 {
 	if( !this ) return nullptr;
 	typedef WeaponInfo_t*( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>(this, 445)(this);
+	return U::GetVFunc<OriginalFn>(this, 444)(this);
 }
 
 bool CBaseCombatWeapon::IsEmpty()
@@ -352,15 +352,15 @@ bool CBaseCombatWeapon::IsReloading()
 
 void CBaseCombatWeapon::UpdateAccuracyPenalty()
 {
-	typedef void ( __thiscall *FunctionFn )( void* );
-	reinterpret_cast< FunctionFn >( *reinterpret_cast< PDWORD >( *reinterpret_cast< PDWORD >( this ) + 0x748 ) )( ( void* )this );
+    typedef void(__thiscall* OriginalFn)(void*);
+    U::GetVFunc<OriginalFn>(this, 468)(this);
 }
 
 float CBaseCombatWeapon::GetWeaponCone()
 {
 	if( !this ) return 0.f;
 	typedef float ( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc< OriginalFn >( this, 478 )( this );
+	return U::GetVFunc< OriginalFn >( this, 475 )( this );
 }
 
 float CBaseCombatWeapon::GetWeaponSpread()
@@ -375,7 +375,7 @@ bool CBaseCombatWeapon::IsGun()
 	if( !this )
 		return false;
 
-	int id = this->GetWeaponID();
+	short id = this->GetWeaponID();
 
 	switch( id )
 	{
@@ -393,6 +393,7 @@ bool CBaseCombatWeapon::IsGun()
 		case WEAPON_M4A1:
 		case WEAPON_MAC10:
 		case WEAPON_P90:
+        case WEAPON_MP5:
 		case WEAPON_UMP45:
 		case WEAPON_XM1014:
 		case WEAPON_BIZON:
@@ -437,7 +438,7 @@ std::string CBaseCombatWeapon::GetWeaponName()
 	if( !this )
 		return "";
 
-	int id = this->GetWeaponID();
+	short id = this->GetWeaponID();
 
 	switch( id )
 	{
@@ -527,6 +528,8 @@ std::string CBaseCombatWeapon::GetWeaponName()
 			return strenc( "CZ75-Auto" );
 		case WEAPON_REVOLVER:
 			return strenc( "R8 Revolver" );
+        case WEAPON_MP5:
+            return strenc( "MP5" );
 		default:
 			return strenc( "Knife" );
 	}

@@ -50,4 +50,5 @@ public:
 	void GetTextSize( HFont font, const wchar_t* text, int& wide, int& tall );
 	void DrawOutlinedCircle( int x, int y, int radius, int segments );
 	void DrawTexturedPolygon( int n, Vertex_t* pVertice, bool bClipVertices = true );
+    void UnlockCursor() { typedef void( __thiscall* OriginalFn )( void* ); return U::GetVFunc< OriginalFn >( this, 66 )( this ); }
 };

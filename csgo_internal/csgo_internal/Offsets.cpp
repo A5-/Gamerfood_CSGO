@@ -59,11 +59,11 @@ void Offsets::GrabOffsets()
 	offsets.m_OriginalOwnerXuidHigh = U::NetVars->GetOffset( charenc( "DT_BaseAttributableItem" ), charenc( "m_OriginalOwnerXuidHigh" ) );
 	offsets.m_iItemDefinitionIndex = U::NetVars->GetOffset( charenc( "DT_BaseAttributableItem" ), charenc( "m_iItemDefinitionIndex" ) );
 
-	offsets.CalcPlayerView = U::FindPattern( strenc( "client.dll" ), strenc( " 84 C0 75 08 57 8B CE E8 ?? ?? ?? ?? 8B 06" ) );
-	offsets.GlowManager = *(DWORD *)(U::FindPattern(("client.dll"), ("0F 11 05 ?? ?? ?? ?? 83 C8 01 C7 05 ?? ?? ?? ?? 00 00 00 00")) + 3);
+	offsets.CalcPlayerView = U::FindPattern( strenc( "client_panorama.dll" ), strenc( " 84 C0 75 08 57 8B CE E8 ?? ?? ?? ?? 8B 06" ) );
+	offsets.GlowManager = *(DWORD *)(U::FindPattern(("client_panorama.dll"), ("0F 11 05 ?? ?? ?? ?? 83 C8 01 C7 05 ?? ?? ?? ?? 00 00 00 00")) + 3);
 	offsets.d3d9Device = **( DWORD** )( U::FindPattern( strenc( "shaderapidx9.dll" ), strenc( "A1 ?? ?? ?? ?? 50 8B 08 FF 51 0C" ) ) + 1 );
-	offsets.LoadFromBufferEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 34 53 8B 5D 0C 89 4C 24 04" ) );
-	offsets.InitKeyValuesEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 51 33 C0 C7 45" ) );
-	offsets.ServerRankRevealAllEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 8B 0D ? ? ? ? 68 ? ? ? ? " ) );
-	offsets.IsReadyEx = U::FindPattern( strenc( "client.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 08 56 8B 35 ? ? ? ? 57 8B 8E ? ? ? ?" ) );
+	offsets.LoadFromBufferEx = U::FindPattern( strenc( "client_panorama.dll" ), strenc( "02 7E 4E" ) ) - 0x3F;
+	offsets.InitKeyValuesEx = U::FindPattern( strenc( "client_panorama.dll" ), strenc( "55 8B EC 51 33 C0 C7 45" ) );
+	offsets.ServerRankRevealAllEx = U::FindPattern( strenc( "client_panorama.dll" ), strenc( "55 8B EC 8B 0D ? ? ? ? 85 C9 75 ? A1 ? ? ? ? 68 ? ? ? ? 8B 08 8B 01 FF 50 ? 85 C0 74 ? 8B C8 E8 ? ? ? ? 8B C8 EB ? 33 C9 89 0D ? ? ? ? 8B 45 ? FF 70 ? E8 ? ? ? ? B0 ? 5D" ) );
+	offsets.IsReadyEx = U::FindPattern( strenc( "client_panorama.dll" ), strenc( "55 8B EC 83 E4 F8 83 EC 08 56 8B 35 ? ? ? ? 57 8B 8E ? ? ? ?" ) );
 }

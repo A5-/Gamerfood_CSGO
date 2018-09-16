@@ -8,9 +8,9 @@ IsReadyFn U::IsReady;
 
 void U::SetupInterfaces()
 {
-	I::Client = U::CaptureInterface< IBaseClientDll >( strenc( "client.dll" ), strenc( "VClient018" ) );
+	I::Client = U::CaptureInterface< IBaseClientDll >( strenc( "client_panorama.dll" ), strenc( "VClient018" ) );
 	I::ClientMode = **( IClientModeShared*** ) ( ( *( DWORD** ) I::Client )[ 10 ] + 0x5 );
-	I::ClientEntList = U::CaptureInterface< IClientEntityList >( strenc( "client.dll" ), strenc( "VClientEntityList003" ) );
+	I::ClientEntList = U::CaptureInterface< IClientEntityList >( strenc( "client_panorama.dll" ), strenc( "VClientEntityList003" ) );
 	I::Cvar = U::CaptureInterface< ICVar >( strenc( "vstdlib.dll" ), strenc( "VEngineCvar007" ) );
 	I::Engine = U::CaptureInterface< IEngineClient >( strenc( "engine.dll" ), strenc( "VEngineClient014" ) );
 	I::EngineTrace = U::CaptureInterface< IEngineTrace >( strenc( "engine.dll" ), strenc( "EngineTraceClient004" ) );
@@ -23,7 +23,7 @@ void U::SetupInterfaces()
 	I::MaterialSystem = U::CaptureInterface< IMaterialSystem >( strenc( "materialsystem.dll" ), strenc( "VMaterialSystem080" ) );
 	I::vrtEffects = U::CaptureInterface< IVEffects >( strenc("engine.dll"), strenc("VEngineEffects001") );
 	I::ModelInfo = U::CaptureInterface< IVModelInfo >( strenc( "engine.dll" ), strenc( "VModelInfoClient004" ) );
-	I::Prediction = U::CaptureInterface< IPrediction >( strenc( "client.dll" ), strenc( "VClientPrediction001" ) );
+	I::Prediction = U::CaptureInterface< IPrediction >( strenc( "client_panorama.dll" ), strenc( "VClientPrediction001" ) );
 	I::Physprops = U::CaptureInterface< IPhysicsSurfaceProps >( strenc( "vphysics.dll" ), strenc( "VPhysicsSurfaceProps001" ) );
 	I::DebugOverlay = U::CaptureInterface< IVDebugOverlay >( strenc( "engine.dll" ), strenc( "VDebugOverlay004" ) );
 	I::StudioRender = U::CaptureInterface< IStudioRender >( strenc( "studiorender.dll" ), strenc( "VStudioRender026" ) );
@@ -135,11 +135,12 @@ void U::SetupHooks()
 	oPaintTraverse = ( PaintTraverseFn )H::VPanel->HookFunction( ( DWORD )Hooks::PaintTraverse, 41 );
 	oCreateMove = ( CreateMoveFn )H::ClientMode->HookFunction( ( DWORD )Hooks::CreateMove, 24 );
 	oOverrideView = ( OverrideViewFn )H::ClientMode->HookFunction( ( DWORD )Hooks::OverrideView, 18 );
-	oFrameStageNotify = ( FrameStageNotifyFn )H::Client->HookFunction( ( DWORD )Hooks::FrameStageNotify, 36 );
+	oFrameStageNotify = ( FrameStageNotifyFn )H::Client->HookFunction( ( DWORD )Hooks::FrameStageNotify, 37 );
 	oDrawModelExecute = ( DrawModelExecuteFn )H::ModelRender->HookFunction( ( DWORD )Hooks::DrawModelExecute, 21 );
 	oPlaySound = ( PlaySoundFn )H::Surface->HookFunction( ( DWORD )Hooks::PlaySound_CSGO, 82 );
 	oReset = ( ResetFn )H::D3D9->HookFunction( ( DWORD )Hooks::Reset, 16 );
 	oEndScene = ( EndSceneFn )H::D3D9->HookFunction( ( DWORD )Hooks::EndScene, 42 );
+    oLockCursor = ( LockCursorFn )H::Surface->HookFunction( ( DWORD )Hooks::LockCursor, 67 );
 }
 
 void U::SetupOffsets()
