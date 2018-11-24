@@ -58,7 +58,7 @@ bool CAutowall::DidHitNonWorldEntity( CBaseEntity* m_pEnt )
 bool CAutowall::TraceToExit( Vector& end, trace_t& tr, float x, float y, float z, float x2, float y2, float z2, trace_t* trace )
 {
 	typedef bool (__fastcall* TraceToExitFn)( Vector&, trace_t&, float, float, float, float, float, float, trace_t* );
-	static TraceToExitFn TraceToExit = ( TraceToExitFn )U::FindPattern( "client.dll", "55 8B EC 83 EC 30 F3 0F 10 75" );
+	static TraceToExitFn TraceToExit = ( TraceToExitFn )U::FindPattern( "client_panorama.dll", "55 8B EC 83 EC 30 F3 0F 10 75" );
 
 	if( !TraceToExit )
 		return false;

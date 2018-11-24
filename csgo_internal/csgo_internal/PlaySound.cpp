@@ -8,6 +8,8 @@ void __stdcall Hooks::PlaySound_CSGO( const char* fileName )
 {
 	oPlaySound( fileName );
 
+    return; //doesn't work in panorama anyways
+
     std::string file_name(fileName);
 
 	if( offsets.IsReadyEx == 0 

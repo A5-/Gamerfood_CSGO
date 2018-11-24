@@ -102,7 +102,5 @@ void OpenMenu()
 	if( is_clicked )
 	{
 		Vars.Menu.Opened = !Vars.Menu.Opened;
-		std::string msg = strenc( "cl_mouseenable " ) + std::to_string( !Vars.Menu.Opened );
-		I::Engine->ClientCmd_Unrestricted( msg.c_str(), nullptr );
 	}
 }

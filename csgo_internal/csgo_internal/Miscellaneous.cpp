@@ -119,6 +119,7 @@ void CMiscellaneous::ChangeName( const char* name )
 
 void CMiscellaneous::AirStuck()
 {
+    return; //patched
 	if( Vars.Ragebot.Enabled && G::UserCmd->buttons & IN_ATTACK )
 		return;
 
@@ -131,7 +132,6 @@ void CMiscellaneous::Panic()
 	if( !G::PressedKeys[ VK_END ] )
 		return;
 
-	I::Engine->ClientCmd_Unrestricted( charenc( "cl_mouseenable 1" ), nullptr );
 	I::Engine->ClientCmd_Unrestricted( charenc( "crosshair 1" ), nullptr );
 
 	H::ModelRender->UnHook();
@@ -142,6 +142,7 @@ void CMiscellaneous::Panic()
 	//H::StudioRender->UnHook();
 	H::D3D9->UnHook();
 	SetWindowLongPtr( G::Window, GWL_WNDPROC, ( LONG_PTR )Hooks::oldWindowProc );
-
+    Sleep( 1 );
+    FreeLibraryAndExitThread( G::Dll, 0 );
     LOG_FREE;
 }

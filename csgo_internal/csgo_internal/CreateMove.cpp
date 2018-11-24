@@ -24,6 +24,9 @@ bool __stdcall Hooks::CreateMove( float flInputSampleTime, CUserCmd* cmd )
 
 	E::LegitBot->Run();
 
+    if ( Vars.Misc.Ranks && G::PressedKeys[ VK_TAB ] ) //caused crashes outside the game thread
+        U::ServerRankRevealAll();
+
 	if( Vars.Misc.Bhop )
 		E::Misc->Bunnyhop();
 
