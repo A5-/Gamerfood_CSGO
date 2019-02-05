@@ -10,3 +10,4 @@ Please open issues of found ones so I can link them in here
 * http://virtuouscheats.com - virtuouscheats
 * https://www.unknowncheats.me/forum/cs-go-releases/229403-beardhook-selfleaked.html - beardhook
 * http://insomniac.pw - insomni.ac
+* https://penguware.xyz - penguware
