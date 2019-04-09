@@ -11,7 +11,7 @@ void Offsets::GrabOffsets()
 	offsets.m_ArmorValue = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_ArmorValue" ) );
 	offsets.m_bHasHelmet = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_bHasHelmet" ) );
 	offsets.m_iClass = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_iClass" ) );
-	offsets.m_bDormant = 0xE9;
+	offsets.m_bDormant = 0xED;
 	offsets.m_bGunGameImmunity = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_bGunGameImmunity" ) );
 	offsets.m_lifeState = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_lifeState" ) );
 	offsets.m_fFlags = U::NetVars->GetOffset( charenc( "DT_CSPlayer" ), charenc( "m_fFlags" ) );
