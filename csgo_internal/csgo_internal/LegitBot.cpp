@@ -42,7 +42,7 @@ void CLegitBot::FindTarget()
 {
 	m_fbestfov = Vars.Legitbot.Aimbot.FOV;
 
-	for( int i = 0; i <= I::Globals->maxClients; i++ )
+	for( int i = 1; i <= I::Globals->maxClients; i++ )
 	{
 		if( !EntityIsValid( i ) )
 			continue;

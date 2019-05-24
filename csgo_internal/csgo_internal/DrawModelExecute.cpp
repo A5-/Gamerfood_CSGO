@@ -23,38 +23,42 @@ void __stdcall Hooks::DrawModelExecute( void* context, void* state, const ModelR
 			if( modelName.find( strenc( "models/player" ) ) != std::string::npos && Vars.Visuals.Chams.Enabled )
 			{
 				CBaseEntity* pModelEntity = ( CBaseEntity* )I::ClientEntList->GetClientEntity( info.entity_index );
-				if( pModelEntity && pModelEntity->GetAlive() && !pModelEntity->GetDormant() )
-				{
-					Color render_color_hidden = pModelEntity->GetTeam() == G::LocalPlayer->GetTeam() ? Color( 72, 219, 75 ) : Color( 232, 209, 32 );
-					Color render_color_visible = pModelEntity->GetTeam() == G::LocalPlayer->GetTeam() ? Color( 84, 167, 255 ) : Color( 200, 60, 60 );
+                if ( pModelEntity && pModelEntity->GetAlive() && !pModelEntity->GetDormant() )
+                {
+                    bool IsFriendly = pModelEntity->GetTeam() == G::LocalPlayer->GetTeam();
+                    Color render_color_hidden = IsFriendly ? Color( 72, 219, 75 ) : Color( 232, 209, 32 );
+                    Color render_color_visible = IsFriendly ? Color( 84, 167, 255 ) : Color( 200, 60, 60 );
 
-					if( Vars.Visuals.Chams.XQZ )
-					{
-						ForceMaterial( Vars.Visuals.Chams.Mode == 0 ? hidden_flat : hidden_tex, render_color_hidden );
-						I::ModelRender->DrawModelExecute( context, state, info, pCustomBoneToWorld );
+                    if ( ( !IsFriendly && Vars.Visuals.Filter.Enemies ) || ( IsFriendly && Vars.Visuals.Filter.Friendlies ) )
+                    {
+                        if ( Vars.Visuals.Chams.XQZ )
+                        {
+                            ForceMaterial(Vars.Visuals.Chams.Mode == 0 ? hidden_flat : hidden_tex, render_color_hidden);
+                            I::ModelRender->DrawModelExecute(context, state, info, pCustomBoneToWorld);
 
-						if( Vars.Visuals.Chams.Mode == 0 )
-							hidden_flat->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, true );
-						else
-							hidden_tex->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, true );
-					}
+                            if ( Vars.Visuals.Chams.Mode == 0 )
+                                hidden_flat->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, true );
+                            else
+                                hidden_tex->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, true );
+                        }
 
-					if( Vars.Visuals.Chams.Mode == 0 )
-						visible_flat->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, false );
-					else
-						visible_tex->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, false );
+                        if ( Vars.Visuals.Chams.Mode == 0 )
+                            visible_flat->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, false );
+                        else
+                            visible_tex->SetMaterialVarFlag( MATERIAL_VAR_IGNOREZ, false );
 
-					ForceMaterial( Vars.Visuals.Chams.Mode == 0 ? visible_flat : visible_tex, render_color_visible );
-					I::ModelRender->DrawModelExecute( context, state, info, pCustomBoneToWorld );
-				}
+                        ForceMaterial(Vars.Visuals.Chams.Mode == 0 ? visible_flat : visible_tex, render_color_visible);
+                        I::ModelRender->DrawModelExecute(context, state, info, pCustomBoneToWorld);
+                    }
+                }
 			}
 
-			else if( modelName.find( strenc( "flash" ) ) != std::string::npos && Vars.Visuals.Removals.Flash )
+			else if( modelName.find( strenc( "flash" ) ) != std::string::npos )
 			{
 				IMaterial* flash = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
 				IMaterial* flashWhite = I::MaterialSystem->FindMaterial( charenc( "effects\\flashbang_white" ), charenc( TEXTURE_GROUP_CLIENT_EFFECTS ) );
-				flash->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
-				flashWhite->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, true );
+				flash->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, Vars.Visuals.Removals.Flash );
+				flashWhite->SetMaterialVarFlag( MATERIAL_VAR_NO_DRAW, Vars.Visuals.Removals.Flash );
 				I::ModelRender->ForcedMaterialOverride( flash );
 				I::ModelRender->ForcedMaterialOverride( flashWhite );
 			}

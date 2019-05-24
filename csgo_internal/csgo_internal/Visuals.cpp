@@ -33,7 +33,7 @@ void CVisuals::Run()
 
 	DrawGlow();
 
-	for( int i = 0; i < I::ClientEntList->GetHighestEntityIndex(); i++ )
+	for( int i = 1; i <= I::ClientEntList->GetHighestEntityIndex(); i++ )
 	{
 		PlayerESP( i );
 		WorldESP( i );
@@ -45,7 +45,7 @@ void CVisuals::PlayerESP( int index )
 	CBaseEntity* Entity = I::ClientEntList->GetClientEntity( index );
 
 	if (Entity && Vars.Visuals.Info.Name)
-		if (Entity->GetClientClass()->m_ClassID == 85)
+		if (Entity->GetClientClass()->m_ClassID == 97)
 		{
 			if (Entity->GetDormant())
 				return;
@@ -159,17 +159,17 @@ void CVisuals::WorldESP( int index )
 				D::DrawString( F::ESP, pos.x, pos.y, Color::White(), FONT_RIGHT, "%s", charenc( "AK-47" ) );
 			}
 
-			if( Entity->GetClientClass()->m_ClassID == 39 )
+			if( Entity->GetClientClass()->m_ClassID == 46 )
 			{
 				D::DrawString( F::ESP, pos.x, pos.y, Color::White(), FONT_RIGHT, "%s", charenc( "Deagle") );
 			}
 		}
 
-		if( Entity->GetClientClass()->m_ClassID == 29 && Vars.Visuals.Filter.C4 )
+		if( Entity->GetClientClass()->m_ClassID == 34 && Vars.Visuals.Filter.C4 )
 			D::DrawString( F::ESP, pos.x, pos.y, Color::LightBlue(), FONT_RIGHT, "%s", charenc( "C4" ) );
 	}
 
-	if( Entity->GetClientClass()->m_ClassID == 41 && Vars.Visuals.Filter.Decoy )
+	if( Entity->GetClientClass()->m_ClassID == 48 && Vars.Visuals.Filter.Decoy )
 	{
 		CBaseEntity* OwnerEntity = I::ClientEntList->GetClientEntity( owner & 0xFFF );
 		D::DrawString( F::ESP, pos.x, pos.y, Color( 230, 78, 255 ), FONT_RIGHT, charenc( "Decoy - %s" ), OwnerEntity ? OwnerEntity->GetName().c_str() : charenc( "Disconnected" ) );
@@ -199,13 +199,13 @@ void CVisuals::DrawGlow()
 
 				break;
 
-			case 29:
+			case 34:
 				if( Vars.Visuals.Filter.C4 )
 					glowEntity->set( Color( 84, 147, 230, 250 ) );
 
 				break;
 
-			case 35:
+			case 40:
 				if( Vars.Visuals.Glow )
 				{
 					if( !Vars.Visuals.Filter.Friendlies && !Entity->IsEnemy() )
@@ -222,19 +222,19 @@ void CVisuals::DrawGlow()
 				}
 				break;
 
-			case 39:
+			case 46:
 				if( Vars.Visuals.Filter.Weapons )
 					glowEntity->set( Color( 255, 138, 46, 250 ) );
 
 				break;
 
-			case 41:
+			case 48:
 				if( Vars.Visuals.Filter.Decoy )
 					glowEntity->set( Color( 230, 78, 255, 250 ) );
 
 				break;
 
-			case 105:
+			case 128:
 				if( Vars.Visuals.Filter.C4 )
 					glowEntity->set( Color( 255, 39, 33, 250 ) );
 				break;

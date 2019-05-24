@@ -336,7 +336,7 @@ WeaponInfo_t* CBaseCombatWeapon::GetCSWpnData()
 {
 	if( !this ) return nullptr;
 	typedef WeaponInfo_t*( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>(this, 444)(this);
+	return U::GetVFunc<OriginalFn>(this, 454)(this);
 }
 
 bool CBaseCombatWeapon::IsEmpty()
@@ -347,13 +347,13 @@ bool CBaseCombatWeapon::IsEmpty()
 
 bool CBaseCombatWeapon::IsReloading()
 {
-	return *( bool* )( ( DWORD )this + 0x3235 );
+	return *( bool* )( ( DWORD )this + 0x3285 );
 }
 
 void CBaseCombatWeapon::UpdateAccuracyPenalty()
 {
     typedef void(__thiscall* OriginalFn)(void*);
-    U::GetVFunc<OriginalFn>(this, 468)(this);
+    U::GetVFunc<OriginalFn>(this, 477)(this);
 }
 
 float CBaseCombatWeapon::GetWeaponCone()
@@ -367,7 +367,7 @@ float CBaseCombatWeapon::GetWeaponSpread()
 {
 	if( !this ) return 0.f;
 	typedef float( __thiscall* OriginalFn )( void* );
-	return U::GetVFunc<OriginalFn>( this, 437 )( this );
+	return U::GetVFunc<OriginalFn>( this, 446 )( this );
 }
 
 bool CBaseCombatWeapon::IsGun()
